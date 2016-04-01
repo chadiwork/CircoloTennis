@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.FinestraMain.FinestraMain">
+  <grid id="27dc6" binding="rootPanel" layout-manager="BorderLayout" hgap="5" vgap="5">
+    <constraints>
+      <xy x="20" y="20" width="568" height="264"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="d919a" binding="pnlCenter" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="e85b1" binding="pnlSX" layout-manager="GridLayoutManager" row-count="3" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="10" left="10" bottom="10" right="10"/>
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <toolTipText value="Hai scoperto il messaggio segreto! Regalami un panino per sapere il premio"/>
+            </properties>
+            <border type="bevel-lowered" title="Menù principale" title-justification="4">
+              <title-color color="-16746053"/>
+            </border>
+            <children>
+              <component id="73371" class="javax.swing.JButton" binding="visualizzaInformazioniDelCorsoButton" default-binding="true">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Visualizza informazioni del Corso"/>
+                </properties>
+              </component>
+              <component id="7ff07" class="javax.swing.JButton" binding="registraPartecipantiButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Registra Partecipanti"/>
+                </properties>
+              </component>
+              <component id="683d9" class="javax.swing.JButton" binding="modificaPartecipantiButton" default-binding="true">
+                <constraints>
+                  <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Modifica Partecipanti"/>
+                </properties>
+              </component>
+              <component id="c16ea" class="javax.swing.JButton" binding="visualizzaIncassoButton" default-binding="true">
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Visualizza Incasso "/>
+                </properties>
+              </component>
+            </children>
+          </grid>
+        </children>
+      </grid>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="SpellCheckingInspection" id="cdf9a"/>
+  </inspectionSuppressions>
+</form>
