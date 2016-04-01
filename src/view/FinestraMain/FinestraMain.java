@@ -33,6 +33,5 @@ public class FinestraMain extends JFrame {
     }
 
     public FinestraMain() {
-
     }
 }
