@@ -1,50 +1,38 @@
 package model;
 
+import java.util.LinkedList;
+
 /**
  * Created by Chado on 17/03/2016.
  */
-public class Corso {
-    Partepante partepante;
+public class Corso extends LinkedList<Partecipante>{
+
     Maestro maestro;
     String nome;
     double costo;
 
-    public Corso(Partepante partepante, String nome, double costo, Maestro maestro) {
-        this.partepante = partepante;
+    //classe pronta
+    //corso contiene vari partecipanti
+
+    public Corso(Maestro maestro, String nome, double costo) {
+        this.maestro = maestro;
         this.nome = nome;
         this.costo = costo;
-        this.maestro = maestro;
     }
 
-    public Partepante getPartepante() {
-        return partepante;
-    }
-
-    public void setPartepante(Partepante partepante) {
-        this.partepante = partepante;
+    public void aggiungiPartecipante(Partecipante partInAggiunta){
+        this.add(partInAggiunta);
     }
 
     public Maestro getMaestro() {
         return maestro;
     }
 
-    public void setMaestro(Maestro maestro) {
-        this.maestro = maestro;
-    }
-
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public double getCosto() {
         return costo;
-    }
-
-    public void setCosto(double costo) {
-        this.costo = costo;
     }
 }

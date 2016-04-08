@@ -4,35 +4,35 @@ package model.Modelli;
  * Created by Chado on 17/03/2016.
  */
 public class Data {
-    int giorno,mese,anno;
+    String giorno,mese,anno;
 
-    public Data(int giorno, int mese, int anno) {
+    public Data(String giorno, String mese, String anno) {
         this.giorno = giorno;
         this.mese = mese;
         this.anno = anno;
     }
 
-    public void setMese(int mese) {
+    public void setMese(String mese) {
         this.mese = mese;
     }
 
-    public void setAnno(int anno) {
+    public void setAnno(String anno) {
         this.anno = anno;
     }
 
-    public void setGiorno(int giorno) {
+    public void setGiorno(String giorno) {
         this.giorno = giorno;
     }
 
-    public int getGiorno() {
+    public String getGiorno() {
         return giorno;
     }
 
-    public int getMese() {
+    public String getMese() {
         return mese;
     }
 
-    public int getAnno() {
+    public String getAnno() {
         return anno;
     }
 }
