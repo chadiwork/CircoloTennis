@@ -26,6 +26,7 @@ public class FinestraRegistrazione extends JFrame {
     private JTextField inputAnno;
     private JTextField inputNome;
     private JTextField inputGiorno;
+    private JLabel lblUltimoInserito;
     Frame mainFrame =new Frame();
 
     public FinestraRegistrazione(String title, int larghezza, int altezza) {
@@ -47,75 +48,71 @@ public class FinestraRegistrazione extends JFrame {
 
 //            controllaEstetica_Pulizia();
 
-            //if di controllo, vedo se l'utente immette info sensate e complete
-            //eccezioni gestite
-            if (comboCorso.getSelectedIndex() != 4) {
+        //if di controllo, vedo se l'utente immette info sensate e complete
+        //eccezioni gestite
+        if (comboCorso.getSelectedIndex() != 4) {
 
-                int codicePaz = comboCorso.getSelectedIndex();
+            int codicePaz = comboCorso.getSelectedIndex();
 
-                if (!inputNome.getText().equals("")) {
+            if (!inputNome.getText().equals("")) {
 
-                    if (inputNome.getText().matches("[a-zA-Z]+")) {
-                        String nome = inputNome.getText();
+                if (inputNome.getText().matches("[a-zA-Z]+")) {
+                    String nome = inputNome.getText();
 
-                        if (!inputCognome.getText().equals("")) {
-                            if (inputCognome.getText().matches("[a-zA-Z]+")) {
+                    if (!inputCognome.getText().equals("")) {
+                        if (inputCognome.getText().matches("[a-zA-Z]+")) {
 
-                                String cognome = inputCognome.getText();
-                                if (!inputGiorno.getText().equals("")) {
-                                    if (inputGiorno.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
-                                        if (!inputMese.getText().equals("")) {
-                                            if (inputMese.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
-                                                if (!inputAnno.getText().equals("")) {
-                                                    if (inputAnno.getText().matches("^[-+]?\\d+(\\.\\d+)?$")) {
+                            String cognome = inputCognome.getText();
+                            if (!inputGiorno.getText().equals("")) {
+                                if (inputGiorno.getText().matches("^([0-9])\\w+")) {
+                                    if (!inputMese.getText().equals("")) {
+                                        if (inputMese.getText().matches("([0-9])\\w+")) {
+                                            if (!inputAnno.getText().equals("")) {
+                                                if (inputAnno.getText().matches("^([0-9])\\w+")) {
 
-                                                        //raccolgo dati calendario
-                                                        String giorno =inputGiorno.getText();
-                                                        String mese =inputMese.getText();
-                                                        String anno =inputMese.getText();
+                                                    //raccolgo dati calendario
+                                                    String giorno =inputGiorno.getText();
+                                                    String mese =inputMese.getText();
+                                                    String anno =inputMese.getText();
 
-                                                        //ora ho tutti i dati raccolti
+                                                    //ora ho tutti i dati raccolti
 
 
-                                                    }else {
-                                                        creaDialogErrore("Inserisci una data corretta");
-                                                    }
                                                 }else {
-                                                    creaDialogErrore("Inserisci una data");
+                                                    creaDialogErrore("Inserisci una data corretta");
                                                 }
                                             }else {
-                                                creaDialogErrore("Inserisci solo LETTERE nel mese");
+                                                creaDialogErrore("Inserisci una data");
                                             }
                                         }else {
-                                            creaDialogErrore("Inserisci un mese");
+                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero");
                                         }
-                                    } else {
-                                        creaDialogErrore("Inserisci solo LETTERE nel nome");
+                                    }else {
+                                        creaDialogErrore("Inserisci un mese");
                                     }
                                 } else {
-                                    creaDialogErrore("Inserisci il nome");
+                                    creaDialogErrore("Inserisci solo LETTERE nel nome");
                                 }
                             } else {
-                                creaDialogErrore("Inserisci solo LETTERE nel cognome");
+                                creaDialogErrore("Inserisci il nome");
                             }
                         } else {
-                            creaDialogErrore("Cognome non inserito");
+                            creaDialogErrore("Inserisci solo LETTERE nel cognome");
                         }
                     } else {
-                        creaDialogErrore("Inserisci solo LETTERE nel nome");
+                        creaDialogErrore("Cognome non inserito");
                     }
                 } else {
-                    creaDialogErrore("Nome non inserito");
+                    creaDialogErrore("Inserisci solo LETTERE nel nome");
                 }
             } else {
-                creaDialogErrore("Non hai selezionato la priorità del paziente");
+                creaDialogErrore("Nome non inserito");
             }
-
-
-//        }
-
-
+        } else {
+            creaDialogErrore("Non hai selezionato la priorità del paziente");
         }
+
+    }
 
     private void creaDialogErrore(String message) {
         JOptionPane.showMessageDialog(mainFrame,
