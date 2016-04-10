@@ -2,6 +2,8 @@ package view.FinestraRegistrazione;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -13,7 +15,7 @@ public class FinestraRegistrazione extends JFrame {
     private JPanel pnlForm;
     private JPanel pnlNomeCliente;
     private JPanel pnlGiorno;
-    private JButton btnMettiInSala;
+    private JButton btnInserisciPartecipante;
     private JComboBox comboCorso;
     private JPanel pnlCognomeCliente;
     private JPanel pnlStoria1;
@@ -47,7 +49,18 @@ public class FinestraRegistrazione extends JFrame {
 //        private void inserimentiForm() {
 
 //            controllaEstetica_Pulizia();
+//        validaForm();
 
+
+        btnInserisciPartecipante.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                validaForm();
+            }
+        });
+    }
+
+    private void validaForm() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
         if (comboCorso.getSelectedIndex() != 4) {
@@ -111,7 +124,6 @@ public class FinestraRegistrazione extends JFrame {
         } else {
             creaDialogErrore("Non hai selezionato la priorità del paziente");
         }
-
     }
 
     private void creaDialogErrore(String message) {

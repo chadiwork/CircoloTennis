@@ -1,5 +1,9 @@
 package view.FinestraMain;
 
+import model.Circolo;
+import model.Corso;
+import model.Maestro;
+import model.Modelli.Data;
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
 import view.FinestraModificaCorso.FinestraModificaCorso;
@@ -35,6 +39,23 @@ public class FinestraMain extends JFrame {
     }
 
     public FinestraMain() {
+
+        settaListenerTastiFinestre();
+
+        Maestro[] maestri = new Maestro[2];
+        maestri[0] = new Maestro("Paolo", "Barbarossa", "051-112233", new Data("6", "2", "1969"));
+
+
+        Corso[] corsi = new Corso[2];
+        corsi[0] = new Corso((maestri[0]), "Corso Facile", 50.35);
+
+
+
+
+//        Circolo mainCircolo = new Circolo();
+    }
+
+    private void settaListenerTastiFinestre() {
         registraPartecipantiButton.addActionListener(e -> {
             FinestraRegistrazione finestra=new FinestraRegistrazione();
             finestra.setVisible(true);
@@ -55,6 +76,7 @@ public class FinestraMain extends JFrame {
             finestra.setVisible(true);
         });
     }
+
     public static void main(String[] args) throws Exception {
         //main
         FinestraMain f = new FinestraMain("Circolo Tennis di Chadivlady", 450, 200);

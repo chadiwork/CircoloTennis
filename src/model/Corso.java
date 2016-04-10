@@ -1,5 +1,8 @@
 package model;
 
+import model.Maestro;
+import model.Partecipante;
+
 import java.util.LinkedList;
 
 /**
@@ -11,6 +14,13 @@ public class Corso extends LinkedList<Partecipante>{
     String nome;
     double costo;
 
+    //indici
+    //0 = facile
+    //1 = intermedio
+    //2 = avanzato
+
+
+
     //classe pronta
     //corso contiene vari partecipanti
 
@@ -20,7 +30,7 @@ public class Corso extends LinkedList<Partecipante>{
         this.costo = costo;
     }
 
-    public void aggiungiPartecipante(Partecipante partInAggiunta){
+    public void aggiungiPartecipante(Partecipante partInAggiunta) {
         this.add(partInAggiunta);
     }
 
