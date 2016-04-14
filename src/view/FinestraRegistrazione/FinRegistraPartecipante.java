@@ -64,10 +64,13 @@ public class FinRegistraPartecipante extends JFrame {
         @SuppressWarnings("MismatchedReadAndWriteOfArray")
 
         String[] tabellaCodici =new String[3];
+
+        tabellaCodici[3]="Scegliere il corso ";
+
         tabellaCodici[0]="Facile";
         tabellaCodici[1]="Medio";
         tabellaCodici[2]="Avanzato";
-        tabellaCodici[3]="Scegliere il corso ";
+
     }
     private void riempiTendina() {
         //aggiungo roba alla tendina
@@ -182,7 +185,7 @@ public class FinRegistraPartecipante extends JFrame {
                     creaDialogErrore("Inserisci solo LETTERE nel nome");
                 }
             } else {
-                creaDialogErrore("Nome non inserito");
+                creaDialogErrore("RndNome non inserito");
             }
         } else {
             creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ");

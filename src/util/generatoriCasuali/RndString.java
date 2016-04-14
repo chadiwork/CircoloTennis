@@ -7,7 +7,7 @@ import java.util.Random;
  * in origine parte del progetto:
  * CircoloTennis
  */
-public class Stringa {
+public class RndString {
     private static final char[] symbols;
 
     static {
@@ -23,7 +23,7 @@ public class Stringa {
 
     private static char[] buf;
 
-    public Stringa(int length) {
+    public RndString(int length) {
         if (length < 1)
             throw new IllegalArgumentException("length < 1: " + length);
         buf = new char[length];

@@ -9,7 +9,7 @@ import java.util.Scanner;
  * in origine parte del progetto:
  * CircoloTennis
  */
-public class Nome {
+public class RndNome {
 
     static ArrayList<String> nomi;
 
