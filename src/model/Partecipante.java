@@ -1,22 +1,18 @@
 package model;
 
 import model.Modelli.Data;
-import model.Modelli.Indirizzo;
+import model.Modelli.Persona;
+
 /**
  * Created by Chado on 17/03/2016.
  * ^vlady too..
  */
-public class Partecipante extends Persona{
+public class Partecipante extends Persona {
 
-
-    Indirizzo mIndirizzo;
-    
     Data dataDiNascita;
 
-
-    public Partecipante(String nome, String cognome, Indirizzo mIndirizzo, Data dataDiNascita) {
+    public Partecipante(String nome, String cognome, Data dataDiNascita) {
         super(nome, cognome);
-        this.mIndirizzo = mIndirizzo;
         this.dataDiNascita = dataDiNascita;
     }
 
@@ -30,12 +26,5 @@ public class Partecipante extends Persona{
         this.dataDiNascita = dataDiNascita;
     }
 
-    public Indirizzo getmIndirizzo() {
-        return mIndirizzo;
-    }
-
-    public void setmIndirizzo(Indirizzo mIndirizzo) {
-        this.mIndirizzo = mIndirizzo;
-    }
 }
 

@@ -1,7 +1,5 @@
 package model;
 
-import model.Modelli.Indirizzo;
-
 /**
  * Created by Chado on 17/03/2016.
  */

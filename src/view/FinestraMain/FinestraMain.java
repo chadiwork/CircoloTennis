@@ -1,17 +1,17 @@
 package view.FinestraMain;
 
-import model.Circolo;
 import model.Corso;
 import model.Maestro;
 import model.Modelli.Data;
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
 import view.FinestraModificaCorso.FinestraModificaCorso;
-import view.FinestraRegistrazione.FinestraRegistrazione;
+import view.FinestraRegistrazione.FinRegPartecipante;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -42,12 +42,7 @@ public class FinestraMain extends JFrame {
 
         settaListenerTastiFinestre();
 
-        Maestro[] maestri = new Maestro[2];
-        maestri[0] = new Maestro("Paolo", "Barbarossa", "051-112233", new Data("6", "2", "1969"));
 
-
-        Corso[] corsi = new Corso[2];
-        corsi[0] = new Corso((maestri[0]), "Corso Facile", 50.35);
 
 
 
@@ -57,8 +52,9 @@ public class FinestraMain extends JFrame {
 
     private void settaListenerTastiFinestre() {
         registraPartecipantiButton.addActionListener(e -> {
-            FinestraRegistrazione finestra=new FinestraRegistrazione();
-            finestra.setVisible(true);
+            FinRegPartecipante finRegPartecipante=new FinRegPartecipante("Registra Partecipante",800,400);
+            finRegPartecipante.setVisible(true);
+
         });
 
         modificaPartecipantiButton.addActionListener(e -> {
@@ -82,3 +78,4 @@ public class FinestraMain extends JFrame {
         FinestraMain f = new FinestraMain("Circolo Tennis di Chadivlady", 450, 200);
     }
 }
+

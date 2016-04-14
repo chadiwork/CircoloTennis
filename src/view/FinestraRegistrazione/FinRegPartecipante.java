@@ -1,5 +1,9 @@
 package view.FinestraRegistrazione;
 
+import model.DataBase;
+import model.Modelli.Data;
+import model.Partecipante;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +12,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Chado on 01/04/2016.
  */
-public class FinestraRegistrazione extends JFrame {
+public class FinRegPartecipante extends JFrame {
 
     private JPanel rootPanel;
     private JPanel pnlCenter;
@@ -31,27 +35,34 @@ public class FinestraRegistrazione extends JFrame {
     private JLabel lblUltimoInserito;
     Frame mainFrame =new Frame();
 
-    public FinestraRegistrazione(String title, int larghezza, int altezza) {
+    public FinRegPartecipante(String title, int larghezza, int altezza) {
         //setup iniziale finestra
         super(title);
-        this.setContentPane(new FinestraRegistrazione().rootPanel);
-        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        settaStatoIniziale(larghezza, altezza);
+    }
+
+    private void settaStatoIniziale(int larghezza, int altezza) {
+        this.setContentPane(new FinRegPartecipante().rootPanel);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
         this.setLocationRelativeTo(null);
         //this.setPosizioneCentro();
         this.setVisible(true);
         this.setResizable(false);
+
+        onOpening();
     }
-    public FinestraRegistrazione() {
 
+    private void onOpening() {
+        txtAreaInseriti.setText("");
+    }
 
-//        private void inserimentiForm() {
+    public FinRegPartecipante() {
+        addListenerInserisci();
+    }
 
-//            controllaEstetica_Pulizia();
-//        validaForm();
-
-
+    private void addListenerInserisci() {
         btnInserisciPartecipante.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -90,6 +101,27 @@ public class FinestraRegistrazione extends JFrame {
 
                                                     //ora ho tutti i dati raccolti
 
+                                                    Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
+
+                                                    String tmpAppenaAggiuntoA="";//setup iniziale
+                                                    switch (comboCorso.getSelectedIndex()) {
+                                                        case 0:DataBase.corsi[0].add(toAdd);
+                                                            tmpAppenaAggiuntoA = DataBase.corsi[0].getNome();
+                                                            break;
+                                                        case 1:DataBase.corsi[1].add(toAdd);
+                                                            tmpAppenaAggiuntoA = DataBase.corsi[1].getNome();
+                                                            break;
+                                                        case 2:DataBase.corsi[2].add(toAdd);
+                                                            tmpAppenaAggiuntoA = DataBase.corsi[2].getNome();
+                                                            break;
+                                                    }
+
+                                                    svuotaCampi();
+
+                                                    txtAreaInseriti.append(toAdd.getCognome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
+
+                                                    //partecipante creato e pronto
+
 
                                                 }else {
                                                     creaDialogErrore("Inserisci una data corretta");
@@ -124,6 +156,20 @@ public class FinestraRegistrazione extends JFrame {
         } else {
             creaDialogErrore("Non hai selezionato la priorità del paziente");
         }
+
+    }
+
+    private void svuotaCampi() {
+        svuotaJText(inputAnno);
+        svuotaJText(inputGiorno);
+        svuotaJText(inputMese);
+        svuotaJText(inputCognome);
+        svuotaJText(inputNome);
+    }
+
+    private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
+        Data dataNascita = new Data(giorno, mese, anno);
+        return new Partecipante(nome, cognome, dataNascita);
     }
 
     private void creaDialogErrore(String message) {
@@ -131,5 +177,9 @@ public class FinestraRegistrazione extends JFrame {
                 message,
                 "Errore",
                 JOptionPane.WARNING_MESSAGE);
+    }
+
+    private void svuotaJText(JTextField daSvuotare) {
+        daSvuotare.setText("");
     }
 }
