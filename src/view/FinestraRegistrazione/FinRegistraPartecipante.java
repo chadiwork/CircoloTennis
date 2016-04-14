@@ -129,11 +129,11 @@ public class FinRegistraPartecipante extends JFrame {
                                                     String anno =inputMese.getText();
 
                                                     //ora ho tutti i dati raccolti
-
                                                     Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
 
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
 
+                                                    //aggiungo partecipante al corso selezionato
                                                     switch (tendinaCorso.getSelectedIndex()) {
                                                         case 0:DataBase.corsi[0].add(toAdd);
                                                             tmpAppenaAggiuntoA = DataBase.corsi[0].getNome();
@@ -146,14 +146,13 @@ public class FinRegistraPartecipante extends JFrame {
                                                             break;
                                                     }
 
+
                                                     svuotaCampi();
 
+                                                    //stampo l'inserimento effettuato
                                                     txtAreaInseriti.append(toAdd.getCognome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
 
                                                     //partecipante creato e pronto
-
-
-
 
                                                 }else {
                                                     creaDialogErrore("Inserisci una data corretta");
