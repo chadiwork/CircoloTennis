@@ -6,16 +6,14 @@ package model;
 public class Circolo {
 
     String nome;
-    Indirizzo indirizzo;
 
     Corso[] corsi;
 
     //circolo contiene vari corsi
 
 
-    public Circolo(String nome, Indirizzo indirizzo, Corso[] corsi) {
+    public Circolo(String nome, Corso[] corsi) {
         this.nome = nome;
-        this.indirizzo = indirizzo;
         this.corsi = corsi;
     }
 }

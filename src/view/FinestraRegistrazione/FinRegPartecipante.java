@@ -21,7 +21,7 @@ public class FinRegPartecipante extends JFrame {
     private JPanel pnlNomeCliente;
     private JPanel pnlGiorno;
     private JButton btnInserisciPartecipante;
-    private JComboBox comboCorso;
+    private JComboBox<String> comboCorso;
     private JPanel pnlCognomeCliente;
     private JPanel pnlStoria1;
     private JTextArea txtAreaInseriti;
@@ -35,6 +35,8 @@ public class FinRegPartecipante extends JFrame {
     private JTextField inputGiorno;
     private JLabel lblUltimoInserito;
     Frame mainFrame =new Frame();
+    String[] tabellaCodici;
+
 
     public FinRegPartecipante(String title, int larghezza, int altezza) {
         //setup iniziale finestra
@@ -52,11 +54,30 @@ public class FinRegPartecipante extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
 
+
+        creaEtichetteComboBox();
+
         onOpening();
+
+    }
+
+    private void creaEtichetteComboBox() {
+        String[] tabellaCodici =new String[3];
+        tabellaCodici[0]="Facile";
+        tabellaCodici[1]="Medio";
+        tabellaCodici[2]="Avanzato";
+        tabellaCodici[3]="Scegliere il corso ";
+    }
+    private void riempiTendina() {
+        //aggiungo roba alla tendina
+        for (int i = 0; i <= 3; i++) {
+            comboCorso.addItem(tabellaCodici[i]);
+        }
     }
 
     private void onOpening() {
         txtAreaInseriti.setText("");
+        riempiTendina();
     }
 
     public FinRegPartecipante() {
@@ -72,10 +93,12 @@ public class FinRegPartecipante extends JFrame {
         });
     }
 
+
+
     private void validaForm() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
-        if (comboCorso.getSelectedIndex() != 4) {
+        if (comboCorso.getSelectedIndex() != 3) {
 
             int codicePaz = comboCorso.getSelectedIndex();
 
@@ -156,7 +179,7 @@ public class FinRegPartecipante extends JFrame {
                 creaDialogErrore("Nome non inserito");
             }
         } else {
-            creaDialogErrore("Non hai selezionato la priorità del paziente");
+            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ");
         }
 
     }
