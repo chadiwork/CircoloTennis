@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * Created by Chado on 01/04/2016.
  * vlady però ha fatto tutto
  */
-public class FinRegPartecipante extends JFrame {
+public class FinRegistraPartecipante extends JFrame {
 
     private JPanel rootPanel;
     private JPanel pnlCenter;
@@ -21,7 +21,7 @@ public class FinRegPartecipante extends JFrame {
     private JPanel pnlNomeCliente;
     private JPanel pnlGiorno;
     private JButton btnInserisciPartecipante;
-    private JComboBox<String> comboCorso;
+    private JComboBox<String> tendinaCorso;
     private JPanel pnlCognomeCliente;
     private JPanel pnlStoria1;
     private JTextArea txtAreaInseriti;
@@ -38,14 +38,14 @@ public class FinRegPartecipante extends JFrame {
     String[] tabellaCodici;
 
 
-    public FinRegPartecipante(String title, int larghezza, int altezza) {
+    public FinRegistraPartecipante(String title, int larghezza, int altezza) {
         //setup iniziale finestra
         super(title);
         settaStatoIniziale(larghezza, altezza);
     }
 
     private void settaStatoIniziale(int larghezza, int altezza) {
-        this.setContentPane(new FinRegPartecipante().rootPanel);
+        this.setContentPane(new FinRegistraPartecipante().rootPanel);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
@@ -55,13 +55,14 @@ public class FinRegPartecipante extends JFrame {
         this.setResizable(false);
 
 
-        creaEtichetteComboBox();
 
-        onOpening();
+        onFirstOpening();
 
     }
 
-    private void creaEtichetteComboBox() {
+    private void creaEtichetteTendina() {
+        @SuppressWarnings("MismatchedReadAndWriteOfArray")
+
         String[] tabellaCodici =new String[3];
         tabellaCodici[0]="Facile";
         tabellaCodici[1]="Medio";
@@ -71,16 +72,20 @@ public class FinRegPartecipante extends JFrame {
     private void riempiTendina() {
         //aggiungo roba alla tendina
         for (int i = 0; i <= 3; i++) {
-            comboCorso.addItem(tabellaCodici[i]);
+            tendinaCorso.addItem(tabellaCodici[i]);
         }
     }
 
-    private void onOpening() {
+    private void onFirstOpening() {
         txtAreaInseriti.setText("");
+
+
+        //gestisco tendina
+        creaEtichetteTendina();
         riempiTendina();
     }
 
-    public FinRegPartecipante() {
+    public FinRegistraPartecipante() {
         addListenerInserisci();
     }
 
@@ -88,19 +93,19 @@ public class FinRegPartecipante extends JFrame {
         btnInserisciPartecipante.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                validaForm();
+                aggiungiPartecipante();
             }
         });
     }
 
 
 
-    private void validaForm() {
+    private void aggiungiPartecipante() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
-        if (comboCorso.getSelectedIndex() != 3) {
+        if (tendinaCorso.getSelectedIndex() != 3) {
 
-            int codicePaz = comboCorso.getSelectedIndex();
+            int codicePaz = tendinaCorso.getSelectedIndex();
 
             if (!inputNome.getText().equals("")) {
 
@@ -129,7 +134,7 @@ public class FinRegPartecipante extends JFrame {
 
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
 
-                                                    switch (comboCorso.getSelectedIndex()) {
+                                                    switch (tendinaCorso.getSelectedIndex()) {
                                                         case 0:DataBase.corsi[0].add(toAdd);
                                                             tmpAppenaAggiuntoA = DataBase.corsi[0].getNome();
                                                             break;
@@ -146,6 +151,8 @@ public class FinRegPartecipante extends JFrame {
                                                     txtAreaInseriti.append(toAdd.getCognome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
 
                                                     //partecipante creato e pronto
+
+
 
 
                                                 }else {
@@ -185,11 +192,15 @@ public class FinRegPartecipante extends JFrame {
     }
 
     private void svuotaCampi() {
+        //svuoto robe
         svuotaJText(inputAnno);
         svuotaJText(inputGiorno);
         svuotaJText(inputMese);
         svuotaJText(inputCognome);
         svuotaJText(inputNome);
+
+        //rimetto tendina da impostare
+        tendinaCorso.setSelectedIndex(4);
     }
 
     private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
