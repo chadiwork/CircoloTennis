@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 
 /**
  * Created by Chado on 01/04/2016.
+ * vlady però ha fatto tutto
  */
 public class FinRegPartecipante extends JFrame {
 
@@ -104,6 +105,7 @@ public class FinRegPartecipante extends JFrame {
                                                     Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
 
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
+
                                                     switch (comboCorso.getSelectedIndex()) {
                                                         case 0:DataBase.corsi[0].add(toAdd);
                                                             tmpAppenaAggiuntoA = DataBase.corsi[0].getNome();
