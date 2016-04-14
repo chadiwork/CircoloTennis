@@ -50,11 +50,8 @@ public class FinRegistraPartecipante extends JFrame {
         this.pack();
         this.setSize(larghezza, altezza);
         this.setLocationRelativeTo(null);
-        //this.setPosizioneCentro();
         this.setVisible(true);
         this.setResizable(false);
-
-
 
         onFirstOpening();
 
@@ -63,29 +60,28 @@ public class FinRegistraPartecipante extends JFrame {
     private void creaEtichetteTendina() {
         @SuppressWarnings("MismatchedReadAndWriteOfArray")
 
-        String[] tabellaCodici =new String[3];
-
-        tabellaCodici[3]="Scegliere il corso ";
+        String[] tabellaCodici =new String[4];
 
         tabellaCodici[0]="Facile";
         tabellaCodici[1]="Medio";
         tabellaCodici[2]="Avanzato";
-
+        tabellaCodici[3]="Scegliere il corso ";
     }
-    private void riempiTendina() {
-        //aggiungo roba alla tendina
-        for (int i = 0; i <= 3; i++) {
-            tendinaCorso.addItem(tabellaCodici[i]);
-        }
-    }
+//    private void riempiTendina() {
+//        //aggiungo roba alla tendina
+//        for (int i = 0; i <= 3; i++) {
+//            tendinaCorso.addItem(tabellaCodici[i]);
+//
+//        }
+//    }
 
     private void onFirstOpening() {
         txtAreaInseriti.setText("");
 
-
-        //gestisco tendina
+        //setto tendina
         creaEtichetteTendina();
-        riempiTendina();
+//        riempiTendina();
+//        tendinaCorso = new JComboBox<String>(tabellaCodici);
     }
 
     public FinRegistraPartecipante() {
@@ -100,8 +96,6 @@ public class FinRegistraPartecipante extends JFrame {
             }
         });
     }
-
-
 
     private void aggiungiPartecipante() {
         //if di controllo, vedo se l'utente immette info sensate e complete
@@ -148,6 +142,7 @@ public class FinRegistraPartecipante extends JFrame {
                                                             tmpAppenaAggiuntoA = DataBase.corsi[2].getNome();
                                                             break;
                                                     }
+
 
 
                                                     svuotaCampi();

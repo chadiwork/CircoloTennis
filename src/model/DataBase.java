@@ -8,7 +8,6 @@ import util.generatoriCasuali.RndNome;
  */
 public class DataBase  {
 
-
     public static String[] nomiCorsi = new String[2];
 
     public static Maestro[] maestri = new Maestro[2];
@@ -41,6 +40,4 @@ public class DataBase  {
         maestri[1] = new Maestro(RndNome.getRandomName(), "Minelli", "011-425698", new Data());
         maestri[2] = new Maestro(RndNome.getRandomName(), "Bortolotti", "051-124378", new Data());
     }
-
-
 }
