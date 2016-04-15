@@ -36,21 +36,50 @@ public class RndNome {
 //        }
 //        System.out.println("La dimensione della lista è: "+nomi.size());
 
+//        String fileName = "./src/util/ListeAnagrafici/listaNomi.txt";
+//
+//        //read file into stream, try-with-resources
+//        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+//
+////            stream.forEach(System.out::println);
+//            while (stream.iterator().hasNext()){
+//                nomi.add(stream.iterator().toString());
+//                nomi = stream.iterator();
+//            };
+//
+////            nomi.add(String.valueOf(stream.iterator()));
+//
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(nomi.size());
+//
         String fileName = "./src/util/ListeAnagrafici/listaNomi.txt";
 
-        //read file into stream, try-with-resources
-        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 
-            stream.forEach(System.out::println);
+            String line;
+            while ((line = br.readLine()) != null) {
+                System.out.println(line);
+                nomi.add(line);
+
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Eccezione IO - "+"RndNome");
         }
 
-
+        System.out.println(nomi.get(50));
 
 
     }
+
+
+
+
 
     public static String get()  {
 
