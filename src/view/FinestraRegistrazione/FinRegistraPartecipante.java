@@ -39,6 +39,7 @@ public class FinRegistraPartecipante extends JFrame {
     private JPanel pnlTendina;
     Frame mainFrame = new Frame();
     private String[] tabellaCodici;
+    private int indiceAncoraDaScegliere;
 
 
 
@@ -46,36 +47,37 @@ public class FinRegistraPartecipante extends JFrame {
     private void onFirstOpening() {
         txtAreaInseriti.setText("");
 
-        //setto tendina
         settaTendina();
 
     }
 
-    public FinRegistraPartecipante() {
+    private FinRegistraPartecipante() {
         //costruttore in cui aggiungere tutte le modifiche alla UI
+        //tieni private
         addListenerInserisci();
         onFirstOpening();
 
-
     }
-
 
     private void aggiungiPartecipante() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
-        if (tendinaCorso.getSelectedIndex() != 3) {
+
+
+        if (tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) {
 
             int codicePaz = tendinaCorso.getSelectedIndex();
 
             if (!inputNome.getText().equals("")) {
-
                 if (inputNome.getText().matches("[a-zA-Z]+")) {
+
                     String nome = inputNome.getText();
 
                     if (!inputCognome.getText().equals("")) {
                         if (inputCognome.getText().matches("[a-zA-Z]+")) {
 
                             String cognome = inputCognome.getText();
+
                             if (!inputGiorno.getText().equals("")) {
                                 if (inputGiorno.getText().matches("^([0-9])\\w+")) {
                                     if (!inputMese.getText().equals("")) {
@@ -143,7 +145,7 @@ public class FinRegistraPartecipante extends JFrame {
                     creaDialogErrore("Inserisci solo LETTERE nel nome");
                 }
             } else {
-                creaDialogErrore("RndNome non inserito");
+                creaDialogErrore("Nome non inserito");
             }
         } else {
             creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ");
@@ -208,12 +210,15 @@ public class FinRegistraPartecipante extends JFrame {
         tabellaCodici[1]="Medio";
         tabellaCodici[2]="Avanzato";
         tabellaCodici[3]="Scegliere...";
+
+
         //non separare questi 2 blocchi in 2 metodi separati...
         for (int i =0;i<=3;i++){
             tendinaCorso.addItem(tabellaCodici[i]);
-            System.out.println(""+tendinaCorso.getItemCount());
-            System.out.println(tabellaCodici[i]);
+            indiceAncoraDaScegliere = i;
         }
+
+        tendinaCorso.setSelectedIndex(indiceAncoraDaScegliere);
 
     }
 
