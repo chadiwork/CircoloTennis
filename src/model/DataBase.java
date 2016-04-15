@@ -15,12 +15,16 @@ public class DataBase  {
     public static Corso[] corsi = new Corso[2];
 
     public DataBase() {
+        setupIniziale();
+
+    }
+
+    private void setupIniziale() {
         creaMaestri();
         creaCorsi();
         creaEtichetteNomi();
 
         System.out.println("Setup dati completato");
-
     }
 
     private void creaEtichetteNomi() {
@@ -40,4 +44,15 @@ public class DataBase  {
         maestri[1] = new Maestro(RndNome.getRandomName(), "Minelli", "011-425698", new Data());
         maestri[2] = new Maestro(RndNome.getRandomName(), "Bortolotti", "051-124378", new Data());
     }
+
+    public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
+        corsi[idCorso].add(personaDaAggiungere);
+
+    }
+
+    public static String getNomeCorso(int idCorso) {
+        return corsi[idCorso].getNome();
+    }
+
+
 }

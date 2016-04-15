@@ -91,19 +91,18 @@ public class FinRegistraPartecipante extends JFrame {
 
                                     String giorno =inputGiorno.getText();
 
-
                                     if (!inputMese.getText().equals("")) {
                                         if (inputMese.getText().matches(regexNumeri)
                                                 &&Integer.parseInt(inputMese.getText())<=12
                                                 &&Integer.parseInt(inputMese.getText())>=1) {
+
+                                            String mese =inputMese.getText();
+
                                             if (!inputAnno.getText().equals("")) {
                                                 if (inputAnno.getText().matches(regexNumeri)
                                                         &&Integer.parseInt(inputMese.getText())<=2016
                                                         &&Integer.parseInt(inputMese.getText())>=1900) {
 
-                                                    //raccolgo dati calendario
-
-                                                    String mese =inputMese.getText();
                                                     String anno =inputMese.getText();
 
                                                     //ora ho tutti i dati raccolti
@@ -113,14 +112,14 @@ public class FinRegistraPartecipante extends JFrame {
 
                                                     //aggiungo partecipante al corso selezionato
                                                     switch (tendinaCorso.getSelectedIndex()) {
-                                                        case 0:DataBase.corsi[0].add(toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.corsi[0].getNome();
+                                                        case 0:DataBase.addPartecipante(0,toAdd);
+                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
                                                             break;
-                                                        case 1:DataBase.corsi[1].add(toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.corsi[1].getNome();
+                                                        case 1:DataBase.addPartecipante(1,toAdd);
+                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
                                                             break;
-                                                        case 2:DataBase.corsi[2].add(toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.corsi[2].getNome();
+                                                        case 2:DataBase.addPartecipante(2,toAdd);
+                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
                                                             break;
                                                     }
 
