@@ -18,7 +18,7 @@ public class RndNome {
     private static void setupList() throws FileNotFoundException {
 
         // Open the file
-        File file = new File("listaNomi.txt");
+        File file = new File("./ListeAnagrafici/listaNomi.txt");
 
         // Attach a scanner to the file
         Scanner localScanner = new Scanner(file);
@@ -44,7 +44,6 @@ public class RndNome {
             }
         }
 
-
 //        if (nomi.size() < 0) {
 //            setupList();
 //        }
@@ -64,8 +63,6 @@ public class RndNome {
         int randomIndex = RndNmbrInRange.random(1,nomi.size());
 
         return nomi.get(randomIndex);
-
     }
-
-
 }
+

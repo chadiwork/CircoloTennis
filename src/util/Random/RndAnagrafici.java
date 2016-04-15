@@ -52,7 +52,6 @@ public class RndAnagrafici {
         Random r=new Random();
         return r.nextInt(High-Low)+Low;
     }
-
     public static String[] getNome() {
         return nome;
     }

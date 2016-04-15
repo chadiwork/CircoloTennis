@@ -3,6 +3,7 @@ package view.FinestraRegistrazione;
 import model.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
+import util.Random.RndNome;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +42,6 @@ public class FinRegistraPartecipante extends JFrame {
     Frame mainFrame = new Frame();
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
-
     String regexParole="[a-zA-Z]+";
     String regexNumeri="[0-9]+";
 
@@ -123,8 +123,6 @@ public class FinRegistraPartecipante extends JFrame {
                                                             tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
                                                             break;
                                                     }
-
-
 
                                                     svuotaCampi();
 
