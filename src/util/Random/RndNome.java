@@ -58,18 +58,14 @@ public class RndNome {
 //
         String fileName = "./src/util/ListeAnagrafici/listaNomi.txt";
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
 
-            String line;
-            while ((line = br.readLine()) != null) {
-                System.out.println(line);
-                nomi.add(line);
-
+            while (scanner.hasNext()){
+                nomi.add(scanner.nextLine().toString());
             }
 
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Eccezione IO - "+"RndNome");
         }
 
         System.out.println(nomi.get(50));
