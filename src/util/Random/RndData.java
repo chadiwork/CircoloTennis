@@ -1,13 +1,11 @@
-    package util.generatoriCasuali;
-
-    import java.util.Objects;
+    package util.Random;
 
     /**
      * Creato da Vlady il 15/04/2016.
      * in origine parte del progetto:
      * CircoloTennis
      */
-    public class rdnDate {
+    public class RndData {
 
         public static String getStandard(char separator) {
             String y = rndYear();

@@ -1,7 +1,7 @@
 package model;
 
 import model.Modelli.Data;
-import util.generatoriCasuali.RndNome;
+import util.Random.RndNome;
 
 /**
  * Created by Chado on 14/04/2016.

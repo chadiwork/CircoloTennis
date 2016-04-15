@@ -1,4 +1,4 @@
-package util.generatoriCasuali;
+package util.Random;
 
 import java.io.*;
 import java.util.LinkedList;

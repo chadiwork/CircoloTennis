@@ -1,6 +1,6 @@
 package model.Modelli;
 
-import util.generatoriCasuali.RndNmbrInRange;
+import util.Random.RndNmbrInRange;
 
 import java.util.Objects;
 

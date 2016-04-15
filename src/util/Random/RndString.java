@@ -1,4 +1,4 @@
-package util.generatoriCasuali;
+package util.Random;
 
 import java.util.Random;
 
