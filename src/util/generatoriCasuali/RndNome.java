@@ -32,7 +32,7 @@ public class RndNome {
 
     }
 
-    public static String getRandomName()  {
+    public static String get()  {
 
         //se la lista non è stata preparata allora la preparo
         if (!isSetupEffettuato) {

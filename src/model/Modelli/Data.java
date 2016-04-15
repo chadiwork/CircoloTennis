@@ -64,8 +64,7 @@ public class Data {
         Integer a = RndNmbrInRange.random(1, 12);
         return a.toString();
     }
-
-    private String rndYear() {
+    private  String rndYear() {
         Integer a = RndNmbrInRange.random(1940, 2010);
         return a.toString();
     }
