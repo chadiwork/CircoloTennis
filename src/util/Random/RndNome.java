@@ -11,14 +11,14 @@ import java.util.Scanner;
  */
 public class RndNome {
 
-    static LinkedList<String> nomi;
+    private static LinkedList<String> nomi;
 
-    static boolean isSetupEffettuato = false;
+    private static boolean isSetupEffettuato = false;
 
     private static void setupList() throws FileNotFoundException {
 
         // Open the file
-        File file = new File("./ListeAnagrafici/listaNomi.txt");
+        File file = new File("./src/util/ListeAnagrafici/listaNomi.txt");
 
         // Attach a scanner to the file
         Scanner localScanner = new Scanner(file);
