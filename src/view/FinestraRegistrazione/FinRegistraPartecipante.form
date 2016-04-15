@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.FinestraRegistrazione.FinRegistraPartecipante">
   <grid id="27dc6" binding="rootPanel" layout-manager="BorderLayout" hgap="5" vgap="5">
     <constraints>
-      <xy x="20" y="20" width="834" height="713"/>
+      <xy x="20" y="20" width="880" height="713"/>
     </constraints>
     <properties/>
     <border type="none"/>
