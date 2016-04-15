@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -34,68 +36,29 @@ public class FinRegistraPartecipante extends JFrame {
     private JTextField inputNome;
     private JTextField inputGiorno;
     private JLabel lblUltimoInserito;
-    Frame mainFrame =new Frame();
-    String[] tabellaCodici;
+    private JPanel pnlTendina;
+    Frame mainFrame = new Frame();
+    private String[] tabellaCodici;
 
 
-    public FinRegistraPartecipante(String title, int larghezza, int altezza) {
-        //setup iniziale finestra
-        super(title);
-        settaStatoIniziale(larghezza, altezza);
-    }
 
-    private void settaStatoIniziale(int larghezza, int altezza) {
-        this.setContentPane(new FinRegistraPartecipante().rootPanel);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.pack();
-        this.setSize(larghezza, altezza);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.setResizable(false);
-
-        onFirstOpening();
-
-    }
-
-    private void creaEtichetteTendina() {
-        @SuppressWarnings("MismatchedReadAndWriteOfArray")
-
-        String[] tabellaCodici =new String[4];
-
-        tabellaCodici[0]="Facile";
-        tabellaCodici[1]="Medio";
-        tabellaCodici[2]="Avanzato";
-        tabellaCodici[3]="Scegliere il corso ";
-    }
-//    private void riempiTendina() {
-//        //aggiungo roba alla tendina
-//        for (int i = 0; i <= 3; i++) {
-//            tendinaCorso.addItem(tabellaCodici[i]);
-//
-//        }
-//    }
 
     private void onFirstOpening() {
         txtAreaInseriti.setText("");
 
         //setto tendina
-        creaEtichetteTendina();
-//        riempiTendina();
-//        tendinaCorso = new JComboBox<String>(tabellaCodici);
+        settaTendina();
+
     }
 
     public FinRegistraPartecipante() {
+        //costruttore in cui aggiungere tutte le modifiche alla UI
         addListenerInserisci();
+        onFirstOpening();
+
+
     }
 
-    private void addListenerInserisci() {
-        btnInserisciPartecipante.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aggiungiPartecipante();
-            }
-        });
-    }
 
     private void aggiungiPartecipante() {
         //if di controllo, vedo se l'utente immette info sensate e complete
@@ -215,4 +178,45 @@ public class FinRegistraPartecipante extends JFrame {
     private void svuotaJText(JTextField daSvuotare) {
         daSvuotare.setText("");
     }
+
+    public FinRegistraPartecipante(String title, int larghezza, int altezza) {
+        //setup iniziale finestra
+        super(title);
+        this.setContentPane(new FinRegistraPartecipante().rootPanel);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setSize(larghezza, altezza);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        this.setResizable(false);
+
+    }
+
+    private void addListenerInserisci() {
+        btnInserisciPartecipante.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                aggiungiPartecipante();
+            }
+        });
+    }
+
+    private void settaTendina() {
+        String[] tabellaCodici =new String[4];
+
+        tabellaCodici[0]="Facile";
+        tabellaCodici[1]="Medio";
+        tabellaCodici[2]="Avanzato";
+        tabellaCodici[3]="Scegliere...";
+        //non separare questi 2 blocchi in 2 metodi separati...
+        for (int i =0;i<=3;i++){
+            tendinaCorso.addItem(tabellaCodici[i]);
+            System.out.println(""+tendinaCorso.getItemCount());
+            System.out.println(tabellaCodici[i]);
+        }
+
+    }
+
+
+
 }

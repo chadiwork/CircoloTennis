@@ -9,6 +9,7 @@ import javax.swing.*;
 
 /**
  * Created by Chado on 01/04/2016.
+ * suck it chadi
  */
 public class FinestraMain extends JFrame {
     private JPanel rootPanel;
@@ -32,14 +33,9 @@ public class FinestraMain extends JFrame {
         this.setResizable(false);
     }
 
-    public FinestraMain() {
+    private FinestraMain() {
 
         settaListenerTastiFinestre();
-
-
-
-
-
 
 //        Circolo mainCircolo = new Circolo();
     }
