@@ -41,6 +41,9 @@ public class FinRegistraPartecipante extends JFrame {
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
 
+    String regexParole="[a-zA-Z]+";
+    String regexNumeri="\\\\b\\\\d+\\\\b";
+
 
 
 
@@ -69,21 +72,21 @@ public class FinRegistraPartecipante extends JFrame {
             int codicePaz = tendinaCorso.getSelectedIndex();
 
             if (!inputNome.getText().equals("")) {
-                if (inputNome.getText().matches("[a-zA-Z]+")) {
+                if (inputNome.getText().matches(regexParole)) {
 
                     String nome = inputNome.getText();
 
                     if (!inputCognome.getText().equals("")) {
-                        if (inputCognome.getText().matches("[a-zA-Z]+")) {
+                        if (inputCognome.getText().matches(regexParole)) {
 
                             String cognome = inputCognome.getText();
 
                             if (!inputGiorno.getText().equals("")) {
-                                if (inputGiorno.getText().matches("^([0-9])\\w+")) {
+                                if (inputGiorno.getText().matches(regexNumeri)) {
                                     if (!inputMese.getText().equals("")) {
-                                        if (inputMese.getText().matches("([0-9])\\w+")) {
+                                        if (inputMese.getText().matches(regexNumeri)) {
                                             if (!inputAnno.getText().equals("")) {
-                                                if (inputAnno.getText().matches("^([0-9])\\w+")) {
+                                                if (inputAnno.getText().matches(regexNumeri)) {
 
                                                     //raccolgo dati calendario
                                                     String giorno =inputGiorno.getText();
@@ -130,7 +133,7 @@ public class FinRegistraPartecipante extends JFrame {
                                         creaDialogErrore("Inserisci un mese");
                                     }
                                 } else {
-                                    creaDialogErrore("Inserisci solo LETTERE nel nome");
+                                    creaDialogErrore("Inserisci solo numeri nel campo giorno");
                                 }
                             } else {
                                 creaDialogErrore("Inserisci il nome");
