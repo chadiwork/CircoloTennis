@@ -8,11 +8,11 @@ import util.generatoriCasuali.RndNome;
  */
 public class DataBase  {
 
-    public static String[] nomiCorsi = new String[2];
+    private static String[] nomiCorsi = new String[2];
 
-    public static Maestro[] maestri = new Maestro[2];
+    private static Maestro[] maestri = new Maestro[2];
 
-    public static Corso[] corsi = new Corso[2];
+    private static Corso[] corsi = new Corso[2];
 
     public DataBase() {
         setupIniziale();
@@ -53,6 +53,8 @@ public class DataBase  {
     public static String getNomeCorso(int idCorso) {
         return corsi[idCorso].getNome();
     }
+
+//    public static String getNomeMaestroCorso
 
 
 }
