@@ -14,12 +14,14 @@ public class DataBase  {
 
     private static Corso[] corsi = new Corso[2];
 
+    private static boolean setupEffettuato=false;
+
     public DataBase() {
         setupIniziale();
 
     }
 
-    private void setupIniziale() {
+    private static void setupIniziale() {
         creaMaestri();
         creaCorsi();
         creaEtichetteNomi();
@@ -27,26 +29,32 @@ public class DataBase  {
         System.out.println("Setup dati completato");
     }
 
-    private void creaEtichetteNomi() {
+    private static void creaEtichetteNomi() {
         nomiCorsi[0] = "Facile";
         nomiCorsi[1] = "Medio";
         nomiCorsi[2] = "Avanzato";
     }
 
-    private void creaCorsi() {
+    private static void creaCorsi() {
         corsi[0] = new Corso((maestri[0]), nomiCorsi[0], 50.35);
         corsi[1] = new Corso((maestri[1]), nomiCorsi[1], 65.75);
         corsi[2] = new Corso((maestri[2]), nomiCorsi[2], 90.99);
     }
 
-    private void creaMaestri() {
+    private static void creaMaestri() {
         maestri[0] = new Maestro(RndNome.getRandomName(), "Barbarossa", "025-112233", new Data());
         maestri[1] = new Maestro(RndNome.getRandomName(), "Minelli", "011-425698", new Data());
         maestri[2] = new Maestro(RndNome.getRandomName(), "Bortolotti", "051-124378", new Data());
     }
 
     public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
+        //se non è stato fatto il setup
+        if (!setupEffettuato) {
+            setupIniziale();
+        }
+
         corsi[idCorso].add(personaDaAggiungere);
+
 
     }
 

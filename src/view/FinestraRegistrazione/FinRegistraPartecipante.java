@@ -100,8 +100,9 @@ public class FinRegistraPartecipante extends JFrame {
 
                                             if (!inputAnno.getText().equals("")) {
                                                 if (inputAnno.getText().matches(regexNumeri)
-                                                        &&Integer.parseInt(inputMese.getText())<=2016
-                                                        &&Integer.parseInt(inputMese.getText())>=1900) {
+//                                                        &&Integer.parseInt(inputMese.getText())<=2016
+//                                                        &&Integer.parseInt(inputMese.getText())>=1900
+                                                        ) {
 
                                                     String anno =inputMese.getText();
 

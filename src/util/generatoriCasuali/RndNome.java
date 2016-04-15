@@ -1,7 +1,7 @@
 package util.generatoriCasuali;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -11,7 +11,9 @@ import java.util.Scanner;
  */
 public class RndNome {
 
-    static ArrayList<String> nomi;
+    static LinkedList<String> nomi;
+
+    static boolean isSetupEffettuato = false;
 
     private static void setupList() throws FileNotFoundException {
 
@@ -22,29 +24,46 @@ public class RndNome {
         Scanner localScanner = new Scanner(file);
 
         // Read the nomi from the file
-        nomi = new ArrayList<>();
+        nomi = new LinkedList<>();
         while (localScanner.hasNext()) {
             nomi.add(localScanner.next());
         }
+        System.out.println("La dimensione della lista è: "+nomi.size());
 
     }
 
-    public static String getRandomName() {
+    public static String getRandomName()  {
 
         //se la lista non è stata preparata allora la preparo
-        if (nomi.size() < 0) {
+        if (!isSetupEffettuato) {
             try {
                 setupList();
             } catch (FileNotFoundException e) {
-//                e.printStackTrace();
-                System.out.println("Errore di lettura del file dei nomi");
+                e.printStackTrace();
                 return "Default";
-                //in caso di errore i nomi saranno tutti default, gestisco l'errore qui
             }
         }
-            // Pick one at random
-            int randomIndex = (int)(Math.random() * nomi.size());
-            return nomi.get(randomIndex);
+
+
+//        if (nomi.size() < 0) {
+//            setupList();
+//        }
+//        //se la lista non è stata preparata allora la preparo
+//        if (nomi.size() < 0) {
+//            try {
+//                setupList();
+//            } catch (FileNotFoundException e) {
+////                e.printStackTrace();
+//                System.out.println("Errore di lettura del file dei nomi");
+//                return "Default";
+//                //in caso di errore i nomi saranno tutti default, gestisco l'errore qui
+//            }
+//        }
+
+        // Pick one at random
+        int randomIndex = RndNmbrInRange.random(1,nomi.size());
+
+        return nomi.get(randomIndex);
 
     }
 

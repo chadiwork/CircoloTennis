@@ -51,22 +51,22 @@ public class Data {
     private String rndDay() {
         //tiene conto di febbraio
         if (Objects.equals(this.mese, "2")) {
-            Integer a = RndNmbrInRange.randomInRange(1, 28);
+            Integer a = RndNmbrInRange.random(1, 28);
             return a.toString();
         }
         else{
-            Integer a = RndNmbrInRange.randomInRange(1, 30);
+            Integer a = RndNmbrInRange.random(1, 30);
             return a.toString();
         }
 
     }
     private String rndMonth() {
-        Integer a = RndNmbrInRange.randomInRange(1, 12);
+        Integer a = RndNmbrInRange.random(1, 12);
         return a.toString();
     }
 
     private String rndYear() {
-        Integer a = RndNmbrInRange.randomInRange(1940, 2010);
+        Integer a = RndNmbrInRange.random(1940, 2010);
         return a.toString();
     }
 }
