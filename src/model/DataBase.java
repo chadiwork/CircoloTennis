@@ -8,17 +8,20 @@ import util.Random.RndNome;
  */
 public class DataBase  {
 
-    private static String[] nomiCorsi = new String[2];
+    private static final double costoFacile = 50.35;
+    private static final double costoMedio = 65.75;
+    private static final double costoAvanzato = 90.99;
 
-    private static Maestro[] maestri = new Maestro[2];
+    private static String[] nomiCorsi = new String[3];
 
-    private static Corso[] corsi = new Corso[2];
+    private static Maestro[] maestri = new Maestro[3];
+
+    private static Corso[] corsi = new Corso[3];
 
     private static boolean setupEffettuato=false;
 
     public DataBase() {
         setupIniziale();
-
     }
 
     private static void setupIniziale() {
@@ -36,9 +39,9 @@ public class DataBase  {
     }
 
     private static void creaCorsi() {
-        corsi[0] = new Corso((maestri[0]), nomiCorsi[0], 50.35);
-        corsi[1] = new Corso((maestri[1]), nomiCorsi[1], 65.75);
-        corsi[2] = new Corso((maestri[2]), nomiCorsi[2], 90.99);
+        corsi[0] = new Corso((maestri[0]), nomiCorsi[0], costoFacile);
+        corsi[1] = new Corso((maestri[1]), nomiCorsi[1], costoMedio);
+        corsi[2] = new Corso((maestri[2]), nomiCorsi[2], costoAvanzato);
     }
 
     private static void creaMaestri() {
@@ -58,7 +61,7 @@ public class DataBase  {
     }
 
     public static String getNomeCorso(int idCorso) {
-        return corsi[idCorso].getNome();
+        return corsi[idCorso].getNomeCorso();
     }
 
 //    public static String getNomeMaestroCorso

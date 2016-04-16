@@ -176,7 +176,7 @@ public class FinRegistraPartecipante extends JFrame {
         svuotaJText(inputNome);
 
         //rimetto tendina da impostare
-        tendinaCorso.setSelectedIndex(4);
+        tendinaCorso.setSelectedIndex(3);
     }
 
     private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {

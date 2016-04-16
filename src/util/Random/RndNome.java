@@ -1,14 +1,8 @@
 package util.Random;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Creato da Vlady il 14/04/2016.
@@ -21,36 +15,44 @@ public class RndNome {
 
     private static boolean isSetupEffettuato = false;
 
+    private static String filePath = "./src/util/ListeAnagrafici/listaCognomi.txt";
+
+
     private static void setupList() throws FileNotFoundException {
 
-//        // Open the file
-//        File file = new File("./src/util/ListeAnagrafici/listaNomi.txt");
-//
-//        // Attach a scanner to the file
-//        Scanner localScanner = new Scanner(file);
-//
-//        // Read the nomi from the file
-//        nomi = new LinkedList<>();
-//        while (localScanner.hasNextLine()) {
-//            nomi.add(localScanner.next());
-//        }
-//        System.out.println("La dimensione della lista è: "+nomi.size());
+        try {
+            nomi=readLines(new File(filePath));
 
-        String fileName = "./src/util/ListeAnagrafici/listaNomi.txt";
+//            for (int i = 0; i >= nomi.size();i++) {
+//                System.out.println(nomi.get(i));
+//            }
 
-        //read file into stream, try-with-resources
-        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-
-            stream.forEach(System.out::println);
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Errore");
         }
-
-
-
-
     }
+
+    private static LinkedList<String> readLines(File file) throws Exception {
+        if (!file.exists()) {
+            return new LinkedList<String>();
+        }
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        LinkedList<String> results = new LinkedList<String>();
+        String line = reader.readLine();
+        while (line != null) {
+
+            System.out.println(line);
+
+            results.add(line);
+            line = reader.readLine();
+        }
+        return results;
+    }
+
+
+
+
 
     public static String get()  {
 
