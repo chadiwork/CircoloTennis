@@ -10,9 +10,9 @@ import java.util.LinkedList;
  */
 public class Corso extends LinkedList<Partecipante>{
 
-    Maestro maestro;
-    String nome;
-    double costo;
+    private Maestro maestro;
+    private String nome;
+    private double costo;
 
     //indici
     //0 = facile
@@ -35,14 +35,14 @@ public class Corso extends LinkedList<Partecipante>{
     }
 
     public Maestro getMaestro() {
-        return maestro;
+        return this.maestro;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCorso() {
+        return this.nome;
     }
 
-    public double getCosto() {
-        return costo;
+    public double getPrezzoCorso() {
+        return this.costo;
     }
 }
