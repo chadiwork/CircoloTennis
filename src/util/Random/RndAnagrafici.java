@@ -1,62 +1,81 @@
 package util.Random;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Random;
-import java.util.Scanner;
+import util.Libs.FileUtils;
+
+import java.io.*;
+import java.util.LinkedList;
 
 /**
- * Created by Chado on 11/02/2016.
- * Classe per leggere e generare nomi e cognomi casuali
+ * Creato da Vlady il 14/04/2016.
+ * in origine parte del progetto:
+ * CircoloTennis
  */
 public class RndAnagrafici {
-    private static String[] nome;
-    private static String[] cognome;
-    private static File fileNomi = new File("Nomi.txt");
-    private static File fileCognomi = new File("Cognomi.txt");
-    private static Scanner lettoreFileNomi;
-    private static Scanner lettoreFileCognomi;
+
+    private static LinkedList<String> nomi;
+    private static LinkedList<String> cognomi;
+
+    private static boolean isSetupNomiEffettuato = false;
+    private static boolean isSetupCognomiEffettuato = false;
+
+    private static String fileNomi = "./src/util/ListeAnagrafici/listaNomi.txt";
+    private static String fileCognomi = "./src/util/ListeAnagrafici/listaCognomi.txt";
 
 
-    private static void setupIniziale() throws FileNotFoundException{
-        //TODO Controllare le refernces
-        lettoreFileNomi=new Scanner(fileNomi);
-        lettoreFileCognomi=new Scanner(fileCognomi);
-        nome=new String[8913];
-        cognome=new String[170];
-    }
-    private static  void leggiNomi(){
-        //leggo il file finchè c'è una stringa e incremento l'array
-        int i=0;
-        while (lettoreFileNomi.hasNext()){
-            String tmp=lettoreFileNomi.next(); //String temporanea
-            nome[i]=tmp.substring(0, 1).toUpperCase() + tmp.substring(1); //Mette maiuscole ai nomi
-            i++;
+    private static void setupListNomi() throws FileNotFoundException {
+
+        try {
+            nomi= FileUtils.readLines(new File(fileNomi));
+            System.out.println("Setup list nomi effettuato correttamente");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Errore");
         }
-
-        lettoreFileNomi.close();
     }
-    private static void leggiCognomi(){
-        //leggo il file finchè c'è una stringa e incremento l'array
-        int i=0;
-        while (lettoreFileCognomi.hasNext()){
-            String tmp=lettoreFileCognomi.next(); //String temporanea
-            cognome[i]= tmp.substring(0, 1).toUpperCase() + tmp.substring(1); //Mette maiuscole ai nomi
 
-            i++;
+    private static void setupListCognomi() {
+
+        try {
+            cognomi= FileUtils.readLines(new File(fileCognomi));
+            System.out.println("Setup list cognomi effettuato correttamente");
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Errore");
         }
-        lettoreFileCognomi.close();
-    }
-    //Restituisce un intero casuale
-    private static int indiceCasuale(int Low, int High){
-        Random r=new Random();
-        return r.nextInt(High-Low)+Low;
-    }
-    public static String[] getNome() {
-        return nome;
     }
 
-    public static String[] getCognome() {
-        return cognome;
+    public static String getRndNome()  {
+        //se la lista non è stata preparata allora la preparo
+        if (!isSetupNomiEffettuato) {
+            try {
+                setupListNomi();
+                isSetupNomiEffettuato = true;
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                return "Default";
+            }
+        }
+        // Pick one at random
+        int randomIndex = RndNmbrInRange.random(1,nomi.size());
+        return nomi.get(randomIndex);
     }
+
+    public static String getRndCognome()  {
+        //se la lista non è stata preparata allora la preparo
+        if (!isSetupCognomiEffettuato) {
+            setupListCognomi();
+            isSetupCognomiEffettuato = true;
+        }
+        // Pick one at random
+        int randomIndex = RndNmbrInRange.random(1,cognomi.size());
+        return cognomi.get(randomIndex);
+    }
+
+
+
+
 }
+

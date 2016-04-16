@@ -1,7 +1,7 @@
 package model;
 
 import model.Modelli.Data;
-import util.Random.RndNome;
+import util.Random.RndAnagrafici;
 
 /**
  * Created by Chado on 14/04/2016.
@@ -45,9 +45,9 @@ public class DataBase  {
     }
 
     private static void creaMaestri() {
-        maestri[0] = new Maestro(RndNome.get(), "Barbarossa", "025-112233", new Data());
-        maestri[1] = new Maestro(RndNome.get(), "Minelli", "011-425698", new Data());
-        maestri[2] = new Maestro(RndNome.get(), "Bortolotti", "051-124378", new Data());
+        maestri[0] = new Maestro(RndAnagrafici.getRndNome(), RndAnagrafici.getRndCognome(), "025-112233", new Data());
+        maestri[1] = new Maestro(RndAnagrafici.getRndNome(), RndAnagrafici.getRndCognome(), "011-425698", new Data());
+        maestri[2] = new Maestro(RndAnagrafici.getRndNome(), RndAnagrafici.getRndCognome(), "051-124378", new Data());
     }
 
     public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
@@ -57,6 +57,8 @@ public class DataBase  {
             setupEffettuato = true;
         }
         corsi[idCorso].add(personaDaAggiungere);
+
+        System.out.println(personaDaAggiungere.getNome()+ " aggiunto correttamente al database");
 
     }
 

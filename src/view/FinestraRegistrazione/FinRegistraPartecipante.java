@@ -3,14 +3,11 @@ package view.FinestraRegistrazione;
 import model.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
-import util.Random.RndNome;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Created by Chado on 01/04/2016.
