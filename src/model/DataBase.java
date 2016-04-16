@@ -8,11 +8,11 @@ import util.Random.RndNome;
  */
 public class DataBase  {
 
-    private static String[] nomiCorsi = new String[2];
+    private static String[] nomiCorsi = new String[3];
 
-    private static Maestro[] maestri = new Maestro[2];
+    private static Maestro[] maestri = new Maestro[3];
 
-    private static Corso[] corsi = new Corso[2];
+    private static Corso[] corsi = new Corso[3];
 
     private static boolean setupEffettuato=false;
 

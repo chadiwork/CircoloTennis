@@ -1,14 +1,8 @@
 package util.Random;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Creato da Vlady il 14/04/2016.
@@ -21,56 +15,39 @@ public class RndNome {
 
     private static boolean isSetupEffettuato = false;
 
+    private static String filePath = "./src/util/ListeAnagrafici/listaCognomi.txt";
+
+
     private static void setupList() throws FileNotFoundException {
 
-//        // Open the file
-//        File file = new File("./src/util/ListeAnagrafici/listaNomi.txt");
-//
-//        // Attach a scanner to the file
-//        Scanner localScanner = new Scanner(file);
-//
-//        // Read the nomi from the file
-//        nomi = new LinkedList<>();
-//        while (localScanner.hasNextLine()) {
-//            nomi.add(localScanner.next());
-//        }
-//        System.out.println("La dimensione della lista è: "+nomi.size());
+        try {
+            nomi=readLines(new File(filePath));
 
-//        String fileName = "./src/util/ListeAnagrafici/listaNomi.txt";
-//
-//        //read file into stream, try-with-resources
-//        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
-//
-////            stream.forEach(System.out::println);
-//            while (stream.iterator().hasNext()){
-//                nomi.add(stream.iterator().toString());
-//                nomi = stream.iterator();
-//            };
-//
-////            nomi.add(String.valueOf(stream.iterator()));
-//
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println(nomi.size());
-//
-        String fileName = "./src/util/ListeAnagrafici/listaNomi.txt";
+//            for (int i = 0; i >= nomi.size();i++) {
+//                System.out.println(nomi.get(i));
+//            }
 
-        try (Scanner scanner = new Scanner(new File(fileName))) {
-
-            while (scanner.hasNext()){
-                nomi.add(scanner.nextLine().toString());
-            }
-
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Errore");
         }
+    }
 
-        System.out.println(nomi.get(50));
+    private static LinkedList<String> readLines(File file) throws Exception {
+        if (!file.exists()) {
+            return new LinkedList<String>();
+        }
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        LinkedList<String> results = new LinkedList<String>();
+        String line = reader.readLine();
+        while (line != null) {
 
+            System.out.println(line);
 
+            results.add(line);
+            line = reader.readLine();
+        }
+        return results;
     }
 
 
