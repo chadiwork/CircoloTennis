@@ -24,10 +24,10 @@ public class Corso extends LinkedList<Partecipante>{
     //classe pronta
     //corso contiene vari partecipanti
 
-    public Corso(Maestro maestro, String nome, double costo) {
+    public Corso(Maestro maestro, String nomeCorso, double costoCorso) {
         this.maestro = maestro;
-        this.nome = nome;
-        this.costo = costo;
+        this.nome = nomeCorso;
+        this.costo = costoCorso;
     }
 
     public void aggiungiPartecipante(Partecipante partInAggiunta) {

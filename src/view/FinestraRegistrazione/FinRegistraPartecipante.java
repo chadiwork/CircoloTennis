@@ -108,23 +108,37 @@ public class FinRegistraPartecipante extends JFrame {
 
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
 
+                                                    //riprendo l'indice del corso selezionato
+                                                    int idSelezionato = tendinaCorso.getSelectedIndex();
+
                                                     //aggiungo partecipante al corso selezionato
                                                     switch (tendinaCorso.getSelectedIndex()) {
                                                         case 0:DataBase.addPartecipante(0,toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
                                                             break;
                                                         case 1:DataBase.addPartecipante(1,toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
                                                             break;
                                                         case 2:DataBase.addPartecipante(2,toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
                                                             break;
                                                     }
 
+                                                    //nome del corso al quale ho appena aggiunto il partecipante
+                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
+
                                                     svuotaCampi();
+
+                                                    //numero di compagni del partecipante in aggiunta di quel corso
+                                                    int compagniCorso = DataBase.getNumeroPartecipantiCorso(idSelezionato) - 1;
 
                                                     //stampo l'inserimento effettuato
                                                     txtAreaInseriti.append(toAdd.getCognome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
+                                                    txtAreaInseriti.append("Compagni: "+compagniCorso + "\n");
+
+                                                    //aggiorno label
+                                                    lblUltimoInserito.setText("Maestro: "+DataBase.getNomeMaestroCorso(idSelezionato)
+                                                            +" "+DataBase.getCognomeMaestroCorso(idSelezionato));
 
                                                     //partecipante creato e pronto
 

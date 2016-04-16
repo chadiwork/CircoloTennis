@@ -42,7 +42,7 @@ public class FinestraMain extends JFrame {
 
     private void settaListenerTastiFinestre() {
         registraPartecipantiButton.addActionListener(e -> {
-            FinRegistraPartecipante finRegistraPartecipante =new FinRegistraPartecipante("Registra Partecipante",800,400);
+            FinRegistraPartecipante finRegistraPartecipante =new FinRegistraPartecipante("Registra Partecipante",900,400);
             finRegistraPartecipante.setVisible(true);
 
         });

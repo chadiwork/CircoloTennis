@@ -25,9 +25,10 @@ public class DataBase  {
     }
 
     private static void setupIniziale() {
+        creaEtichetteNomi();
         creaMaestri();
         creaCorsi();
-        creaEtichetteNomi();
+
 
         System.out.println("Setup dati completato");
     }
@@ -45,9 +46,9 @@ public class DataBase  {
     }
 
     private static void creaMaestri() {
-        maestri[0] = new Maestro(RndAnagrafici.getRndNome(), RndAnagrafici.getRndCognome(), "025-112233", new Data());
-        maestri[1] = new Maestro(RndAnagrafici.getRndNome(), RndAnagrafici.getRndCognome(), "011-425698", new Data());
-        maestri[2] = new Maestro(RndAnagrafici.getRndNome(), RndAnagrafici.getRndCognome(), "051-124378", new Data());
+        maestri[0] = new Maestro(capFirst(RndAnagrafici.getRndNome()), capFirst(RndAnagrafici.getRndCognome()), "025-112233", new Data());
+        maestri[1] = new Maestro(capFirst(RndAnagrafici.getRndNome()), capFirst(RndAnagrafici.getRndCognome()), "011-425698", new Data());
+        maestri[2] = new Maestro(capFirst(RndAnagrafici.getRndNome()), capFirst(RndAnagrafici.getRndCognome()), "051-124378", new Data());
     }
 
     public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
@@ -66,7 +67,25 @@ public class DataBase  {
         return corsi[idCorso].getNomeCorso();
     }
 
-//    public static String getNomeMaestroCorso
+    public static Integer getNumeroPartecipantiCorso(int idCorso) {
+        return corsi[idCorso].size();
+    }
+
+    public static String getNomeMaestroCorso(int idCorso) {
+
+//        String str = corsi[idCorso].getMaestro().getNome();
+//        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        // cap = "Java"
+
+        return corsi[idCorso].getMaestro().getNome();
+    }
+
+    public static String capFirst(String toCap) {
+        return toCap.substring(0, 1).toUpperCase() + toCap.substring(1);
+    }
 
 
+    public static String getCognomeMaestroCorso(int idCorso) {
+        return corsi[idCorso].getMaestro().getCognome();
+    }
 }
