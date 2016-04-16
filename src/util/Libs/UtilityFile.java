@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * in origine parte del progetto:
  * CircoloTennis
  */
-public class FileUtils {
+public class UtilityFile {
 
     public static LinkedList<String> readLines(File file) throws Exception {
         if (!file.exists()) {

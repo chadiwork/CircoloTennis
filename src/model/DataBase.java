@@ -1,6 +1,7 @@
 package model;
 
 import model.Modelli.Data;
+import util.Libs.UtilityString;
 import util.Random.RndAnagrafici;
 
 /**
@@ -46,9 +47,12 @@ public class DataBase  {
     }
 
     private static void creaMaestri() {
-        maestri[0] = new Maestro(capFirst(RndAnagrafici.getRndNome()), capFirst(RndAnagrafici.getRndCognome()), "025-112233", new Data());
-        maestri[1] = new Maestro(capFirst(RndAnagrafici.getRndNome()), capFirst(RndAnagrafici.getRndCognome()), "011-425698", new Data());
-        maestri[2] = new Maestro(capFirst(RndAnagrafici.getRndNome()), capFirst(RndAnagrafici.getRndCognome()), "051-124378", new Data());
+        maestri[0] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "025-112233", new Data());
+        maestri[1] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "011-425698", new Data());
+        maestri[2] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "051-124378", new Data());
     }
 
     public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
@@ -78,10 +82,6 @@ public class DataBase  {
         // cap = "Java"
 
         return corsi[idCorso].getMaestro().getNome();
-    }
-
-    public static String capFirst(String toCap) {
-        return toCap.substring(0, 1).toUpperCase() + toCap.substring(1);
     }
 
 
