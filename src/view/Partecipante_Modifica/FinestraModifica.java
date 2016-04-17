@@ -47,7 +47,6 @@ public class FinestraModifica extends JFrame {
             UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
             System.exit(50000);
         } else {
-
             settaListener();
             settaTendine();
         }

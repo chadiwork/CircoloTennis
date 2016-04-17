@@ -9,6 +9,8 @@ import Librerie.Util.UtilityString;
 import Librerie.Random.RndAnagrafici;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 /**
  * Created by Chado on 14/04/2016.
  */
@@ -106,8 +108,8 @@ public class DataBase  {
         controllaSetup();
         //controllo se sono tutti vuoti
         return isCorsoVuoto(0)
-             &&isCorsoVuoto(1)
-             &&isCorsoVuoto(2);
+                &&isCorsoVuoto(1)
+                &&isCorsoVuoto(2);
     }
 
     public static boolean isCorsoVuoto(int idCorso) {
@@ -155,12 +157,14 @@ public class DataBase  {
 
             if (!getCorsi()[f].isEmpty()) {
 
+                partecipanti = new String[getCorsi()[f].size()+1];
+
                 for (int i = 0; i < getCorsi()[f].size(); i++) {
 
                     System.out.println("-Indice partecipante:"+i);
 
 
-                    partecipanti = new String[getCorsi()[f].size()+1];
+
 
                     partecipanti[i]=(getCorsi()[f].get(i).getNome());
 
@@ -185,7 +189,64 @@ public class DataBase  {
 
     public static int getNumeroTotali() {
         return corsi[0].size()+
-               corsi[1].size()+
-               corsi[2].size();
+                corsi[1].size()+
+                corsi[2].size();
     }
+
+    public static String[] estraiPartecipantiInseriti(int idCorso) {
+
+        controllaSetup();
+
+        int dim = corsi[idCorso].size();
+
+        String[] partecipanti = null;
+
+        if (dim > 0) {
+
+
+            partecipanti = new String[dim];
+
+            for (int i = 0; i < dim; i++) {
+
+                String nome = corsi[idCorso].get(i).getNome();
+                String cognome = corsi[idCorso].get(i).getCognome();
+
+                partecipanti[i] = nome + " " + cognome;
+
+            }
+
+        }
+
+        return partecipanti;
+    }
+
+    public static String[] getPartecipantiCorso(int idCorso) {
+
+        return corsi[idCorso].toArray(new String[0]);
+
+    }
+
+    public static String[] getNomiCorsiConPartecipanti() {
+
+        ArrayList<String> tmp = new ArrayList<>();
+
+        String[] corsiConPartecipanti = null;
+
+        for (int f=0;f<3;f++) {
+
+            if (!getCorsi()[f].isEmpty()) {
+
+                tmp.add(nomiCorsi[f]);
+            }
+        }
+
+        return tmp.toArray(new String[0]);
+    }
+
+
+
+
+
+
 }
+
