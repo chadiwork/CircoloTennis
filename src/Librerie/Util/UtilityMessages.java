@@ -14,6 +14,22 @@ public class UtilityMessages {
         JOptionPane.showMessageDialog(localFrame,
                 message,
                 "Errore",
+                JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void creaDialogInfo(String message, Frame localFrame) {
+        JOptionPane.showMessageDialog(localFrame,
+                message,
+                "Info",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public static void creaDialogAttenzione(String message, Frame localFrame) {
+        JOptionPane.showMessageDialog(localFrame,
+                message,
+                "Attenzione",
                 JOptionPane.WARNING_MESSAGE);
     }
+
+
 }

@@ -25,9 +25,11 @@ public class ScegliDaModificare extends JFrame {
     private JPanel pnlPartecipante;
     private JPanel pnlTende;
     private JButton btnElimina;
-//    private int numeroConversioni=0;
+    //    private int numeroConversioni=0;
+    private JFrame localFrame;
 
-    private int corsoSelezionato,partecipanteSelezionato;
+    private int idCorsoSelezionato, idPartSelezionato;
+    private Partecipante selezionato=null;
 
     private String[] partecipanti,corsi;
 
@@ -38,6 +40,8 @@ public class ScegliDaModificare extends JFrame {
         this.pack();
         this.setSize(larghezza, altezza);
         this.setVisible(true);
+
+        localFrame = this;
     }
 
     private ScegliDaModificare() {
@@ -50,20 +54,24 @@ public class ScegliDaModificare extends JFrame {
             settaTendine();
         }
 
-
+        localFrame = this;
 
     }
 
     private void settaTendine() {
 
         settaTendinaCorso();
-//        settaTendinaPartecipante();
+        //quella partecipante si aggiorna da sola, lascio comunque commentato per sicurezza
+        //settaTendinaPartecipante();
 
 
         DataBase.stampaDiagnostica();
     }
 
     private void settaTendinaCorso() {
+
+        System.out.println("Selezionato in creazione: "+tendinaCorso.getSelectedIndex());
+        tendinaCorso.removeAllItems();
 
         for (int i = 0; i < DataBase.getNomiCorsiConPartecipanti().size(); i++) {
             tendinaCorso.addItem(DataBase.getNomiCorsiConPartecipanti().get(i));
@@ -76,42 +84,32 @@ public class ScegliDaModificare extends JFrame {
         tendinaPartecipante.removeAllItems();
         //così non metto doppioni
 
-        String[] nomiCorsi = DataBase.getNomiCorsi();
+        aggiornaCorsoSelezionato();
 
+        //riempio la tendinaPartecipante
+        for (int i = 0; i < DataBase.getPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
+            tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(idCorsoSelezionato).get(i));
+        }
 
-        //switch paurosi
-        if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
-            //caso corso facile
-            corsoSelezionato = 0;
-        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
-            //caso corso medio
-            corsoSelezionato = 1;
-        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
-            //caso corso avanzato
-            corsoSelezionato = 2;
-        }
-        for (int i = 0; i < DataBase.getPartecipantiAlCorso(corsoSelezionato).size(); i++) {
-            tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(corsoSelezionato).get(i));
-        }
+        aggiornaPartecipanteSelezionato();
 
     }
+
 
     private void settaListener() {
         btnModifica.addActionListener(new ActionListener() {
             //listener
             @Override
             public void actionPerformed(ActionEvent e) {
-                listenerModifica();
+                aggiornaPartecipanteSelezionato();
             }
         });
-
         btnElimina.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                eliminaPartecipante();
             }
         });
-
         tendinaCorso.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -120,17 +118,92 @@ public class ScegliDaModificare extends JFrame {
         });
     }
 
-    private void listenerModifica() {
-        partecipanteSelezionato = tendinaPartecipante.getSelectedIndex();
 
-        Partecipante selezionato = DataBase.getPartecipanteAlCorso(corsoSelezionato, partecipanteSelezionato);
 
-        System.out.println("Indice partecipante selezionato: "+partecipanteSelezionato);
+    private void eliminaPartecipante() {
 
-        System.out.println("Partecipante da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
+        aggiornaSelezionati();
 
+        int dialogButton = JOptionPane.YES_NO_OPTION;
+        int dialogResult = JOptionPane.showConfirmDialog(this, "Vuoi davvero eliminare "
+                        + selezionato.getNome()+" "
+                        + selezionato.getCognome()+" ?"
+                , "Elimina partecipante", dialogButton);
+
+        if(dialogResult == 0) {
+
+//            for (int i=0;i<50;i++) {
+//
+//                String tmp = getFrames()[i].getClass().getCanonicalName();
+//
+//                if (tmp.equals(this.getClass().getCanonicalName())) {
+//                    System.out.println("Frame n:"+i);
+//                    getFrames()[i].dispose();
+//                    break;
+//                }
+//
+//            }
+
+            localFrame = (JFrame) this;
+            localFrame.dispose();
+
+            this.dispose();
+//            tendinaCorso.setSelectedIndex(0);
+            localFrame.dispose();
+
+            super.dispose();
+
+            System.out.println("Utente sceglie SI");
+            DataBase.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
+
+            String toMsg = selezionato.getNomeCognome() + " rimosso/a correttamente";
+
+            UtilityMessages.creaDialogInfo(toMsg,this);
+
+            System.out.println("Funziona ancora e va avanti");
+
+
+        } else {
+            System.out.println("Utente sceglie NO");
+        }
 
     }
+
+    private void aggiornaSelezionati() {
+        aggiornaCorsoSelezionato();
+        aggiornaPartecipanteSelezionato();
+    }
+
+    private void aggiornaPartecipanteSelezionato() {
+        idPartSelezionato = tendinaPartecipante.getSelectedIndex();
+
+        selezionato = DataBase.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
+
+        System.out.println("---Corso selezionato: "+ idCorsoSelezionato);
+        System.out.println("--Indiceselezionato: "+ idPartSelezionato);
+        System.out.println(">Da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
+
+    }
+
+    private void aggiornaCorsoSelezionato() {
+        String[] nomiCorsi = DataBase.getNomiCorsi();
+
+        //switch paurosi
+        if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
+            //caso corso facile
+            idCorsoSelezionato = 0;
+        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
+            //caso corso medio
+            idCorsoSelezionato = 1;
+        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
+            //caso corso avanzato
+            idCorsoSelezionato = 2;
+        } else {
+            UtilityMessages.creaDialogErrore("Non ci sono corsi con partecipanti",new Frame("Fine del mondo"));
+        }
+    }
+
+
 }
 
 

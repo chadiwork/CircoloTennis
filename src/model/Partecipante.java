@@ -26,5 +26,6 @@ public class Partecipante extends Persona {
         this.dataDiNascita = dataDiNascita;
     }
 
+
 }
 
