@@ -57,11 +57,6 @@ public class DataBase  {
                 UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
         maestri[2] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
                 UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
-
-
-
-        //TODO - test
-        System.out.println(RndTelNumber.conPrefisso());
     }
 
     public static void addPartecipante(int idCorso, Partecipante personaDaAggiungere) {
