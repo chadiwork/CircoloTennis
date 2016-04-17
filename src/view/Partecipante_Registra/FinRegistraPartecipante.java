@@ -1,11 +1,11 @@
 package view.Partecipante_Registra;
 
-import model.DataBase;
+import model.Data.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
-import util.Libs.UtilityString;
-import util.Random.RndAnagrafici;
-import util.Random.RndNmbrInRange;
+import Librerie.Util.UtilityString;
+import Librerie.Random.RndAnagrafici;
+import Librerie.Random.RndNmbrInRange;
 
 import javax.swing.*;
 import java.awt.*;

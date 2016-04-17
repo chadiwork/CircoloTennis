@@ -1,4 +1,4 @@
-package util.Random;
+package Librerie.Random;
 
 /**
  * Creato da Vlady il 14/04/2016.

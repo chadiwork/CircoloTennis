@@ -1,8 +1,11 @@
-package model;
+package model.Data;
 
+import model.Corso;
+import model.Maestro;
 import model.Modelli.Data;
-import util.Libs.UtilityString;
-import util.Random.RndAnagrafici;
+import model.Partecipante;
+import Librerie.Util.UtilityString;
+import Librerie.Random.RndAnagrafici;
 
 /**
  * Created by Chado on 14/04/2016.
@@ -55,7 +58,7 @@ public class DataBase  {
                 UtilityString.capFirst(RndAnagrafici.getRndCognome()), "051-124378", new Data());
     }
 
-    public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
+    public static void addPartecipante(int idCorso, Partecipante personaDaAggiungere) {
         //se non è stato fatto il setup
         if (!setupEffettuato) {
             setupIniziale();

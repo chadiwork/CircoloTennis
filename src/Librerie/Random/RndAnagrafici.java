@@ -1,6 +1,6 @@
-package util.Random;
+package Librerie.Random;
 
-import util.Libs.UtilityFile;
+import Librerie.Util.UtilityFile;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -17,8 +17,8 @@ public class RndAnagrafici {
 
     private static boolean isSetupEffettuato = false;
 
-    private static String fileNomi = "./src/util/ListeAnagrafici/listaNomi.txt";
-    private static String fileCognomi = "./src/util/ListeAnagrafici/listaCognomi.txt";
+    private static String fileNomi = "./src/Librerie/ListeAnagrafici/listaNomi.txt";
+    private static String fileCognomi = "./src/Librerie/ListeAnagrafici/listaCognomi.txt";
 
 
     private static void setupListNomi() throws FileNotFoundException {

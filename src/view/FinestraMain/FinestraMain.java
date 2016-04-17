@@ -3,6 +3,7 @@ package view.FinestraMain;
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
 import view.Partecipante_Modifica.FinModificaPartecipante;
+import view.Partecipante_Modifica.FinestraModifica;
 import view.Partecipante_Registra.FinRegistraPartecipante;
 
 import javax.swing.*;
@@ -28,7 +29,6 @@ public class FinestraMain extends JFrame {
         this.pack();
         this.setSize(larghezza, altezza);
         this.setLocationRelativeTo(null);
-        //this.setPosizioneCentro();
         this.setVisible(true);
         this.setResizable(false);
     }
@@ -48,7 +48,7 @@ public class FinestraMain extends JFrame {
         });
 
         modificaPartecipantiButton.addActionListener(e -> {
-            FinModificaPartecipante finestra=new FinModificaPartecipante();
+            FinestraModifica finestra=new FinestraModifica();
             finestra.setVisible(true);
         });
 

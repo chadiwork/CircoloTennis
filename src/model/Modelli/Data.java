@@ -1,6 +1,6 @@
 package model.Modelli;
 
-import util.Random.RndNmbrInRange;
+import Librerie.Random.RndNmbrInRange;
 
 import java.util.Objects;
 

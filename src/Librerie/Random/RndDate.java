@@ -1,11 +1,11 @@
-    package util.Random;
+    package Librerie.Random;
 
     /**
      * Creato da Vlady il 15/04/2016.
      * in origine parte del progetto:
      * CircoloTennis
      */
-    public class RndData {
+    public class RndDate {
 
         public static String getStandard(char separator) {
             String y = rndYear();
