@@ -1,16 +1,16 @@
-package view.FinestraRegistrazione;
+package view.Partecipante_Registra;
 
 import model.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
-import util.Random.RndNome;
+import util.Libs.UtilityString;
+import util.Random.RndAnagrafici;
+import util.Random.RndNmbrInRange;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -38,6 +38,7 @@ public class FinRegistraPartecipante extends JFrame {
     private JTextField inputGiorno;
     private JLabel lblUltimoInserito;
     private JPanel pnlTendina;
+    private JButton btnAddCasuale;
     private JFormattedTextField formattedTextField1;
     Frame mainFrame = new Frame();
     private String[] tabellaCodici;
@@ -59,8 +60,9 @@ public class FinRegistraPartecipante extends JFrame {
     private FinRegistraPartecipante() {
         //costruttore in cui aggiungere tutte le modifiche alla UI
         //tieni private
-        addListenerInserisci();
+        addListener();
         onFirstOpening();
+
 
     }
 
@@ -107,29 +109,42 @@ public class FinRegistraPartecipante extends JFrame {
                                                     String anno =inputMese.getText();
 
                                                     //ora ho tutti i dati raccolti
-                                                    Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
 
+                                                    Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
+                                                    //partecipante creato e pronto
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
+
+                                                    //riprendo l'indice del corso selezionato
+                                                    int idSelezionato = tendinaCorso.getSelectedIndex();
 
                                                     //aggiungo partecipante al corso selezionato
                                                     switch (tendinaCorso.getSelectedIndex()) {
                                                         case 0:DataBase.addPartecipante(0,toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
                                                             break;
                                                         case 1:DataBase.addPartecipante(1,toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
                                                             break;
                                                         case 2:DataBase.addPartecipante(2,toAdd);
-                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
                                                             break;
                                                     }
 
+                                                    //nome del corso al quale ho appena aggiunto il partecipante
+                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
+
                                                     svuotaCampi();
 
-                                                    //stampo l'inserimento effettuato
-                                                    txtAreaInseriti.append(toAdd.getCognome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
+                                                    //numero di compagni del partecipante in aggiunta di quel corso
+                                                    int compagniCorso = DataBase.getNumeroPartecipantiCorso(idSelezionato) - 1;
 
-                                                    //partecipante creato e pronto
+                                                    //stampo l'inserimento effettuato
+                                                    txtAreaInseriti.append(toAdd.getNome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
+                                                    txtAreaInseriti.append("Compagni: "+compagniCorso + "\n");
+
+                                                    //aggiorno label
+                                                    lblUltimoInserito.setText("Maestro: "+DataBase.getNomeMaestroCorso(idSelezionato)
+                                                            +" "+DataBase.getCognomeMaestroCorso(idSelezionato));
 
                                                 }else {
                                                     creaDialogErrore("Inserisci un anno correttamente");
@@ -208,13 +223,30 @@ public class FinRegistraPartecipante extends JFrame {
 
     }
 
-    private void addListenerInserisci() {
+    private void addListener() {
         btnInserisciPartecipante.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 aggiungiPartecipante();
             }
         });
+
+        btnAddCasuale.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                riempiCampiInRandom();
+            }
+        });
+    }
+
+    private void riempiCampiInRandom() {
+        //riempio i campi con valori casuali
+        inputNome.setText(UtilityString.capFirst(RndAnagrafici.getRndNome()));
+        inputCognome.setText(UtilityString.capFirst(RndAnagrafici.getRndCognome()));
+        tendinaCorso.setSelectedIndex(RndNmbrInRange.random(1,3)-1);
+        inputGiorno.setText(""+RndNmbrInRange.random(1, 31));
+        inputMese.setText(""+RndNmbrInRange.random(1, 12));
+        inputAnno.setText(""+RndNmbrInRange.random(1920, 2016));
     }
 
     private void settaTendina() {

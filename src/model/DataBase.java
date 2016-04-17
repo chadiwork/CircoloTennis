@@ -1,7 +1,8 @@
 package model;
 
 import model.Modelli.Data;
-import util.Random.RndNome;
+import util.Libs.UtilityString;
+import util.Random.RndAnagrafici;
 
 /**
  * Created by Chado on 14/04/2016.
@@ -25,9 +26,10 @@ public class DataBase  {
     }
 
     private static void setupIniziale() {
+        creaEtichetteNomi();
         creaMaestri();
         creaCorsi();
-        creaEtichetteNomi();
+
 
         System.out.println("Setup dati completato");
     }
@@ -45,9 +47,12 @@ public class DataBase  {
     }
 
     private static void creaMaestri() {
-        maestri[0] = new Maestro(RndNome.get(), "Barbarossa", "025-112233", new Data());
-        maestri[1] = new Maestro(RndNome.get(), "Minelli", "011-425698", new Data());
-        maestri[2] = new Maestro(RndNome.get(), "Bortolotti", "051-124378", new Data());
+        maestri[0] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "025-112233", new Data());
+        maestri[1] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "011-425698", new Data());
+        maestri[2] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "051-124378", new Data());
     }
 
     public static void addPartecipante(int idCorso,Partecipante personaDaAggiungere) {
@@ -58,13 +63,29 @@ public class DataBase  {
         }
         corsi[idCorso].add(personaDaAggiungere);
 
+        System.out.println(personaDaAggiungere.getNome()+ " aggiunto correttamente al database");
+
     }
 
     public static String getNomeCorso(int idCorso) {
         return corsi[idCorso].getNomeCorso();
     }
 
-//    public static String getNomeMaestroCorso
+    public static Integer getNumeroPartecipantiCorso(int idCorso) {
+        return corsi[idCorso].size();
+    }
+
+    public static String getNomeMaestroCorso(int idCorso) {
+
+//        String str = corsi[idCorso].getMaestro().getNome();
+//        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
+        // cap = "Java"
+
+        return corsi[idCorso].getMaestro().getNome();
+    }
 
 
+    public static String getCognomeMaestroCorso(int idCorso) {
+        return corsi[idCorso].getMaestro().getCognome();
+    }
 }

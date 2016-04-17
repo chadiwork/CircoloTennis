@@ -2,8 +2,8 @@ package view.FinestraMain;
 
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
-import view.FinestraModificaCorso.FinestraModificaCorso;
-import view.FinestraRegistrazione.FinRegistraPartecipante;
+import view.Partecipante_Modifica.FinModificaPartecipante;
+import view.Partecipante_Registra.FinRegistraPartecipante;
 
 import javax.swing.*;
 
@@ -42,13 +42,13 @@ public class FinestraMain extends JFrame {
 
     private void settaListenerTastiFinestre() {
         registraPartecipantiButton.addActionListener(e -> {
-            FinRegistraPartecipante finRegistraPartecipante =new FinRegistraPartecipante("Registra Partecipante",800,400);
+            FinRegistraPartecipante finRegistraPartecipante =new FinRegistraPartecipante("Registra Partecipante",900,400);
             finRegistraPartecipante.setVisible(true);
 
         });
 
         modificaPartecipantiButton.addActionListener(e -> {
-            FinestraModificaCorso finestra=new FinestraModificaCorso();
+            FinModificaPartecipante finestra=new FinModificaPartecipante();
             finestra.setVisible(true);
         });
 
