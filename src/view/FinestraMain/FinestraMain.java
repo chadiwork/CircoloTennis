@@ -2,7 +2,6 @@ package view.FinestraMain;
 
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
-import view.Partecipante_Modifica.FinModificaPartecipante;
 import view.Partecipante_Modifica.FinestraModifica;
 import view.Partecipante_Registra.FinRegistraPartecipante;
 
@@ -34,9 +33,7 @@ public class FinestraMain extends JFrame {
     }
 
     private FinestraMain() {
-
         settaListenerTastiFinestre();
-
 //        Circolo mainCircolo = new Circolo();
     }
 
@@ -48,7 +45,7 @@ public class FinestraMain extends JFrame {
         });
 
         modificaPartecipantiButton.addActionListener(e -> {
-            FinestraModifica finestra=new FinestraModifica();
+            FinestraModifica finestra=new FinestraModifica("Modifica un partecipante",500,400);
             finestra.setVisible(true);
         });
 

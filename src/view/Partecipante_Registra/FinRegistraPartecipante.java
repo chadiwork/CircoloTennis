@@ -1,5 +1,7 @@
 package view.Partecipante_Registra;
 
+import Librerie.Util.UtilityConstants;
+import Librerie.Util.UtilityMessages;
 import model.Data.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
@@ -40,13 +42,9 @@ public class FinRegistraPartecipante extends JFrame {
     private JPanel pnlTendina;
     private JButton btnAddCasuale;
     private JFormattedTextField formattedTextField1;
-    Frame mainFrame = new Frame();
+    private Frame mainFrame = new Frame();
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
-    String regexParole="[a-zA-Z]+";
-    String regexNumeri="[0-9]+";
-
-
 
 
     private void onFirstOpening() {
@@ -62,8 +60,6 @@ public class FinRegistraPartecipante extends JFrame {
         //tieni private
         addListener();
         onFirstOpening();
-
-
     }
 
     private void aggiungiPartecipante() {
@@ -77,31 +73,31 @@ public class FinRegistraPartecipante extends JFrame {
             int codicePaz = tendinaCorso.getSelectedIndex();
 
             if (!inputNome.getText().equals("")) {
-                if (inputNome.getText().matches(regexParole)) {
+                if (inputNome.getText().matches(UtilityConstants.regexParole)) {
 
                     String nome = inputNome.getText();
 
                     if (!inputCognome.getText().equals("")) {
-                        if (inputCognome.getText().matches(regexParole)) {
+                        if (inputCognome.getText().matches(UtilityConstants.regexParole)) {
 
                             String cognome = inputCognome.getText();
 
                             if (!inputGiorno.getText().equals("")) {
-                                if (inputGiorno.getText().matches(regexNumeri)
+                                if (inputGiorno.getText().matches(UtilityConstants.regexNumeri)
                                         &&Integer.parseInt(inputGiorno.getText())<=31
                                         &&Integer.parseInt(inputGiorno.getText())>=1 ) {
 
                                     String giorno =inputGiorno.getText();
 
                                     if (!inputMese.getText().equals("")) {
-                                        if (inputMese.getText().matches(regexNumeri)
+                                        if (inputMese.getText().matches(UtilityConstants.regexNumeri)
                                                 &&Integer.parseInt(inputMese.getText())<=12
                                                 &&Integer.parseInt(inputMese.getText())>=1) {
 
                                             String mese =inputMese.getText();
 
                                             if (!inputAnno.getText().equals("")) {
-                                                if (inputAnno.getText().matches(regexNumeri)
+                                                if (inputAnno.getText().matches(UtilityConstants.regexNumeri)
 //                                                        &&Integer.parseInt(inputMese.getText())<=2016
 //                                                        &&Integer.parseInt(inputMese.getText())>=1900
                                                         ) {
@@ -147,37 +143,37 @@ public class FinRegistraPartecipante extends JFrame {
                                                             +" "+DataBase.getCognomeMaestroCorso(idSelezionato));
 
                                                 }else {
-                                                    creaDialogErrore("Inserisci un anno correttamente");
+                                                    UtilityMessages.creaDialogErrore("Inserisci un anno correttamente", mainFrame);
                                                 }
                                             }else {
-                                                creaDialogErrore("Inserisci l'anno");
+                                                UtilityMessages.creaDialogErrore("Inserisci l'anno", mainFrame);
                                             }
                                         }else {
-                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero");
+                                            UtilityMessages.creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", mainFrame);
                                         }
                                     }else {
-                                        creaDialogErrore("Inserisci il mese");
+                                        UtilityMessages.creaDialogErrore("Inserisci il mese", mainFrame);
                                     }
                                 } else {
-                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno");
+                                    UtilityMessages.creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", mainFrame);
                                 }
                             } else {
-                                creaDialogErrore("Devi inserire il giorno");
+                                UtilityMessages.creaDialogErrore("Devi inserire il giorno", mainFrame);
                             }
                         } else {
-                            creaDialogErrore("Inserisci solo LETTERE nel cognome");
+                            UtilityMessages.creaDialogErrore("Inserisci solo LETTERE nel cognome", mainFrame);
                         }
                     } else {
-                        creaDialogErrore("Cognome non inserito");
+                        UtilityMessages.creaDialogErrore("Cognome non inserito", mainFrame);
                     }
                 } else {
-                    creaDialogErrore("Inserisci solo LETTERE nel nome");
+                    UtilityMessages.creaDialogErrore("Inserisci solo LETTERE nel nome", mainFrame);
                 }
             } else {
-                creaDialogErrore("Nome non inserito");
+                UtilityMessages.creaDialogErrore("Nome non inserito", mainFrame);
             }
         } else {
-            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ");
+            UtilityMessages.creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", mainFrame);
         }
 
     }
@@ -197,13 +193,6 @@ public class FinRegistraPartecipante extends JFrame {
     private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
         Data dataNascita = new Data(giorno, mese, anno);
         return new Partecipante(nome, cognome, dataNascita);
-    }
-
-    private void creaDialogErrore(String message) {
-        JOptionPane.showMessageDialog(mainFrame,
-                message,
-                "Errore",
-                JOptionPane.WARNING_MESSAGE);
     }
 
     private void svuotaJText(JTextField daSvuotare) {

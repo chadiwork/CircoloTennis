@@ -87,6 +87,18 @@ public class DataBase  {
         return corsi[idCorso].getMaestro().getNome();
     }
 
+    public static boolean isAllEmpty() {
+        //controllo se sono tutti vuoti
+//        return corsi[0].size() + corsi[1].size() + corsi[2].size() == 0;
+
+        return isCorsoVuoto(0) && isCorsoVuoto(1) && isCorsoVuoto(2);
+    }
+
+    public static boolean isCorsoVuoto(int idCorso) {
+        //controllo se un corso in particolare è vuoto
+        return corsi[idCorso].size() == 0;
+    }
+
 
     public static String getCognomeMaestroCorso(int idCorso) {
         return corsi[idCorso].getMaestro().getCognome();
