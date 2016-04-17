@@ -22,8 +22,7 @@ public class FinestraModifica extends JFrame {
     private JButton btnModifica;
     private JPanel pnlCenter;
     private JPanel pnlModifica;
-    private JComboBox<String> tendinaCorso;
-    private JComboBox<String> tendinaPartecipante;
+    private JComboBox<String> tendinaCorso,tendinaPartecipante;
     private JPanel pnlCorso;
     private JPanel pnlPartecipante;
     private JPanel pnlTende;
@@ -32,8 +31,7 @@ public class FinestraModifica extends JFrame {
 
     private int corsoSelezionato,partecipanteSelezionato;
 
-    private String[] partecipanti;
-    private String[] corsi;
+    private String[] partecipanti,corsi;
 
     public FinestraModifica(String title, int larghezza, int altezza) throws HeadlessException {
         super(title);
@@ -105,13 +103,7 @@ public class FinestraModifica extends JFrame {
             //listener
             @Override
             public void actionPerformed(ActionEvent e) {
-                partecipanteSelezionato = tendinaPartecipante.getSelectedIndex();
-
-                Partecipante selezionato = DataBase.getPartecipanteAlCorso(corsoSelezionato, partecipanteSelezionato);
-
-                System.out.println("Indice partecipante selezionato: "+partecipanteSelezionato);
-
-                System.out.println("Partecipante da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
+                listenerModifica();
             }
         });
 
@@ -128,6 +120,16 @@ public class FinestraModifica extends JFrame {
                 settaTendinaPartecipante();
             }
         });
+    }
+
+    private void listenerModifica() {
+        partecipanteSelezionato = tendinaPartecipante.getSelectedIndex();
+
+        Partecipante selezionato = DataBase.getPartecipanteAlCorso(corsoSelezionato, partecipanteSelezionato);
+
+        System.out.println("Indice partecipante selezionato: "+partecipanteSelezionato);
+
+        System.out.println("Partecipante da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
     }
 }
 

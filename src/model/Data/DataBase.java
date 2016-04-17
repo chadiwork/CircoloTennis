@@ -172,7 +172,7 @@ public class DataBase  {
 
                     partecipanti[i]=(getCorsi()[f].get(i).getNome());
 
-                    System.out.println("Partecipante: "+partecipanti[i]+" del corso: "+f);
+                    System.out.println("Partecipante: "+partecipanti[i]);
 
                     totali++;
 
