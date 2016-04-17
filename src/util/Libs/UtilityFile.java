@@ -12,7 +12,7 @@ import java.util.LinkedList;
  */
 public class UtilityFile {
 
-    public static LinkedList<String> readLines(File file) throws Exception {
+    public static LinkedList<String> readLinesFromFile(File file) throws Exception {
         if (!file.exists()) {
             return new LinkedList<String>();
         }

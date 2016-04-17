@@ -24,7 +24,7 @@ public class RndAnagrafici {
     private static void setupListNomi() throws FileNotFoundException {
 
         try {
-            nomi= UtilityFile.readLines(new File(fileNomi));
+            nomi= UtilityFile.readLinesFromFile(new File(fileNomi));
             System.out.println("Setup list nomi effettuato correttamente");
 
         } catch (Exception e) {
@@ -36,7 +36,7 @@ public class RndAnagrafici {
     private static void setupListCognomi() throws FileNotFoundException {
 
         try {
-            cognomi= UtilityFile.readLines(new File(fileCognomi));
+            cognomi= UtilityFile.readLinesFromFile(new File(fileCognomi));
             System.out.println("Setup list cognomi effettuato correttamente");
 
 

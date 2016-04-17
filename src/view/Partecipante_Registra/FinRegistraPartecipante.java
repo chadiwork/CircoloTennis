@@ -1,4 +1,4 @@
-package view.FinestraRegistrazione;
+package view.Partecipante_Registra;
 
 import model.DataBase;
 import model.Modelli.Data;
@@ -109,8 +109,9 @@ public class FinRegistraPartecipante extends JFrame {
                                                     String anno =inputMese.getText();
 
                                                     //ora ho tutti i dati raccolti
-                                                    Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
 
+                                                    Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
+                                                    //partecipante creato e pronto
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
 
                                                     //riprendo l'indice del corso selezionato
@@ -144,8 +145,6 @@ public class FinRegistraPartecipante extends JFrame {
                                                     //aggiorno label
                                                     lblUltimoInserito.setText("Maestro: "+DataBase.getNomeMaestroCorso(idSelezionato)
                                                             +" "+DataBase.getCognomeMaestroCorso(idSelezionato));
-
-                                                    //partecipante creato e pronto
 
                                                 }else {
                                                     creaDialogErrore("Inserisci un anno correttamente");
