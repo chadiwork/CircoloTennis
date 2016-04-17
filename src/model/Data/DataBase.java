@@ -7,11 +7,14 @@ import model.Modelli.Data;
 import model.Partecipante;
 import Librerie.Util.UtilityString;
 import Librerie.Random.RndAnagrafici;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by Chado on 14/04/2016.
  */
 public class DataBase  {
+
+    //utilizzata al posto di circolo
 
     private static final double costoFacile = 50.35;
     private static final double costoMedio = 65.75;
@@ -33,7 +36,7 @@ public class DataBase  {
         creaEtichetteNomi();
         creaMaestri();
         creaCorsi();
-
+        //l'ordine è importantissimo qui, non cambiarlo
 
         System.out.println("Setup dati completato");
     }
@@ -42,21 +45,25 @@ public class DataBase  {
         nomiCorsi[0] = "Facile";
         nomiCorsi[1] = "Medio";
         nomiCorsi[2] = "Avanzato";
+        System.out.println("Etichette costruite");
     }
 
     private static void creaCorsi() {
         corsi[0] = new Corso((maestri[0]), nomiCorsi[0], costoFacile);
         corsi[1] = new Corso((maestri[1]), nomiCorsi[1], costoMedio);
         corsi[2] = new Corso((maestri[2]), nomiCorsi[2], costoAvanzato);
+        System.out.println("Corsi costruiti");
     }
 
     private static void creaMaestri() {
+        //luogo dove costruisco i maestri
         maestri[0] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
                 UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
         maestri[1] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
                 UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
         maestri[2] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
                 UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
+        System.out.println("Mestri costruiti");
     }
 
     public static void addPartecipante(int idCorso, Partecipante personaDaAggiungere) {
@@ -84,6 +91,7 @@ public class DataBase  {
         return corsi[idCorso].getMaestro();
     }
 
+    @NotNull
     public static Integer getNumeroPartecipantiCorso(int idCorso) {
         controllaSetup();
         return corsi[idCorso].size();
@@ -97,7 +105,9 @@ public class DataBase  {
     public static boolean isAllEmpty() {
         controllaSetup();
         //controllo se sono tutti vuoti
-        return isCorsoVuoto(0) && isCorsoVuoto(1) && isCorsoVuoto(2);
+        return isCorsoVuoto(0)
+             &&isCorsoVuoto(1)
+             &&isCorsoVuoto(2);
     }
 
     public static boolean isCorsoVuoto(int idCorso) {
@@ -110,5 +120,72 @@ public class DataBase  {
     public static String getCognomeMaestroCorso(int idCorso) {
         controllaSetup();
         return corsi[idCorso].getMaestro().getCognome();
+    }
+
+    public static Corso[] getCorsi() {
+        return corsi;
+    }
+
+    public static String[] getNomiCorsi() {
+        return nomiCorsi;
+    }
+
+    public static Maestro[] getMaestri() {
+        return maestri;
+    }
+
+    public static void stampaDiagnostica() {
+
+        controllaSetup();
+
+        String[] partecipanti;
+
+        System.out.println("Diagnostica:");
+
+        int totali=0;
+
+
+        System.out.println("Size 0:"+corsi[0].size());
+        System.out.println("Size 1:"+corsi[1].size());
+        System.out.println("Size 2:"+corsi[2].size());
+
+        for (int f=0;f<3;f++) {
+
+            System.out.println("F:"+f);
+
+            if (!getCorsi()[f].isEmpty()) {
+
+                for (int i = 0; i < getCorsi()[f].size(); i++) {
+
+                    System.out.println("I:"+i);
+
+
+                    partecipanti = new String[getCorsi()[f].size()+1];
+
+                    partecipanti[i]=(getCorsi()[f].get(i).getNome());
+
+                    System.out.println("Partecipante: "+partecipanti[i]+" del corso: "+f);
+
+                    totali++;
+
+                    //aggiungere qui se vuoi anche il cognome
+                }
+            }
+            System.out.println("---");
+            System.out.println("Totali contati:"+totali);
+            System.out.println("Totali size:"+getNumeroTotali());
+            System.out.println("---");
+        }
+
+
+
+
+
+    }
+
+    public static int getNumeroTotali() {
+        return corsi[0].size()+
+               corsi[1].size()+
+               corsi[2].size();
     }
 }

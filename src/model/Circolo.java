@@ -12,6 +12,7 @@ public class Circolo {
     //circolo contiene vari corsi
 
 
+    //classe non utilizzata-> vedi @DataBase
     public Circolo(String nome, Corso[] corsi) {
         this.nome = nome;
         this.corsi = corsi;

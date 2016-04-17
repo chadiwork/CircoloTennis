@@ -8,6 +8,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static model.Data.DataBase.getCorsi;
+
 /**
  * Creato da Vlady il 15/01/2016.
  * in origine parte del progetto:
@@ -15,10 +17,10 @@ import java.awt.event.ActionListener;
  */
 public class FinestraModifica extends JFrame {
 
-	private JPanel rootPanel;
+    private JPanel rootPanel;
     private JButton btnModifica;
     private JPanel pnlCenter;
-	private JPanel pnlModifica;
+    private JPanel pnlModifica;
     private JComboBox tendinaCorso;
     private JComboBox tendinaPartecipante;
     private JPanel pnlCorso;
@@ -27,23 +29,47 @@ public class FinestraModifica extends JFrame {
     private JButton btnElimina;
 //    private int numeroConversioni=0;
 
-	public FinestraModifica(String title, int larghezza, int altezza) throws HeadlessException {
-		super(title);
-		this.setContentPane(new FinestraModifica().rootPanel);
-		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-		this.pack();
-		this.setSize(larghezza, altezza);
-		this.setVisible(true);
-	}
+    private String[] partecipanti;
+    private String[] corsi;
 
-	private FinestraModifica() {
+    public FinestraModifica(String title, int larghezza, int altezza) throws HeadlessException {
+        super(title);
+        this.setContentPane(new FinestraModifica().rootPanel);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.pack();
+        this.setSize(larghezza, altezza);
+        this.setVisible(true);
+    }
 
-        if (!DataBase.isAllEmpty()) {
-            settaListener();
-        } else {
+    private FinestraModifica() {
+
+        if (DataBase.isAllEmpty()) {
             UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
             System.exit(50000);
+        } else {
+
+            settaListener();
+            settaTendine();
         }
+
+
+    }
+
+    private void settaTendine() {
+//        if (!DataBase.isCorsoVuoto(0)) {
+//
+//
+//            for (int i = 0; i <= DataBase.getCorsi()[0].size(); i++) {
+//                partecipanti = new String[DataBase.getCorsi()[0].size()];
+//
+//                partecipanti[i]=(DataBase.getCorsi()[0].get(i).getNome());
+//
+//                System.out.println(partecipanti[i]);
+//                //aggiungere qui se vuoi anche il cognome
+//            }
+//        }
+
+        DataBase.stampaDiagnostica();
     }
 
     private void settaListener() {
@@ -62,7 +88,6 @@ public class FinestraModifica extends JFrame {
             }
         });
     }
-
 
 
 }

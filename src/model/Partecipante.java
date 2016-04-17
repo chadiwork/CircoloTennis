@@ -9,7 +9,7 @@ import model.Modelli.Persona;
  */
 public class Partecipante extends Persona {
 
-    Data dataDiNascita;
+    private Data dataDiNascita;
 
     public Partecipante(String nome, String cognome, Data dataDiNascita) {
         super(nome, cognome);
