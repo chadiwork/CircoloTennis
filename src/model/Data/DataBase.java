@@ -185,10 +185,6 @@ public class DataBase  {
             System.out.println("---");
         }
 
-
-
-
-
     }
 
     public static int getNumeroTotali() {
@@ -256,6 +252,5 @@ public class DataBase  {
 
         return tmp;
     }
-
 }
 

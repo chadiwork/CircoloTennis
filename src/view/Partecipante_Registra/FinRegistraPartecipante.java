@@ -54,9 +54,7 @@ public class FinRegistraPartecipante extends JFrame {
 
     private void onFirstOpening() {
         txtAreaInseriti.setText("");
-
         settaTendina();
-
 
     }
 
@@ -70,8 +68,6 @@ public class FinRegistraPartecipante extends JFrame {
     private void aggiungiPartecipante() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
-
-
 
         if (tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) {
 
@@ -262,9 +258,6 @@ public class FinRegistraPartecipante extends JFrame {
         }
 
         tendinaCorso.setSelectedIndex(indiceAncoraDaScegliere);
-
     }
-
-
 
 }

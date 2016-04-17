@@ -69,37 +69,35 @@ public class FinestraModifica extends JFrame {
         for (int i = 0; i < DataBase.getNomiCorsiConPartecipanti().size(); i++) {
             tendinaCorso.addItem(DataBase.getNomiCorsiConPartecipanti().get(i));
         }
-
     }
 
     private void settaTendinaPartecipante() {
 
+        tendinaPartecipante.removeAllItems();
+        //così non metto doppioni
+
         String[] nomiCorsi = DataBase.getNomiCorsi();
 
+
+        //switch paurosi
         if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
             //caso corso facile
 
             for (int i = 0; i < DataBase.getPartecipantiAlCorso(0).size(); i++) {
                 tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(0).get(i));
             }
-
         } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
             //caso corso medio
             for (int i = 0; i < DataBase.getPartecipantiAlCorso(1).size(); i++) {
                 tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(1).get(i));
             }
-
         } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
             //caso corso avanzato
             for (int i = 0; i < DataBase.getPartecipantiAlCorso(2).size(); i++) {
                 tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(2).get(i));
             }
-
         }
-
     }
-
-
 
     private void settaListener() {
         btnModifica.addActionListener(new ActionListener() {
@@ -124,11 +122,6 @@ public class FinestraModifica extends JFrame {
             }
         });
     }
-
-
-
-
-
 }
 
 
