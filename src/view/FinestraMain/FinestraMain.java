@@ -45,7 +45,7 @@ public class FinestraMain extends JFrame {
         });
 
         modificaPartecipantiButton.addActionListener(e -> {
-            ScegliDaModificare finestra=new ScegliDaModificare("Modifica un partecipante",500,400);
+            ScegliDaModificare finestra=new ScegliDaModificare("Modifica un partecipante",500,250);
             finestra.setVisible(true);
         });
 

@@ -35,13 +35,13 @@ public class ScegliDaModificare extends JFrame {
 
     public ScegliDaModificare(String title, int larghezza, int altezza) throws HeadlessException {
         super(title);
-        this.setContentPane(new ScegliDaModificare().rootPanel);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
+
         this.setVisible(true);
 
-        localFrame = this;
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setContentPane(new ScegliDaModificare().rootPanel);
     }
 
     private ScegliDaModificare() {
@@ -53,9 +53,6 @@ public class ScegliDaModificare extends JFrame {
             settaListener();
             settaTendine();
         }
-
-        localFrame = this;
-
     }
 
     private void settaTendine() {
@@ -97,6 +94,10 @@ public class ScegliDaModificare extends JFrame {
 
 
     private void settaListener() {
+
+        localFrame = this;
+
+
         btnModifica.addActionListener(new ActionListener() {
             //listener
             @Override
@@ -144,14 +145,7 @@ public class ScegliDaModificare extends JFrame {
 //
 //            }
 
-            localFrame = (JFrame) this;
             localFrame.dispose();
-
-            this.dispose();
-//            tendinaCorso.setSelectedIndex(0);
-            localFrame.dispose();
-
-            super.dispose();
 
             System.out.println("Utente sceglie SI");
             DataBase.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
