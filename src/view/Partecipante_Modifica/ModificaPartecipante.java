@@ -1,39 +1,35 @@
-package view.Partecipante_Registra;
+package view.Partecipante_Modifica;
 
-import Librerie.Util.UtilityConstants;
-import Librerie.Util.UtilityMessages;
+import Librerie.Random.RndAnagrafici;
 import model.Data.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
-import Librerie.Util.UtilityString;
-import Librerie.Random.RndAnagrafici;
-import Librerie.Random.RndNmbrInRange;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Librerie.Random.RndNmbrInRange.*;
-import static Librerie.Util.UtilityConstants.*;
-import static Librerie.Util.UtilityMessages.*;
-import static Librerie.Util.UtilityString.*;
+import static Librerie.Random.RndNmbrInRange.random;
+import static Librerie.Util.UtilityConstants.regexNumeri;
+import static Librerie.Util.UtilityConstants.regexParole;
+import static Librerie.Util.UtilityMessages.creaDialogErrore;
+import static Librerie.Util.UtilityString.capFirst;
 
 /**
  * Created by Chado on 01/04/2016.
  * vlady però ha fatto tutto
  */
-public class FinRegistraPartecipante extends JFrame {
+public class ModificaPartecipante extends JFrame {
 
     private JPanel rootPanel;
     private JPanel pnlCenter;
     private JPanel pnlForm;
     private JPanel pnlNomeCliente;
     private JPanel pnlGiorno;
-    private JButton btnInserisciPartecipante;
+    private JButton btnModificaPartecipante;
     private JComboBox<String> tendinaCorso;
     private JPanel pnlCognomeCliente;
-    private JPanel pnlStoria1;
     private JTextArea txtAreaInseriti;
     private JTextField inputCognome;
     private JPanel pnlDate;
@@ -51,6 +47,9 @@ public class FinRegistraPartecipante extends JFrame {
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
 
+    private int oldCorso, oldPosizione;
+    private Partecipante oldPartecipante;
+
 
     private void onFirstOpening() {
         txtAreaInseriti.setText("");
@@ -58,7 +57,7 @@ public class FinRegistraPartecipante extends JFrame {
 
     }
 
-    private FinRegistraPartecipante() {
+    private ModificaPartecipante() {
         //costruttore in cui aggiungere tutte le modifiche alla UI
         //tieni private
         addListener();
@@ -203,10 +202,11 @@ public class FinRegistraPartecipante extends JFrame {
         daSvuotare.setText("");
     }
 
-    public FinRegistraPartecipante(String title, int larghezza, int altezza) {
+    public ModificaPartecipante(String title, int larghezza, int altezza,
+                                Partecipante partecipante,int idCorso,int idPosizione) {
         //setup iniziale finestra
         super(title);
-        this.setContentPane(new FinRegistraPartecipante().rootPanel);
+        this.setContentPane(new ModificaPartecipante().rootPanel);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
@@ -214,32 +214,22 @@ public class FinRegistraPartecipante extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
 
+        //mi passo i valori
+        oldPartecipante = partecipante;
+        oldCorso = idCorso;
+        oldPosizione = idPosizione;
+
     }
 
     private void addListener() {
-        btnInserisciPartecipante.addActionListener(new ActionListener() {
+        btnModificaPartecipante.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 aggiungiPartecipante();
             }
         });
 
-        btnAddCasuale.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                riempiCampiInRandom();
-            }
-        });
-    }
 
-    private void riempiCampiInRandom() {
-        //riempio i campi con valori casuali
-        inputNome.setText(capFirst(RndAnagrafici.getRndNome()));
-        inputCognome.setText(capFirst(RndAnagrafici.getRndCognome()));
-        tendinaCorso.setSelectedIndex(random(1,3)-1);
-        inputGiorno.setText(""+ random(1, 31));
-        inputMese.setText(""+ random(1, 12));
-        inputAnno.setText(""+ random(1920, 2016));
     }
 
     private void settaTendina() {

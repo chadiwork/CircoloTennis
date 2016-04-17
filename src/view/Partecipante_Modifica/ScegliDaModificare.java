@@ -8,15 +8,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  * Creato da Vlady il 15/01/2016.
  * in origine parte del progetto:
  * PilaProjYakovenko
  */
-public class FinestraModifica extends JFrame {
+public class ScegliDaModificare extends JFrame {
 
     private JPanel rootPanel;
     private JButton btnModifica;
@@ -33,16 +31,16 @@ public class FinestraModifica extends JFrame {
 
     private String[] partecipanti,corsi;
 
-    public FinestraModifica(String title, int larghezza, int altezza) throws HeadlessException {
+    public ScegliDaModificare(String title, int larghezza, int altezza) throws HeadlessException {
         super(title);
-        this.setContentPane(new FinestraModifica().rootPanel);
+        this.setContentPane(new ScegliDaModificare().rootPanel);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
         this.setVisible(true);
     }
 
-    private FinestraModifica() {
+    private ScegliDaModificare() {
 
         if (DataBase.isAllEmpty()) {
             UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
@@ -130,6 +128,8 @@ public class FinestraModifica extends JFrame {
         System.out.println("Indice partecipante selezionato: "+partecipanteSelezionato);
 
         System.out.println("Partecipante da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
+
+
     }
 }
 
