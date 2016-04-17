@@ -7,8 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import static model.Data.DataBase.getCorsi;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 /**
  * Creato da Vlady il 15/01/2016.
@@ -21,8 +21,8 @@ public class FinestraModifica extends JFrame {
     private JButton btnModifica;
     private JPanel pnlCenter;
     private JPanel pnlModifica;
-    private JComboBox tendinaCorso;
-    private JComboBox tendinaPartecipante;
+    private JComboBox<String> tendinaCorso;
+    private JComboBox<String> tendinaPartecipante;
     private JPanel pnlCorso;
     private JPanel pnlPartecipante;
     private JPanel pnlTende;
@@ -52,24 +52,54 @@ public class FinestraModifica extends JFrame {
         }
 
 
+
     }
 
     private void settaTendine() {
-//        if (!DataBase.isCorsoVuoto(0)) {
-//
-//
-//            for (int i = 0; i <= DataBase.getCorsi()[0].size(); i++) {
-//                partecipanti = new String[DataBase.getCorsi()[0].size()];
-//
-//                partecipanti[i]=(DataBase.getCorsi()[0].get(i).getNome());
-//
-//                System.out.println(partecipanti[i]);
-//                //aggiungere qui se vuoi anche il cognome
-//            }
-//        }
+
+        settaTendinaCorso();
+//        settaTendinaPartecipante();
+
 
         DataBase.stampaDiagnostica();
     }
+
+    private void settaTendinaCorso() {
+
+        for (int i = 0; i < DataBase.getNomiCorsiConPartecipanti().size(); i++) {
+            tendinaCorso.addItem(DataBase.getNomiCorsiConPartecipanti().get(i));
+        }
+
+    }
+
+    private void settaTendinaPartecipante() {
+
+        String[] nomiCorsi = DataBase.getNomiCorsi();
+
+        if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
+            //caso corso facile
+
+            for (int i = 0; i < DataBase.getPartecipantiAlCorso(0).size(); i++) {
+                tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(0).get(i));
+            }
+
+        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
+            //caso corso medio
+            for (int i = 0; i < DataBase.getPartecipantiAlCorso(1).size(); i++) {
+                tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(1).get(i));
+            }
+
+        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
+            //caso corso avanzato
+            for (int i = 0; i < DataBase.getPartecipantiAlCorso(2).size(); i++) {
+                tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(2).get(i));
+            }
+
+        }
+
+    }
+
+
 
     private void settaListener() {
         btnModifica.addActionListener(new ActionListener() {
@@ -86,7 +116,17 @@ public class FinestraModifica extends JFrame {
 
             }
         });
+
+        tendinaCorso.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                settaTendinaPartecipante();
+            }
+        });
     }
+
+
+
 
 
 }

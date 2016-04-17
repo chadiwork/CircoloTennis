@@ -10,6 +10,10 @@ import Librerie.Random.RndAnagrafici;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+import static javafx.scene.input.KeyCode.T;
 
 /**
  * Created by Chado on 14/04/2016.
@@ -176,7 +180,7 @@ public class DataBase  {
                 }
             }
             System.out.println("---");
-            System.out.println("Totali contati:"+totali);
+            System.out.println("Totali contati per ora:"+totali);
             System.out.println("Totali size:"+getNumeroTotali());
             System.out.println("---");
         }
@@ -220,17 +224,27 @@ public class DataBase  {
         return partecipanti;
     }
 
-    public static String[] getPartecipantiCorso(int idCorso) {
+    public static LinkedList<String> getPartecipantiAlCorso(int idCorso) {
 
-        return corsi[idCorso].toArray(new String[0]);
+        LinkedList<String> tmp=new LinkedList<String>();
+
+        for (int i = 0; i < corsi[idCorso].size(); i++) {
+            tmp.add(corsi[idCorso].get(i).getNome()+
+                    " "+
+                    corsi[idCorso].get(i).getCognome()
+
+            );
+        }
+
+        return tmp;
 
     }
 
-    public static String[] getNomiCorsiConPartecipanti() {
+    public static ArrayList<String> getNomiCorsiConPartecipanti() {
 
         ArrayList<String> tmp = new ArrayList<>();
 
-        String[] corsiConPartecipanti = null;
+//        String[] corsiConPartecipanti = null;
 
         for (int f=0;f<3;f++) {
 
@@ -240,13 +254,8 @@ public class DataBase  {
             }
         }
 
-        return tmp.toArray(new String[0]);
+        return tmp;
     }
-
-
-
-
-
 
 }
 
