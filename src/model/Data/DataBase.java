@@ -140,7 +140,7 @@ public class DataBase  {
 
         String[] partecipanti;
 
-        System.out.println("Diagnostica:");
+        System.out.println(">>>>Diagnostica:");
 
         int totali=0;
 
@@ -151,13 +151,13 @@ public class DataBase  {
 
         for (int f=0;f<3;f++) {
 
-            System.out.println("F:"+f);
+            System.out.println("--Indice corso:"+f);
 
             if (!getCorsi()[f].isEmpty()) {
 
                 for (int i = 0; i < getCorsi()[f].size(); i++) {
 
-                    System.out.println("I:"+i);
+                    System.out.println("-Indice partecipante:"+i);
 
 
                     partecipanti = new String[getCorsi()[f].size()+1];

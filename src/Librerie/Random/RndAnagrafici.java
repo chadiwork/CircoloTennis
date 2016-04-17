@@ -70,7 +70,7 @@ public class RndAnagrafici {
         controllaSetup();
 
         // Pick one at random
-        int randomIndex = RndNmbrInRange.random(1,cognomi.size());
+        int randomIndex = RndNmbrInRange.random(1,cognomi.size()-1);
         return cognomi.get(randomIndex);
     }
 
