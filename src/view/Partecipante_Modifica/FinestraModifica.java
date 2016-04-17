@@ -2,6 +2,7 @@ package view.Partecipante_Modifica;
 
 import Librerie.Util.UtilityMessages;
 import model.Data.DataBase;
+import model.Partecipante;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,6 +29,8 @@ public class FinestraModifica extends JFrame {
     private JPanel pnlTende;
     private JButton btnElimina;
 //    private int numeroConversioni=0;
+
+    private int corsoSelezionato,partecipanteSelezionato;
 
     private String[] partecipanti;
     private String[] corsi;
@@ -72,6 +75,7 @@ public class FinestraModifica extends JFrame {
     }
 
     private void settaTendinaPartecipante() {
+        //reagisce al cambiamento di tendinaCorso
 
         tendinaPartecipante.removeAllItems();
         //così non metto doppioni
@@ -82,21 +86,18 @@ public class FinestraModifica extends JFrame {
         //switch paurosi
         if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
             //caso corso facile
-
-            for (int i = 0; i < DataBase.getPartecipantiAlCorso(0).size(); i++) {
-                tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(0).get(i));
-            }
+            corsoSelezionato = 0;
         } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
             //caso corso medio
-            for (int i = 0; i < DataBase.getPartecipantiAlCorso(1).size(); i++) {
-                tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(1).get(i));
-            }
+            corsoSelezionato = 1;
         } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
             //caso corso avanzato
-            for (int i = 0; i < DataBase.getPartecipantiAlCorso(2).size(); i++) {
-                tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(2).get(i));
-            }
+            corsoSelezionato = 2;
         }
+        for (int i = 0; i < DataBase.getPartecipantiAlCorso(corsoSelezionato).size(); i++) {
+            tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(corsoSelezionato).get(i));
+        }
+
     }
 
     private void settaListener() {
@@ -104,7 +105,13 @@ public class FinestraModifica extends JFrame {
             //listener
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("OK");
+                partecipanteSelezionato = tendinaPartecipante.getSelectedIndex();
+
+                Partecipante selezionato = DataBase.getPartecipanteAlCorso(corsoSelezionato, partecipanteSelezionato);
+
+                System.out.println("Indice partecipante selezionato: "+partecipanteSelezionato);
+
+                System.out.println("Partecipante da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
             }
         });
 

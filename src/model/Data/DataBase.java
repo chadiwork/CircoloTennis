@@ -252,5 +252,9 @@ public class DataBase  {
 
         return tmp;
     }
+
+    public static Partecipante getPartecipanteAlCorso(int idCorso,int idPartecipante) {
+        return corsi[idCorso].get(idPartecipante);
+    }
 }
 
