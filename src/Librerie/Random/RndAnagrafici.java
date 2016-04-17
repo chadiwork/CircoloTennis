@@ -53,17 +53,13 @@ public class RndAnagrafici {
             System.out.println("Setup completo fatto");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Errore setup completo");
+            System.out.println("Errore setup completo - probabilmente file non trovato");
         }
 
     }
 
     public static String getRndNome()  {
-        //se la lista non è stata preparata allora la preparo
-        if (!isSetupEffettuato) {
-            setupCompleto();
-            isSetupEffettuato = true;
-        }
+        controllaSetup();
 
         // Pick one at random
         int randomIndex = RndNmbrInRange.random(1,nomi.size());
@@ -71,15 +67,20 @@ public class RndAnagrafici {
     }
 
     public static String getRndCognome()  {
-        //se la lista non è stata preparata allora la preparo
-        if (!isSetupEffettuato) {
-            setupCompleto();
-            isSetupEffettuato = true;
-        }
+        controllaSetup();
 
         // Pick one at random
         int randomIndex = RndNmbrInRange.random(1,cognomi.size());
         return cognomi.get(randomIndex);
+    }
+
+    private static void controllaSetup() {
+        //se la lista non è stata preparata allora la preparo
+        //se non è stato fatto il setup
+        if (!isSetupEffettuato) {
+            isSetupEffettuato = true;
+            setupCompleto();
+        }
     }
 
 

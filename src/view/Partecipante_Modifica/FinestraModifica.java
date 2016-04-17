@@ -25,7 +25,7 @@ public class FinestraModifica extends JFrame {
     private JPanel pnlPartecipante;
     private JPanel pnlTende;
     private JButton btnElimina;
-    private int numeroConversioni=0;
+//    private int numeroConversioni=0;
 
 	public FinestraModifica(String title, int larghezza, int altezza) throws HeadlessException {
 		super(title);
@@ -38,14 +38,12 @@ public class FinestraModifica extends JFrame {
 
 	private FinestraModifica() {
 
-        if (DataBase.isAllEmpty()) {
-
-            UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ");
+        if (!DataBase.isAllEmpty()) {
+            settaListener();
+        } else {
+            UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
+            System.exit(50000);
         }
-        settaListener();
-
-
-
     }
 
     private void settaListener() {

@@ -1,5 +1,6 @@
 package model.Data;
 
+import Librerie.Random.RndTelNumber;
 import model.Corso;
 import model.Maestro;
 import model.Modelli.Data;
@@ -22,7 +23,7 @@ public class DataBase  {
 
     private static Corso[] corsi = new Corso[3];
 
-    private static boolean setupEffettuato=false;
+    private static boolean isSetupFatto = false;
 
     public DataBase() {
         setupIniziale();
@@ -51,56 +52,68 @@ public class DataBase  {
 
     private static void creaMaestri() {
         maestri[0] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
-                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "025-112233", new Data());
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
         maestri[1] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
-                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "011-425698", new Data());
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
         maestri[2] = new Maestro(UtilityString.capFirst(RndAnagrafici.getRndNome()),
-                UtilityString.capFirst(RndAnagrafici.getRndCognome()), "051-124378", new Data());
+                UtilityString.capFirst(RndAnagrafici.getRndCognome()), RndTelNumber.conPrefisso(), new Data());
+
+
+
+        //TODO - test
+        System.out.println(RndTelNumber.conPrefisso());
     }
 
     public static void addPartecipante(int idCorso, Partecipante personaDaAggiungere) {
-        //se non è stato fatto il setup
-        if (!setupEffettuato) {
-            setupIniziale();
-            setupEffettuato = true;
-        }
+        controllaSetup();
         corsi[idCorso].add(personaDaAggiungere);
 
-        System.out.println(personaDaAggiungere.getNome()+ " aggiunto correttamente al database");
+        System.out.println("Aggiunto: "+personaDaAggiungere.getNome());
+    }
 
+    private static void controllaSetup() {
+        //se non è stato fatto il setup
+        if (!isSetupFatto) {
+            setupIniziale();
+            isSetupFatto = true;
+        }
     }
 
     public static String getNomeCorso(int idCorso) {
+        controllaSetup();
         return corsi[idCorso].getNomeCorso();
     }
 
+    public static Maestro getMestroCorso(int idCorso) {
+        controllaSetup();
+        return corsi[idCorso].getMaestro();
+    }
+
     public static Integer getNumeroPartecipantiCorso(int idCorso) {
+        controllaSetup();
         return corsi[idCorso].size();
     }
 
     public static String getNomeMaestroCorso(int idCorso) {
-
-//        String str = corsi[idCorso].getMaestro().getNome();
-//        String cap = str.substring(0, 1).toUpperCase() + str.substring(1);
-        // cap = "Java"
-
+        controllaSetup();
         return corsi[idCorso].getMaestro().getNome();
     }
 
     public static boolean isAllEmpty() {
+        controllaSetup();
         //controllo se sono tutti vuoti
-//        return corsi[0].size() + corsi[1].size() + corsi[2].size() == 0;
-
         return isCorsoVuoto(0) && isCorsoVuoto(1) && isCorsoVuoto(2);
     }
 
     public static boolean isCorsoVuoto(int idCorso) {
+        controllaSetup();
         //controllo se un corso in particolare è vuoto
         return corsi[idCorso].size() == 0;
     }
 
 
     public static String getCognomeMaestroCorso(int idCorso) {
+        controllaSetup();
         return corsi[idCorso].getMaestro().getCognome();
     }
 }

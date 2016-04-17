@@ -139,8 +139,11 @@ public class FinRegistraPartecipante extends JFrame {
                                                     txtAreaInseriti.append("Compagni: "+compagniCorso + "\n");
 
                                                     //aggiorno label
-                                                    lblUltimoInserito.setText("Maestro: "+DataBase.getNomeMaestroCorso(idSelezionato)
-                                                            +" "+DataBase.getCognomeMaestroCorso(idSelezionato));
+                                                    lblUltimoInserito.setText(
+                                                            "Maestro: " + DataBase.getNomeMaestroCorso(idSelezionato)
+                                                            + " " + DataBase.getCognomeMaestroCorso(idSelezionato) +" | "+
+                                                            "Tel: " + DataBase.getMestroCorso(idSelezionato).getNumTel()
+                                                    );
 
                                                 }else {
                                                     UtilityMessages.creaDialogErrore("Inserisci un anno correttamente", mainFrame);
