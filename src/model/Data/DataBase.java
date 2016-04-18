@@ -21,6 +21,15 @@ import static javafx.scene.input.KeyCode.T;
  */
 public class DataBase  {
 
+
+    public static final int altezzaModifica =400;
+    public static final int larghezzaModifica = 300;
+
+
+    public static Frame frameScegliDaModificare;
+    public static final int altezzaScegliModifica =400;
+    public static final int larghezzaScegliModifica = 300;
+
     //utilizzata al posto di circolo
 
     private static final double costoFacile = 50.35;
@@ -36,8 +45,6 @@ public class DataBase  {
     private static boolean isSetupFatto = false;
 
     //frame finestra
-    public static Frame frameScegliDaModificare;
-
 
     public DataBase() {
         setupIniziale();

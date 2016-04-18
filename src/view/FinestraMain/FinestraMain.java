@@ -1,5 +1,6 @@
 package view.FinestraMain;
 
+import Librerie.Util.UtilityMessages;
 import model.Data.DataBase;
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
@@ -7,6 +8,7 @@ import view.Partecipante_Modifica.ScegliDaModificare;
 import view.Partecipante_Registrazione.RegistraPartecipante;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -21,6 +23,7 @@ public class FinestraMain extends JFrame {
     private JButton modificaPartecipantiButton;
     private JButton visualizzaIncassoButton;
 
+
     public FinestraMain(String title, int larghezza, int altezza) {
         //setup iniziale finestra
         super(title);
@@ -31,7 +34,6 @@ public class FinestraMain extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
-
     }
 
     private FinestraMain() {
@@ -47,8 +49,15 @@ public class FinestraMain extends JFrame {
         });
 
         modificaPartecipantiButton.addActionListener(e -> {
-            ScegliDaModificare finestra=new ScegliDaModificare("Modifica un partecipante",500,250);
-            finestra.setVisible(true);
+
+            if (DataBase.isAllEmpty()) {
+                UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
+            } else {
+                ScegliDaModificare finestra=new ScegliDaModificare(
+                        "Modifica un partecipante", DataBase.altezzaScegliModifica, DataBase.larghezzaScegliModifica);
+                finestra.setVisible(true);
+            }
+
         });
 
         visualizzaInformazioniDelCorsoButton.addActionListener(e -> {

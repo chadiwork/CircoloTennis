@@ -30,7 +30,6 @@ public class ModificaPartecipante extends JFrame {
     private JButton btnModificaPartecipante;
     private JComboBox<String> tendinaCorso;
     private JPanel pnlCognomeCliente;
-    private JTextArea txtAreaInseriti;
     private JTextField inputCognome;
     private JPanel pnlDate;
     private JPanel pnlMese;
@@ -42,7 +41,6 @@ public class ModificaPartecipante extends JFrame {
     private JLabel lblUltimoInserito;
     private JPanel pnlTendina;
     private JButton btnAddCasuale;
-    private JFormattedTextField formattedTextField1;
     private Frame mainFrame = new Frame();
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
@@ -52,14 +50,36 @@ public class ModificaPartecipante extends JFrame {
 
 
     private void onFirstOpening() {
-        txtAreaInseriti.setText("");
         settaTendina();
+
+        assegnaDaModificare();
 
     }
 
-    private ModificaPartecipante() {
+    private void assegnaDaModificare() {
+
+        System.out.println(oldPartecipante.getNome());
+        inputNome.setText(oldPartecipante.getNome());
+        inputCognome.setText(oldPartecipante.getCognome());
+        inputGiorno.setText(oldPartecipante.getDataDiNascita().getGiorno());
+        inputMese.setText(oldPartecipante.getDataDiNascita().getMese());
+        inputAnno.setText(oldPartecipante.getDataDiNascita().getAnno());
+
+        tendinaCorso.setSelectedIndex(oldCorso);
+    }
+
+    private ModificaPartecipante(Partecipante partecipante  ,int idCorso,int idPosizione) {
         //costruttore in cui aggiungere tutte le modifiche alla UI
         //tieni private
+
+        //mi passo i valori
+        this.oldPartecipante = partecipante;
+
+        System.out.println(oldPartecipante);
+        this.oldCorso = idCorso;
+        this.oldPosizione = idPosizione;
+
+
         addListener();
         onFirstOpening();
     }
@@ -113,37 +133,39 @@ public class ModificaPartecipante extends JFrame {
                                                     //riprendo l'indice del corso selezionato
                                                     int idSelezionato = tendinaCorso.getSelectedIndex();
 
-                                                    //aggiungo partecipante al corso selezionato
-                                                    switch (tendinaCorso.getSelectedIndex()) {
-                                                        case 0:DataBase.addPartecipante(0,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
-                                                            break;
-                                                        case 1:DataBase.addPartecipante(1,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
-                                                            break;
-                                                        case 2:DataBase.addPartecipante(2,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
-                                                            break;
-                                                    }
+//                                                    //aggiungo partecipante al corso selezionato
+//                                                    switch (tendinaCorso.getSelectedIndex()) {
+//                                                        case 0:DataBase.addPartecipante(0,toAdd);
+////                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
+//                                                            break;
+//                                                        case 1:DataBase.addPartecipante(1,toAdd);
+////                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
+//                                                            break;
+//                                                        case 2:DataBase.addPartecipante(2,toAdd);
+////                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
+//                                                            break;
+//                                                    }
+//
+//                                                    //nome del corso al quale ho appena aggiunto il partecipante
+//                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
+//
+//                                                    svuotaCampi();
+//
+//                                                    //numero di compagni del partecipante in aggiunta di quel corso
+//                                                    int compagniCorso = DataBase.getNumeroPartecipantiCorso(idSelezionato) - 1;
+//
+//                                                    //stampo l'inserimento effettuato
+//                                                    txtAreaInseriti.append(toAdd.getNome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
+//                                                    txtAreaInseriti.append("Compagni: "+compagniCorso + "\n");
+//
+//                                                    //aggiorno label
+//                                                    lblUltimoInserito.setText(
+//                                                            "Maestro: " + DataBase.getNomeMaestroCorso(idSelezionato)
+//                                                            + " " + DataBase.getCognomeMaestroCorso(idSelezionato) +" | "+
+//                                                            "Tel: " + DataBase.getMestroCorso(idSelezionato).getNumTel()
+//                                                    );
 
-                                                    //nome del corso al quale ho appena aggiunto il partecipante
-                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
 
-                                                    svuotaCampi();
-
-                                                    //numero di compagni del partecipante in aggiunta di quel corso
-                                                    int compagniCorso = DataBase.getNumeroPartecipantiCorso(idSelezionato) - 1;
-
-                                                    //stampo l'inserimento effettuato
-                                                    txtAreaInseriti.append(toAdd.getNome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
-                                                    txtAreaInseriti.append("Compagni: "+compagniCorso + "\n");
-
-                                                    //aggiorno label
-                                                    lblUltimoInserito.setText(
-                                                            "Maestro: " + DataBase.getNomeMaestroCorso(idSelezionato)
-                                                            + " " + DataBase.getCognomeMaestroCorso(idSelezionato) +" | "+
-                                                            "Tel: " + DataBase.getMestroCorso(idSelezionato).getNumTel()
-                                                    );
 
                                                 }else {
                                                     creaDialogErrore("Inserisci un anno correttamente", mainFrame);
@@ -204,9 +226,15 @@ public class ModificaPartecipante extends JFrame {
 
     public ModificaPartecipante(String title, int larghezza, int altezza,
                                 Partecipante partecipante,int idCorso,int idPosizione) {
-        //setup iniziale finestra
+
         super(title);
-        this.setContentPane(new ModificaPartecipante().rootPanel);
+
+
+
+
+        //setup iniziale finestra
+
+        this.setContentPane(new ModificaPartecipante(partecipante,idCorso,idPosizione).rootPanel);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
@@ -214,10 +242,7 @@ public class ModificaPartecipante extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
 
-        //mi passo i valori
-        oldPartecipante = partecipante;
-        oldCorso = idCorso;
-        oldPosizione = idPosizione;
+
 
     }
 
@@ -235,9 +260,9 @@ public class ModificaPartecipante extends JFrame {
     private void settaTendina() {
         String[] tabellaCodici =new String[4];
 
-        tabellaCodici[0]="Facile";
-        tabellaCodici[1]="Medio";
-        tabellaCodici[2]="Avanzato";
+        tabellaCodici[0]=DataBase.getNomeCorso(0);
+        tabellaCodici[1]=DataBase.getNomeCorso(1);
+        tabellaCodici[2]=DataBase.getNomeCorso(2);
         tabellaCodici[3]="Scegliere...";
 
 

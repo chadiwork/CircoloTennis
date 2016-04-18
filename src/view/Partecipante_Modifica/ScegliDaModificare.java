@@ -37,9 +37,7 @@ public class ScegliDaModificare extends JFrame {
         super(title);
         this.pack();
         this.setSize(larghezza, altezza);
-
         this.setVisible(true);
-
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setContentPane(new ScegliDaModificare().rootPanel);
 
@@ -99,12 +97,18 @@ public class ScegliDaModificare extends JFrame {
 
         localFrame = this;
 
-
         btnModifica.addActionListener(new ActionListener() {
             //listener
             @Override
             public void actionPerformed(ActionEvent e) {
                 aggiornaPartecipanteSelezionato();
+
+
+                apriFinestraModifica();
+
+                //dispongo la finestra attuale
+                DataBase.frameScegliDaModificare.dispose();
+
             }
         });
         btnElimina.addActionListener(new ActionListener() {
@@ -147,6 +151,8 @@ public class ScegliDaModificare extends JFrame {
 //
 //            }
 
+
+            //dispongo la finestra attuale
             DataBase.frameScegliDaModificare.dispose();
 
             System.out.println("Utente sceglie SI");
@@ -175,10 +181,23 @@ public class ScegliDaModificare extends JFrame {
 
         selezionato = DataBase.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
 
+
         System.out.println("---Corso selezionato: "+ idCorsoSelezionato);
         System.out.println("--Indiceselezionato: "+ idPartSelezionato);
         System.out.println(">Da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
 
+    }
+
+    private void apriFinestraModifica() {
+
+        aggiornaSelezionati();
+
+        ModificaPartecipante finestra = new ModificaPartecipante(" Modifica: " +
+                selezionato.getNome() + " " + selezionato.getCognome()
+                , DataBase.altezzaModifica, DataBase.larghezzaModifica
+                , selezionato
+                , idCorsoSelezionato
+                , idPartSelezionato);
     }
 
     private void aggiornaCorsoSelezionato() {
