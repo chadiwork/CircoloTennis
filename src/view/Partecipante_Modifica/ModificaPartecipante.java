@@ -1,7 +1,7 @@
 package view.Partecipante_Modifica;
 
 import Librerie.Util.UtilityMessages;
-import model.Data.DataBase;
+import model.Data.D;
 import model.Modelli.Data;
 import model.Partecipante;
 
@@ -144,11 +144,11 @@ public class ModificaPartecipante extends JFrame {
 
 //                                                    //aggiungo partecipante al corso selezionato
 //                                                    switch (tendinaCorso.getSelectedIndex()) {
-//                                                        case 0:DataBase.addPartecipante(0,toAdd);
+//                                                        case 0:D.addPartecipante(0,toAdd);
 //                                                            break;
-//                                                        case 1:DataBase.addPartecipante(1,toAdd);
+//                                                        case 1:D.addPartecipante(1,toAdd);
 //                                                            break;
-//                                                        case 2:DataBase.addPartecipante(2,toAdd);
+//                                                        case 2:D.addPartecipante(2,toAdd);
 //                                                            break;
 //                                                    }
 
@@ -174,31 +174,31 @@ public class ModificaPartecipante extends JFrame {
                                                         //effettivamente lavoro in base a ciò che so
                                                         if (!cambiaCorso) {
                                                             //aggiorna l'oggetto, in posizione nuova
-                                                            DataBase.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
+                                                            D.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
                                                         } else if (cambiaCorso) {
                                                             //cancello vecchio partecipante
-                                                            DataBase.rimuoviPartecipanteDaCorso(oldCorso,oldPosizione);
+                                                            D.rimuoviPartecipanteDaCorso(oldCorso,oldPosizione);
 
                                                             //aggiungo nuovo con dati presi
-                                                            DataBase.addPartecipante(tendinaCorso.getSelectedIndex(),toAdd);
+                                                            D.addPartecipante(tendinaCorso.getSelectedIndex(),toAdd);
                                                         }
 
-//                                                        DataBase.frameModifica.dispose();
+//                                                        D.frameModifica.dispose();
 
                                                         //TODO - in work
-                                                        DataBase.chiudiFinestra(DataBase.getkModifica());
+                                                        D.chiudiFinestra(D.getkModifica());
 
                                                         UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",this);
                                                     }
 //
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
-//                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
+//                                                    tmpAppenaAggiuntoA = D.getNomeCorso(idSelezionato);
 //
 //                                                    svuotaCampi();
 //
 //                                                    //numero di compagni del partecipante in aggiunta di quel corso
-//                                                    int compagniCorso = DataBase.getNumeroPartecipantiCorso(idSelezionato) - 1;
+//                                                    int compagniCorso = D.getNumeroPartecipantiCorso(idSelezionato) - 1;
 //
 //                                                    //stampo l'inserimento effettuato
 //                                                    txtAreaInseriti.append(toAdd.getNome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
@@ -206,9 +206,9 @@ public class ModificaPartecipante extends JFrame {
 //
 //                                                    //aggiorno label
 //                                                    lblUltimoInserito.setText(
-//                                                            "Maestro: " + DataBase.getNomeMaestroCorso(idSelezionato)
-//                                                            + " " + DataBase.getCognomeMaestroCorso(idSelezionato) +" | "+
-//                                                            "Tel: " + DataBase.getMestroCorso(idSelezionato).getNumTel()
+//                                                            "Maestro: " + D.getNomeMaestroCorso(idSelezionato)
+//                                                            + " " + D.getCognomeMaestroCorso(idSelezionato) +" | "+
+//                                                            "Tel: " + D.getMestroCorso(idSelezionato).getNumTel()
 //                                                    );
 
 
@@ -274,8 +274,8 @@ public class ModificaPartecipante extends JFrame {
         //riaggiorno il frame del database
 
 
-//        DataBase.frameModifica = this;
-        DataBase.assegnaFinestra(DataBase.getkModifica(),this);
+//        D.frameModifica = this;
+        D.assegnaFinestra(D.getkModifica(),this);
 
     }
     private void addListener() {
@@ -302,9 +302,9 @@ public class ModificaPartecipante extends JFrame {
     private void settaTendina() {
         String[] tabellaCodici =new String[4];
 
-        tabellaCodici[0]=DataBase.getNomeCorso(0);
-        tabellaCodici[1]=DataBase.getNomeCorso(1);
-        tabellaCodici[2]=DataBase.getNomeCorso(2);
+        tabellaCodici[0]= D.getNomeCorso(0);
+        tabellaCodici[1]= D.getNomeCorso(1);
+        tabellaCodici[2]= D.getNomeCorso(2);
         tabellaCodici[3]="Scegliere...";
 
 

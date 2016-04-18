@@ -1,6 +1,6 @@
 package view.Partecipante_Registrazione;
 
-import model.Data.DataBase;
+import model.Data.D;
 import model.Modelli.Data;
 import model.Partecipante;
 import Librerie.Random.RndAnagrafici;
@@ -115,24 +115,27 @@ public class RegistraPartecipante extends JFrame {
 
                                                     //aggiungo partecipante al corso selezionato
                                                     switch (tendinaCorso.getSelectedIndex()) {
-                                                        case 0:DataBase.addPartecipante(0,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
+                                                        case 0:
+                                                            D.addPartecipante(0,toAdd);
+//                                                            tmpAppenaAggiuntoA = D.getNomeCorso(0);
                                                             break;
-                                                        case 1:DataBase.addPartecipante(1,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
+                                                        case 1:
+                                                            D.addPartecipante(1,toAdd);
+//                                                            tmpAppenaAggiuntoA = D.getNomeCorso(1);
                                                             break;
-                                                        case 2:DataBase.addPartecipante(2,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
+                                                        case 2:
+                                                            D.addPartecipante(2,toAdd);
+//                                                            tmpAppenaAggiuntoA = D.getNomeCorso(2);
                                                             break;
                                                     }
 
                                                     //nome del corso al quale ho appena aggiunto il partecipante
-                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
+                                                    tmpAppenaAggiuntoA = D.getNomeCorso(idSelezionato);
 
                                                     svuotaCampi();
 
                                                     //numero di compagni del partecipante in aggiunta di quel corso
-                                                    int compagniCorso = DataBase.getNumeroPartecipantiCorso(idSelezionato) - 1;
+                                                    int compagniCorso = D.getNumeroPartecipantiCorso(idSelezionato) - 1;
 
                                                     //stampo l'inserimento effettuato
                                                     txtAreaInseriti.append(toAdd.getNome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
@@ -140,9 +143,9 @@ public class RegistraPartecipante extends JFrame {
 
                                                     //aggiorno label
                                                     lblUltimoInserito.setText(
-                                                            "Maestro: " + DataBase.getNomeMaestroCorso(idSelezionato)
-                                                            + " " + DataBase.getCognomeMaestroCorso(idSelezionato) +" | "+
-                                                            "Tel: " + DataBase.getMestroCorso(idSelezionato).getNumTel()
+                                                            "Maestro: " + D.getNomeMaestroCorso(idSelezionato)
+                                                            + " " + D.getCognomeMaestroCorso(idSelezionato) +" | "+
+                                                            "Tel: " + D.getMestroCorso(idSelezionato).getNumTel()
                                                     );
 
                                                 }else {
@@ -213,7 +216,7 @@ public class RegistraPartecipante extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
 
-//        DataBase.assegnaFinestra(DataBase.getkRegistra(),this);
+//        D.assegnaFinestra(D.getkRegistra(),this);
 
     }
 
@@ -235,7 +238,7 @@ public class RegistraPartecipante extends JFrame {
         btnCompletaInserimenti.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            DataBase.chiudiFinestra(DataBase.getkRegistra());
+            D.chiudiFinestra(D.getkRegistra());
             }
         });
     }

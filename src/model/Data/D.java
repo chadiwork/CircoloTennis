@@ -16,7 +16,7 @@ import java.util.LinkedList;
 /**
  * Created by Chado on 14/04/2016.
  */
-public class DataBase  {
+public class D {
 
     //costanti finestra
     private static final int kMain =0;
@@ -74,7 +74,7 @@ public class DataBase  {
 
     //frame finestra
 
-    public DataBase() {
+    public D() {
         setupIniziale();
     }
 

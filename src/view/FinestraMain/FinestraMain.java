@@ -1,7 +1,7 @@
 package view.FinestraMain;
 
 import Librerie.Util.UtilityMessages;
-import model.Data.DataBase;
+import model.Data.D;
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
 import view.Partecipante_Modifica.ScegliDaModificare;
@@ -43,11 +43,11 @@ public class FinestraMain extends JFrame {
 
     private void settaListenerTastiFinestre() {
         btnRegistra.addActionListener(e -> {
-            apriFinestra(DataBase.getkRegistra());
+            apriFinestra(D.getkRegistra());
         });
 
         btnScegliModifica.addActionListener(e -> {
-            apriFinestra(DataBase.getkScegli());
+            apriFinestra(D.getkScegli());
         });
 
         visualizzaInformazioniDelCorsoButton.addActionListener(e -> {
@@ -71,34 +71,34 @@ public class FinestraMain extends JFrame {
 //        if(finestraAperta())
 
         int uno,due,tre,quattro;
-        uno = DataBase.getkRegistra();
-        due = DataBase.getkScegli();
+        uno = D.getkRegistra();
+        due = D.getkScegli();
 
 
         //in base all'indice datomi dal listener faccio aprire ogni finestra solo una volta
-        if (indice == DataBase.getkRegistra()) {
+        if (indice == D.getkRegistra()) {
             //if registra
-            if (!DataBase.isFinestraAperta(indice)) {
+            if (!D.isFinestraAperta(indice)) {
 
-                DataBase.assegnaFinestra(DataBase.getkRegistra(),
+                D.assegnaFinestra(D.getkRegistra(),
                         new RegistraPartecipante("Registra Partecipante",
                                 900,
                                 400)
                 );
 //                finRegistraPartecipante.setVisible(true);
             }
-        } else if (indice == DataBase.getkScegli()) {
-            if (!DataBase.isFinestraAperta(indice)) {
-                if (DataBase.isAllEmpty()) {
+        } else if (indice == D.getkScegli()) {
+            if (!D.isFinestraAperta(indice)) {
+                if (D.isAllEmpty()) {
                     UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
                 } else {
 
-                    DataBase.assegnaFinestra(
-                            DataBase.getkScegli(),
+                    D.assegnaFinestra(
+                            D.getkScegli(),
                             new ScegliDaModificare(
                                     "Modifica un partecipante",
-                                    DataBase.altezzaScegliModifica,
-                                    DataBase.larghezzaScegliModifica)
+                                    D.altezzaScegliModifica,
+                                    D.larghezzaScegliModifica)
                     );
 
 

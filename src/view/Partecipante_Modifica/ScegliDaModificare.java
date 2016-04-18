@@ -1,14 +1,13 @@
 package view.Partecipante_Modifica;
 
 import Librerie.Util.UtilityMessages;
-import model.Data.DataBase;
+import model.Data.D;
 import model.Partecipante;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
 
 /**
  * Creato da Vlady il 15/01/2016.
@@ -42,12 +41,12 @@ public class ScegliDaModificare extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setContentPane(new ScegliDaModificare().rootPanel);
 
-//        DataBase.assegnaFinestra(DataBase.getkScegli(),this);
+//        D.assegnaFinestra(D.getkScegli(),this);
     }
 
     private ScegliDaModificare() {
 
-        if (DataBase.isAllEmpty()) {
+        if (D.isAllEmpty()) {
             UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
             System.exit(50000);
         } else {
@@ -63,7 +62,7 @@ public class ScegliDaModificare extends JFrame {
         //settaTendinaPartecipante();
 
 
-        DataBase.stampaDiagnostica();
+        D.stampaDiagnostica();
     }
 
     private void settaTendinaCorso() {
@@ -71,8 +70,8 @@ public class ScegliDaModificare extends JFrame {
         System.out.println("Selezionato in creazione: "+tendinaCorso.getSelectedIndex());
         tendinaCorso.removeAllItems();
 
-        for (int i = 0; i < DataBase.getNomiCorsiConPartecipanti().size(); i++) {
-            tendinaCorso.addItem(DataBase.getNomiCorsiConPartecipanti().get(i));
+        for (int i = 0; i < D.getNomiCorsiConPartecipanti().size(); i++) {
+            tendinaCorso.addItem(D.getNomiCorsiConPartecipanti().get(i));
         }
     }
 
@@ -85,8 +84,8 @@ public class ScegliDaModificare extends JFrame {
         aggiornaCorsoSelezionato();
 
         //riempio la tendinaPartecipante
-        for (int i = 0; i < DataBase.getPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
-            tendinaPartecipante.addItem(DataBase.getPartecipantiAlCorso(idCorsoSelezionato).get(i));
+        for (int i = 0; i < D.getPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
+            tendinaPartecipante.addItem(D.getPartecipantiAlCorso(idCorsoSelezionato).get(i));
         }
 
         aggiornaPartecipanteSelezionato();
@@ -108,9 +107,9 @@ public class ScegliDaModificare extends JFrame {
 
                 //dispongo la finestra attuale
                 //l'ordine dei prossimi 2 è importante
-//                DataBase.frameScegliDaModificare.dispose();
+//                D.frameScegliDaModificare.dispose();
 
-                DataBase.chiudiFinestra(DataBase.getkScegli());
+                D.chiudiFinestra(D.getkScegli());
 
                 apriFinestraModifica();
             }
@@ -167,11 +166,11 @@ public class ScegliDaModificare extends JFrame {
 
 
             //dispongo la finestra attuale
-//            DataBase.frameScegliDaModificare.dispose();
-            DataBase.chiudiFinestra(DataBase.getkScegli());
+//            D.frameScegliDaModificare.dispose();
+            D.chiudiFinestra(D.getkScegli());
 
             System.out.println("Utente sceglie SI");
-            DataBase.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
+            D.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
 
             String toMsg = selezionato.getNomeCognome() + " rimosso/a correttamente";
 
@@ -194,7 +193,7 @@ public class ScegliDaModificare extends JFrame {
     private void aggiornaPartecipanteSelezionato() {
         idPartSelezionato = tendinaPartecipante.getSelectedIndex();
 
-        selezionato = DataBase.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
+        selezionato = D.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
 
 
         System.out.println("---Corso selezionato: "+ idCorsoSelezionato);
@@ -217,14 +216,14 @@ public class ScegliDaModificare extends JFrame {
 
         ModificaPartecipante finestra = new ModificaPartecipante(" Modifica: " +
                 selezionato.getNome() + " " + selezionato.getCognome()
-                , DataBase.altezzaModifica, DataBase.larghezzaModifica
+                , D.altezzaModifica, D.larghezzaModifica
                 , selezionato
                 , idCorsoSelezionato
                 , idPartSelezionato);
     }
 
     private void aggiornaCorsoSelezionato() {
-        String[] nomiCorsi = DataBase.getNomiCorsi();
+        String[] nomiCorsi = D.getNomiCorsi();
 
         //switch paurosi
         if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
