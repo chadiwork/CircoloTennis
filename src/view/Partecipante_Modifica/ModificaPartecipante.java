@@ -38,6 +38,9 @@ public class ModificaPartecipante extends JFrame {
     private JTextField inputGiorno;
     private JLabel lblUltimoInserito;
     private JPanel pnlTendina;
+    private JCheckBox checkCambia;
+    private JPanel pnlCheck;
+    private JPanel pnlTendinaNetta;
     private JButton btnAddCasuale;
     private Frame localFrame;
     private String[] tabellaCodici;
@@ -51,6 +54,10 @@ public class ModificaPartecipante extends JFrame {
         settaTendina();
 
         assegnaDaModificare();
+
+        //setto condizioni iniziali della tendina disabilitata
+
+        tendinaCorso.setEnabled(false);
 
     }
 
@@ -73,10 +80,9 @@ public class ModificaPartecipante extends JFrame {
         //mi passo i valori
         this.oldPartecipante = partecipante;
 
-        System.out.println(oldPartecipante);
+//        System.out.println(oldPartecipante);
         this.oldCorso = idCorso;
         this.oldPosizione = idPosizione;
-
 
         addListener();
         onFirstOpening();
@@ -225,18 +231,6 @@ public class ModificaPartecipante extends JFrame {
 
     }
 
-    private void svuotaCampi() {
-        //svuoto robe
-        svuotaJText(inputAnno);
-        svuotaJText(inputGiorno);
-        svuotaJText(inputMese);
-        svuotaJText(inputCognome);
-        svuotaJText(inputNome);
-
-        //rimetto tendina da impostare
-        tendinaCorso.setSelectedIndex(3);
-    }
-
     private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
         Data dataNascita = new Data(giorno, mese, anno);
         return new Partecipante(nome, cognome, dataNascita);
@@ -248,14 +242,9 @@ public class ModificaPartecipante extends JFrame {
 
     public ModificaPartecipante(String title, int larghezza, int altezza,
                                 Partecipante partecipante,int idCorso,int idPosizione) {
-
         super(title);
 
-
-
-
         //setup iniziale finestra
-
         this.setContentPane(new ModificaPartecipante(partecipante,idCorso,idPosizione).rootPanel);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
@@ -268,7 +257,6 @@ public class ModificaPartecipante extends JFrame {
         DataBase.frameModifica = this;
 
     }
-
     private void addListener() {
         btnSalvaModifiche.addActionListener(new ActionListener() {
             @Override
@@ -276,6 +264,18 @@ public class ModificaPartecipante extends JFrame {
                 salvaModifiche();
             }
         });
+        checkCambia.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                listenerCheckBox();
+            }
+        });
+    }
+
+    private void listenerCheckBox() {
+        //flip flop
+        if (checkCambia.isSelected()) tendinaCorso.setEnabled(true);
+        else if (!checkCambia.isSelected()) tendinaCorso.setEnabled(false);
     }
 
     private void settaTendina() {
@@ -294,6 +294,18 @@ public class ModificaPartecipante extends JFrame {
         }
 
         tendinaCorso.setSelectedIndex(indiceAncoraDaScegliere);
+    }
+
+    private void svuotaCampi() {
+        //svuoto robe
+        svuotaJText(inputAnno);
+        svuotaJText(inputGiorno);
+        svuotaJText(inputMese);
+        svuotaJText(inputCognome);
+        svuotaJText(inputNome);
+
+        //rimetto tendina da impostare
+        tendinaCorso.setSelectedIndex(3);
     }
 
 }
