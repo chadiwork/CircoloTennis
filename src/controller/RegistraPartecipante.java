@@ -1,4 +1,4 @@
-package view.Partecipante_Registrazione;
+package controller;
 
 import model.Data.D;
 import model.Modelli.Data;
@@ -7,8 +7,6 @@ import Librerie.Random.RndAnagrafici;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static Librerie.Random.RndNmbrInRange.*;
 import static Librerie.Util.UtilityConstants.*;
@@ -61,7 +59,6 @@ public class RegistraPartecipante extends JFrame {
         //tieni private
         addListener();
         onFirstOpening();
-
 
     }
 
@@ -216,9 +213,6 @@ public class RegistraPartecipante extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
-
-//        D.assegnaFinestra(D.getkRegistra(),this);
-
     }
 
     private void addListener() {
@@ -256,7 +250,6 @@ public class RegistraPartecipante extends JFrame {
         tabellaCodici[1]="Medio";
         tabellaCodici[2]="Avanzato";
         tabellaCodici[3]="Scegliere...";
-
 
         //non separare questi 2 blocchi in 2 metodi separati...
         for (int i =0;i<=3;i++){

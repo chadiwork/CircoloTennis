@@ -1,11 +1,7 @@
-package view.FinestraMain;
+package controller;
 
 import Librerie.Util.UtilityMessages;
 import model.Data.D;
-import view.FinestraIncasso.FinestraIncasso;
-import view.FinestraInfoCorso.FinestraInfoCorso;
-import view.Partecipante_Modifica.ScegliDaModificare;
-import view.Partecipante_Registrazione.RegistraPartecipante;
 
 import javax.swing.*;
 import java.awt.*;

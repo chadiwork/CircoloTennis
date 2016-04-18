@@ -13,9 +13,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/**
- * Created by Chado on 14/04/2016.
- */
+
 public class D {
 
     //costanti finestra

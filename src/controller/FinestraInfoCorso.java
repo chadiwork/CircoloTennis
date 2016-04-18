@@ -1,4 +1,4 @@
-package view.FinestraInfoCorso;
+package controller;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package view.FinestraIncasso;
+package controller;
 
 import javax.swing.*;
 

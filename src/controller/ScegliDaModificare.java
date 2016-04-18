@@ -1,4 +1,4 @@
-package view.Partecipante_Modifica;
+package controller;
 
 import Librerie.Util.UtilityMessages;
 import model.Data.D;
@@ -6,8 +6,6 @@ import model.Partecipante;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Creato da Vlady il 15/01/2016.
