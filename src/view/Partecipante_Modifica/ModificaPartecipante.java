@@ -55,6 +55,8 @@ public class ModificaPartecipante extends JFrame {
 
         assegnaDaModificare();
 
+        tendinaCorso.setSelectedIndex(3);
+
         //setto condizioni iniziali della tendina disabilitata
 
         tendinaCorso.setEnabled(false);

@@ -55,8 +55,8 @@ public class D {
 
     //ScegliDaModificare
     //    public static Frame frameScegliDaModificare;
-    public static final int altezzaScegliModifica =400;
-    public static final int larghezzaScegliModifica = 300;
+    public static final int larghezzaScegliMod =400;
+    public static final int altezzaScegliMod = 250;
 
     //utilizzata al posto di circolo
 

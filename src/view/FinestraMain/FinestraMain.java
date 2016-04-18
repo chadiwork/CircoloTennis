@@ -97,8 +97,8 @@ public class FinestraMain extends JFrame {
                             D.getkScegli(),
                             new ScegliDaModificare(
                                     "Modifica un partecipante",
-                                    D.altezzaScegliModifica,
-                                    D.larghezzaScegliModifica)
+                                    D.larghezzaScegliMod,
+                                    D.altezzaScegliMod)
                     );
 
 

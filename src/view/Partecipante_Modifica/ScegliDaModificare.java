@@ -35,11 +35,13 @@ public class ScegliDaModificare extends JFrame {
 
     public ScegliDaModificare(String title, int larghezza, int altezza) throws HeadlessException {
         super(title);
+        this.setContentPane(new ScegliDaModificare().rootPanel);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
         this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        this.setContentPane(new ScegliDaModificare().rootPanel);
+        this.setPosizioneCentro();
+
 
 //        D.assegnaFinestra(D.getkScegli(),this);
     }
@@ -53,6 +55,9 @@ public class ScegliDaModificare extends JFrame {
             settaListener();
             settaTendine();
         }
+
+//        aggiungiListenerChiusura();
+
     }
 
     private void settaTendine() {
@@ -85,7 +90,8 @@ public class ScegliDaModificare extends JFrame {
 
         //riempio la tendinaPartecipante
         for (int i = 0; i < D.getPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
-            tendinaPartecipante.addItem(D.getPartecipantiAlCorso(idCorsoSelezionato).get(i));
+            int n = i + 1;
+            tendinaPartecipante.addItem(n+"- "+D.getPartecipantiAlCorso(idCorsoSelezionato).get(i));
         }
 
         aggiornaPartecipanteSelezionato();
@@ -95,7 +101,7 @@ public class ScegliDaModificare extends JFrame {
 
     private void settaListener() {
 
-        localFrame = this;
+//        localFrame = this;
         //TODO - forse causa errore
 
         btnModifica.addActionListener(new ActionListener() {
@@ -127,17 +133,18 @@ public class ScegliDaModificare extends JFrame {
             }
         });
 
-//        addWindowListener(new WindowAdapter()
-//        {
-//            @Override
-//            public void windowClosing(WindowEvent e)
-//            {
-//                System.out.println("Closed");
-//                e.getWindow().dispose();
-//            }
-//        });
     }
 
+//    private void aggiungiListenerChiusura() {
+//        D.getFinestra(D.getkScegli()).addWindowListener(new java.awt.event.WindowAdapter() {
+//            @Override
+//            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+//
+//                D.chiudiFinestra(D.getkScegli());
+//
+//            }
+//        });
+//    }
 
 
     private void eliminaPartecipante() {
@@ -243,6 +250,20 @@ public class ScegliDaModificare extends JFrame {
 
     //TODO - crea listener onchiusura ripulisci i frame s db
 
+
+    public void setPosizioneCentro() {
+        // valuta le dimensioni della finestra
+        int larg;
+        int alt;
+        alt = this.getHeight();
+        larg = this.getWidth();
+        // serve per la risoluzione dello schermo
+        final Toolkit kit = Toolkit.getDefaultToolkit();
+        final Dimension dimensione = kit.getScreenSize();
+        final int x = dimensione.width / 2 - larg / 2;
+        final int y = dimensione.height / 2 - alt / 2;
+        this.setLocation(x, y);
+    }
 
 
 }

@@ -62,6 +62,7 @@ public class RegistraPartecipante extends JFrame {
         addListener();
         onFirstOpening();
 
+
     }
 
     private void aggiungiPartecipante() {
@@ -241,6 +242,19 @@ public class RegistraPartecipante extends JFrame {
             D.chiudiFinestra(D.getkRegistra());
             }
         });
+        btnRiempi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                aggiungiNCasuali(20);
+            }
+        });
+    }
+
+    private void aggiungiNCasuali(int numeroPartecipanti) {
+        for (int i = 0; i < numeroPartecipanti; i++) {
+            riempiCampiInRandom();
+            aggiungiPartecipante();
+        }
     }
 
     private void riempiCampiInRandom() {
