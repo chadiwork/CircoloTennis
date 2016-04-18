@@ -19,8 +19,8 @@ public class FinestraMain extends JFrame {
     private JPanel pnlCenter;
     private JPanel pnlSX; //cambiare nome
     private JButton visualizzaInformazioniDelCorsoButton;
-    private JButton registraPartecipantiButton;
-    private JButton modificaPartecipantiButton;
+    private JButton btnRegistra;
+    private JButton btnScegliModifica;
     private JButton visualizzaIncassoButton;
 
 
@@ -42,26 +42,12 @@ public class FinestraMain extends JFrame {
     }
 
     private void settaListenerTastiFinestre() {
-        registraPartecipantiButton.addActionListener(e -> {
-            RegistraPartecipante finRegistraPartecipante =new RegistraPartecipante("Registra Partecipante",900,400);
-            finRegistraPartecipante.setVisible(true);
-
+        btnRegistra.addActionListener(e -> {
+            apriFinestra(DataBase.getkRegistra());
         });
 
-        modificaPartecipantiButton.addActionListener(e -> {
-
-            if (DataBase.getFinestra(DataBase.getkFinestraScegliModifica()) == null) {
-                if (DataBase.isAllEmpty()) {
-                    UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
-                } else {
-                    ScegliDaModificare finestra=new ScegliDaModificare(
-                            "Modifica un partecipante", DataBase.altezzaScegliModifica, DataBase.larghezzaScegliModifica);
-                    finestra.setVisible(true);
-                }
-            }
-
-
-
+        btnScegliModifica.addActionListener(e -> {
+            apriFinestra(DataBase.getkScegli());
         });
 
         visualizzaInformazioniDelCorsoButton.addActionListener(e -> {
@@ -79,5 +65,55 @@ public class FinestraMain extends JFrame {
         //main
         FinestraMain f = new FinestraMain("Circolo Tennis di Chadivlady", 450, 200);
     }
+
+    private void apriFinestra(int indice) {
+
+//        if(finestraAperta())
+
+        int uno,due,tre,quattro;
+        uno = DataBase.getkRegistra();
+        due = DataBase.getkScegli();
+
+
+        //in base all'indice datomi dal listener faccio aprire ogni finestra solo una volta
+        if (indice == DataBase.getkRegistra()) {
+            //if registra
+            if (!DataBase.isFinestraAperta(indice)) {
+
+                DataBase.assegnaFinestra(DataBase.getkRegistra(),
+                        new RegistraPartecipante("Registra Partecipante",
+                                900,
+                                400)
+                );
+//                finRegistraPartecipante.setVisible(true);
+            }
+        } else if (indice == DataBase.getkScegli()) {
+            if (!DataBase.isFinestraAperta(indice)) {
+                if (DataBase.isAllEmpty()) {
+                    UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
+                } else {
+
+                    DataBase.assegnaFinestra(
+                            DataBase.getkScegli(),
+                            new ScegliDaModificare(
+                                    "Modifica un partecipante",
+                                    DataBase.altezzaScegliModifica,
+                                    DataBase.larghezzaScegliModifica)
+                    );
+
+
+//                    finestra.setVisible(true);
+                }
+            }
+        }
+
+
+
+
+
+    }
+
+
+
 }
 

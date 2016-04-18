@@ -8,14 +8,10 @@ import model.Partecipante;
 import Librerie.Util.UtilityString;
 import Librerie.Random.RndAnagrafici;
 import org.jetbrains.annotations.NotNull;
-import view.FinestraMain.FinestraMain;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-
-import static javafx.scene.input.KeyCode.T;
 
 /**
  * Created by Chado on 14/04/2016.
@@ -23,25 +19,25 @@ import static javafx.scene.input.KeyCode.T;
 public class DataBase  {
 
     //costanti finestra
-    private static final int kFinestraMain=0;
-    private static final int kFinestraRegistra=1;
-    private static final int kFinestraScegliModifica=2;
-    private static final int kFinestraModifica=3;
+    private static final int kMain =0;
+    private static final int kRegistra =1;
+    private static final int kScegli =2;
+    private static final int kModifica =3;
 
-    public static int getkFinestraMain() {
-        return kFinestraMain;
+    public static int getkMain() {
+        return kMain;
     }
 
-    public static int getkFinestraRegistra() {
-        return kFinestraRegistra;
+    public static int getkRegistra() {
+        return kRegistra;
     }
 
-    public static int getkFinestraScegliModifica() {
-        return kFinestraScegliModifica;
+    public static int getkScegli() {
+        return kScegli;
     }
 
-    public static int getkFinestraModifica() {
-        return kFinestraModifica;
+    public static int getkModifica() {
+        return kModifica;
     }
     //frame:
     //0- main
@@ -312,6 +308,7 @@ public class DataBase  {
         //3- modifica
         //4-
         finestre.get(indice).dispose();
+        finestre.set(indice,null) ;
     }
 
     public static void assegnaFinestra(int indice,Frame frame) {
@@ -323,7 +320,6 @@ public class DataBase  {
         finestre.set(indice, frame);
 //        }else finestre.add(indice, frame);
         //l'else in teoria non si applica mai
-        System.out.println("TEST DATABASE");
     }
 
     private static void inizializzaLaLista() {
@@ -340,6 +336,12 @@ public class DataBase  {
     public static Frame getFinestra(int indice) {
         inizializzaLaLista();
         return finestre.get(indice);
+    }
+
+    public static boolean isFinestraAperta(int indice) {
+        inizializzaLaLista();
+//        return finestre.get(indice);
+        return getFinestra(indice) != null;
     }
 }
 

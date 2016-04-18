@@ -33,7 +33,7 @@
                   <text value="Visualizza informazioni del Corso"/>
                 </properties>
               </component>
-              <component id="7ff07" class="javax.swing.JButton" binding="registraPartecipantiButton" default-binding="true">
+              <component id="7ff07" class="javax.swing.JButton" binding="btnRegistra" default-binding="true">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>
@@ -41,7 +41,7 @@
                   <text value="Registra Partecipanti"/>
                 </properties>
               </component>
-              <component id="683d9" class="javax.swing.JButton" binding="modificaPartecipantiButton" default-binding="true">
+              <component id="683d9" class="javax.swing.JButton" binding="btnScegliModifica" default-binding="true">
                 <constraints>
                   <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
                 </constraints>

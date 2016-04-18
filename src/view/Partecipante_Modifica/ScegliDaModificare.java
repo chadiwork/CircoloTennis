@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 
 /**
  * Creato da Vlady il 15/01/2016.
@@ -38,11 +39,10 @@ public class ScegliDaModificare extends JFrame {
         this.pack();
         this.setSize(larghezza, altezza);
         this.setVisible(true);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.setContentPane(new ScegliDaModificare().rootPanel);
 
-        DataBase.assegnaFinestra(DataBase.getkFinestraScegliModifica(),this);
-        System.out.println("TEST SCEGLI");
+//        DataBase.assegnaFinestra(DataBase.getkScegli(),this);
     }
 
     private ScegliDaModificare() {
@@ -110,7 +110,7 @@ public class ScegliDaModificare extends JFrame {
                 //l'ordine dei prossimi 2 è importante
 //                DataBase.frameScegliDaModificare.dispose();
 
-                DataBase.chiudiFinestra(DataBase.getkFinestraScegliModifica());
+                DataBase.chiudiFinestra(DataBase.getkScegli());
 
                 apriFinestraModifica();
             }
@@ -127,6 +127,16 @@ public class ScegliDaModificare extends JFrame {
                 settaTendinaPartecipante();
             }
         });
+
+//        addWindowListener(new WindowAdapter()
+//        {
+//            @Override
+//            public void windowClosing(WindowEvent e)
+//            {
+//                System.out.println("Closed");
+//                e.getWindow().dispose();
+//            }
+//        });
     }
 
 
@@ -158,7 +168,7 @@ public class ScegliDaModificare extends JFrame {
 
             //dispongo la finestra attuale
 //            DataBase.frameScegliDaModificare.dispose();
-            DataBase.chiudiFinestra(DataBase.getkFinestraScegliModifica());
+            DataBase.chiudiFinestra(DataBase.getkScegli());
 
             System.out.println("Utente sceglie SI");
             DataBase.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
@@ -230,6 +240,10 @@ public class ScegliDaModificare extends JFrame {
             UtilityMessages.creaDialogErrore("Non ci sono corsi con partecipanti",new Frame("Fine del mondo"));
         }
     }
+
+
+    //TODO - crea listener onchiusura ripulisci i frame s db
+
 
 
 }

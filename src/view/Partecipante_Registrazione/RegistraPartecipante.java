@@ -29,7 +29,7 @@ public class RegistraPartecipante extends JFrame {
     private JButton btnInserisciPartecipante;
     private JComboBox<String> tendinaCorso;
     private JPanel pnlCognomeCliente;
-    private JPanel pnlStoria1;
+    private JPanel pnlStoria;
     private JTextArea txtAreaInseriti;
     private JTextField inputCognome;
     private JPanel pnlDate;
@@ -42,6 +42,8 @@ public class RegistraPartecipante extends JFrame {
     private JLabel lblUltimoInserito;
     private JPanel pnlTendina;
     private JButton btnAddCasuale;
+    private JButton btnRiempi;
+    private JButton btnCompletaInserimenti;
     private JFormattedTextField formattedTextField1;
     private Frame mainFrame = new Frame();
     private String[] tabellaCodici;
@@ -59,6 +61,7 @@ public class RegistraPartecipante extends JFrame {
         //tieni private
         addListener();
         onFirstOpening();
+
     }
 
     private void aggiungiPartecipante() {
@@ -203,12 +206,14 @@ public class RegistraPartecipante extends JFrame {
         //setup iniziale finestra
         super(title);
         this.setContentPane(new RegistraPartecipante().rootPanel);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
+
+//        DataBase.assegnaFinestra(DataBase.getkRegistra(),this);
 
     }
 
@@ -224,6 +229,13 @@ public class RegistraPartecipante extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 riempiCampiInRandom();
+            }
+        });
+
+        btnCompletaInserimenti.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            DataBase.chiudiFinestra(DataBase.getkRegistra());
             }
         });
     }

@@ -186,7 +186,7 @@ public class ModificaPartecipante extends JFrame {
 //                                                        DataBase.frameModifica.dispose();
 
                                                         //TODO - in work
-                                                        DataBase.chiudiFinestra(DataBase.getkFinestraModifica());
+                                                        DataBase.chiudiFinestra(DataBase.getkModifica());
 
                                                         UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",this);
                                                     }
@@ -275,7 +275,7 @@ public class ModificaPartecipante extends JFrame {
 
 
 //        DataBase.frameModifica = this;
-        DataBase.assegnaFinestra(DataBase.getkFinestraModifica(),this);
+        DataBase.assegnaFinestra(DataBase.getkModifica(),this);
 
     }
     private void addListener() {
