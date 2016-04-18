@@ -6,8 +6,6 @@ import model.Partecipante;
 import Librerie.Random.RndAnagrafici;
 
 import javax.swing.*;
-import java.awt.*;
-
 import static Librerie.Random.RndNmbrInRange.*;
 import static Librerie.Util.UtilityConstants.*;
 import static Librerie.Util.UtilityMessages.*;
@@ -22,28 +20,24 @@ public class RegistraPartecipante extends JFrame {
     private JPanel rootPanel;
     private JPanel pnlCenter;
     private JPanel pnlForm;
-    private JPanel pnlNomeCliente;
+    private JPanel pnAnagrafici;
     private JPanel pnlGiorno;
     private JButton btnInserisciPartecipante;
     private JComboBox<String> tendinaCorso;
-    private JPanel pnlCognomeCliente;
-    private JPanel pnlStoria;
     private JTextArea txtAreaInseriti;
     private JTextField inputCognome;
-    private JPanel pnlDate;
-    private JPanel pnlMese;
     private JTextField inputMese;
-    private JPanel pnlAnno;
     private JTextField inputAnno;
     private JTextField inputNome;
     private JTextField inputGiorno;
     private JLabel lblUltimoInserito;
-    private JPanel pnlTendina;
     private JButton btnAddCasuale;
     private JButton btnRiempi;
     private JButton btnCompletaInserimenti;
-    private JFormattedTextField formattedTextField1;
-    private String[] tabellaCodici;
+    private JPanel pnlDate;
+    private JPanel pnlStoria;
+    private JPanel pnlMese;
+    private JPanel pnlAnno;
     private int indiceAncoraDaScegliere;
 
 
@@ -67,7 +61,8 @@ public class RegistraPartecipante extends JFrame {
 
         if (tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) {
 
-            int codicePaz = tendinaCorso.getSelectedIndex();
+            //riprendo l'indice del corso selezionato
+            int idSelezionato = tendinaCorso.getSelectedIndex();
 
             if (!inputNome.getText().equals("")) {
                 if (inputNome.getText().matches(regexParole)) {
@@ -105,13 +100,12 @@ public class RegistraPartecipante extends JFrame {
 
                                                     Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
                                                     //partecipante creato e pronto
-                                                    String tmpAppenaAggiuntoA="";//setup iniziale
 
-                                                    //riprendo l'indice del corso selezionato
-                                                    int idSelezionato = tendinaCorso.getSelectedIndex();
+                                                    @SuppressWarnings("Value redundant")
+                                                    String tmpAppenaAggiuntoA;//setup iniziale
 
                                                     //aggiungo partecipante al corso selezionato
-                                                    switch (tendinaCorso.getSelectedIndex()) {
+                                                    switch (idSelezionato) {
                                                         case 0:
                                                             D.addPartecipante(0,toAdd);
 //                                                            tmpAppenaAggiuntoA = D.getNomeCorso(0);
@@ -141,8 +135,8 @@ public class RegistraPartecipante extends JFrame {
                                                     //aggiorno label
                                                     lblUltimoInserito.setText(
                                                             "Maestro: " + D.getNomeMaestroCorso(idSelezionato)
-                                                            + " " + D.getCognomeMaestroCorso(idSelezionato) +" | "+
-                                                            "Tel: " + D.getMestroCorso(idSelezionato).getNumTel()
+                                                                    + " " + D.getCognomeMaestroCorso(idSelezionato) +" | "+
+                                                                    "Tel: " + D.getMestroCorso(idSelezionato).getNumTel()
                                                     );
 
                                                 }else {
@@ -201,7 +195,7 @@ public class RegistraPartecipante extends JFrame {
         daSvuotare.setText("");
     }
 
-    public RegistraPartecipante(String title, int larghezza, int altezza) {
+    RegistraPartecipante(String title, int larghezza, int altezza) {
         //setup iniziale finestra
         super(title);
         this.setContentPane(new RegistraPartecipante().rootPanel);
