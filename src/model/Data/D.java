@@ -17,14 +17,10 @@ import java.util.LinkedList;
 public class D {
 
     //costanti finestra
-    private static final int kMain =0;
+//    private static final int kMain =0;
     private static final int kRegistra =1;
     private static final int kScegli =2;
     private static final int kModifica =3;
-
-    public static int getkMain() {
-        return kMain;
-    }
 
     public static int getkRegistra() {
         return kRegistra;
