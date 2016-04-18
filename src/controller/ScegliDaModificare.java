@@ -174,12 +174,14 @@ public class ScegliDaModificare extends JFrame {
 
         aggiornaSelezionati();
 
-        ModificaPartecipante finestra = new ModificaPartecipante(" Modifica: " +
+        D.assegnaFinestra(D.getkModifica(),
+                new ModificaPartecipante(" Modifica: " +
                 selezionato.getNome() + " " + selezionato.getCognome()
                 , D.altezzaModifica, D.larghezzaModifica
                 , selezionato
                 , idCorsoSelezionato
-                , idPartSelezionato);
+                , idPartSelezionato)
+        );
     }
 
     private void aggiornaCorsoSelezionato() {

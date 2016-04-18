@@ -110,6 +110,13 @@ public class FinestraMain extends JFrame {
     }
 
 
+    public static void apriModifica () {
+
+    }
+
+
+
+
 
 }
 
