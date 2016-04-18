@@ -99,7 +99,7 @@ public class RegistraPartecipante extends JFrame {
 //                                                        &&Integer.parseInt(inputMese.getText())>=1900
                                                         ) {
 
-                                                    String anno =inputMese.getText();
+                                                    String anno =inputAnno.getText();
 
                                                     //ora ho tutti i dati raccolti
 

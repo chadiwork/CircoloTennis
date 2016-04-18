@@ -183,8 +183,16 @@ public class ScegliDaModificare extends JFrame {
 
 
         System.out.println("---Corso selezionato: "+ idCorsoSelezionato);
-        System.out.println("--Indiceselezionato: "+ idPartSelezionato);
+        System.out.println("--Indice selezionato: "+ idPartSelezionato);
         System.out.println(">Da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
+        System.out.println(
+                        "Nato il: "
+                        +selezionato.getDataDiNascita().getGiorno()
+                        +"-"
+                        +selezionato.getDataDiNascita().getMese()
+                        +"-"
+                        +selezionato.getDataDiNascita().getAnno()
+        );
 
     }
 
