@@ -42,7 +42,6 @@ public class ModificaPartecipante extends JFrame {
     private JPanel pnlCheck;
     private JPanel pnlTendinaNetta;
     private JButton btnAddCasuale;
-    private Frame localFrame;
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
 
@@ -216,39 +215,38 @@ public class ModificaPartecipante extends JFrame {
 
 
                                                 }else {
-                                                    creaDialogErrore("Inserisci un anno correttamente", localFrame);
+                                                    creaDialogErrore("Inserisci un anno correttamente", this);
                                                 }
                                             }else {
-                                                creaDialogErrore("Inserisci l'anno", localFrame);
+                                                creaDialogErrore("Inserisci l'anno", this);
                                             }
                                         }else {
-                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", localFrame);
+                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", this);
                                         }
                                     }else {
-                                        creaDialogErrore("Inserisci il mese", localFrame);
+                                        creaDialogErrore("Inserisci il mese", this);
                                     }
                                 } else {
-                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", localFrame);
+                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", this);
                                 }
                             } else {
-                                creaDialogErrore("Devi inserire il giorno", localFrame);
+                                creaDialogErrore("Devi inserire il giorno", this);
                             }
                         } else {
-                            creaDialogErrore("Inserisci solo LETTERE nel cognome", localFrame);
+                            creaDialogErrore("Inserisci solo LETTERE nel cognome", this);
                         }
                     } else {
-                        creaDialogErrore("Cognome non inserito", localFrame);
+                        creaDialogErrore("Cognome non inserito", this);
                     }
                 } else {
-                    creaDialogErrore("Inserisci solo LETTERE nel nome", localFrame);
+                    creaDialogErrore("Inserisci solo LETTERE nel nome", this);
                 }
             } else {
-                creaDialogErrore("Nome non inserito", localFrame);
+                creaDialogErrore("Nome non inserito", this);
             }
         } else {
-            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", localFrame);
+            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", this);
         }
-
     }
 
     private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
@@ -272,13 +270,6 @@ public class ModificaPartecipante extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
-
-        //riaggiorno il frame del database
-
-
-//        D.frameModifica = this;
-        D.assegnaFinestra(D.getkModifica(),this);
-
     }
     private void addListener() {
         btnSalvaModifiche.addActionListener(new ActionListener() {

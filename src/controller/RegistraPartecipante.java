@@ -43,7 +43,6 @@ public class RegistraPartecipante extends JFrame {
     private JButton btnRiempi;
     private JButton btnCompletaInserimenti;
     private JFormattedTextField formattedTextField1;
-    private Frame mainFrame = new Frame();
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
 
@@ -147,39 +146,38 @@ public class RegistraPartecipante extends JFrame {
                                                     );
 
                                                 }else {
-                                                    creaDialogErrore("Inserisci un anno correttamente", mainFrame);
+                                                    creaDialogErrore("Inserisci un anno correttamente", this);
                                                 }
                                             }else {
-                                                creaDialogErrore("Inserisci l'anno", mainFrame);
+                                                creaDialogErrore("Inserisci l'anno", this);
                                             }
                                         }else {
-                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", mainFrame);
+                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", this);
                                         }
                                     }else {
-                                        creaDialogErrore("Inserisci il mese", mainFrame);
+                                        creaDialogErrore("Inserisci il mese", this);
                                     }
                                 } else {
-                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", mainFrame);
+                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", this);
                                 }
                             } else {
-                                creaDialogErrore("Devi inserire il giorno", mainFrame);
+                                creaDialogErrore("Devi inserire il giorno", this);
                             }
                         } else {
-                            creaDialogErrore("Inserisci solo LETTERE nel cognome", mainFrame);
+                            creaDialogErrore("Inserisci solo LETTERE nel cognome", this);
                         }
                     } else {
-                        creaDialogErrore("Cognome non inserito", mainFrame);
+                        creaDialogErrore("Cognome non inserito", this);
                     }
                 } else {
-                    creaDialogErrore("Inserisci solo LETTERE nel nome", mainFrame);
+                    creaDialogErrore("Inserisci solo LETTERE nel nome", this);
                 }
             } else {
-                creaDialogErrore("Nome non inserito", mainFrame);
+                creaDialogErrore("Nome non inserito", this);
             }
         } else {
-            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", mainFrame);
+            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", this);
         }
-
     }
 
     private void svuotaCampi() {
