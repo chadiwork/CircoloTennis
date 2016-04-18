@@ -1,6 +1,6 @@
 package view.Partecipante_Modifica;
 
-import Librerie.Random.RndAnagrafici;
+import Librerie.Util.UtilityMessages;
 import model.Data.DataBase;
 import model.Modelli.Data;
 import model.Partecipante;
@@ -10,11 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Librerie.Random.RndNmbrInRange.random;
 import static Librerie.Util.UtilityConstants.regexNumeri;
 import static Librerie.Util.UtilityConstants.regexParole;
 import static Librerie.Util.UtilityMessages.creaDialogErrore;
-import static Librerie.Util.UtilityString.capFirst;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -27,7 +25,7 @@ public class ModificaPartecipante extends JFrame {
     private JPanel pnlForm;
     private JPanel pnlNomeCliente;
     private JPanel pnlGiorno;
-    private JButton btnModificaPartecipante;
+    private JButton btnSalvaModifiche;
     private JComboBox<String> tendinaCorso;
     private JPanel pnlCognomeCliente;
     private JTextField inputCognome;
@@ -41,7 +39,7 @@ public class ModificaPartecipante extends JFrame {
     private JLabel lblUltimoInserito;
     private JPanel pnlTendina;
     private JButton btnAddCasuale;
-    private Frame mainFrame = new Frame();
+    private Frame localFrame;
     private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
 
@@ -82,9 +80,11 @@ public class ModificaPartecipante extends JFrame {
 
         addListener();
         onFirstOpening();
+
     }
 
-    private void aggiungiPartecipante() {
+
+    private void salvaModifiche() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
 
@@ -122,29 +122,51 @@ public class ModificaPartecipante extends JFrame {
 //                                                        &&Integer.parseInt(inputMese.getText())>=1900
                                                         ) {
 
-                                                    String anno =inputMese.getText();
+                                                    String anno =inputAnno.getText();
 
                                                     //ora ho tutti i dati raccolti
 
                                                     Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
+
                                                     //partecipante creato e pronto
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
 
                                                     //riprendo l'indice del corso selezionato
                                                     int idSelezionato = tendinaCorso.getSelectedIndex();
 
-//                                                    //aggiungo partecipante al corso selezionato
-//                                                    switch (tendinaCorso.getSelectedIndex()) {
-//                                                        case 0:DataBase.addPartecipante(0,toAdd);
-////                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
-//                                                            break;
-//                                                        case 1:DataBase.addPartecipante(1,toAdd);
-////                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
-//                                                            break;
-//                                                        case 2:DataBase.addPartecipante(2,toAdd);
-////                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
-//                                                            break;
-//                                                    }
+                                                    //aggiungo partecipante al corso selezionato
+                                                    switch (tendinaCorso.getSelectedIndex()) {
+                                                        case 0:DataBase.addPartecipante(0,toAdd);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
+                                                            break;
+                                                        case 1:DataBase.addPartecipante(1,toAdd);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
+                                                            break;
+                                                        case 2:DataBase.addPartecipante(2,toAdd);
+//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
+                                                            break;
+                                                    }
+
+
+                                                    int dialogButton = JOptionPane.YES_NO_OPTION;
+                                                    int dialogResult = JOptionPane.showConfirmDialog(this, "Stai per salvare: "
+                                                                    + toAdd.getNome()+" "
+                                                                    + toAdd.getCognome()+" | Confermi?"
+                                                            , "Aggiorna dati partecipante", dialogButton);
+
+                                                    if(dialogResult == 0) {
+
+                                                        //TODO - crea diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
+
+                                                        //aggiorna l'oggetto, in posizione nuova
+                                                        DataBase.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
+
+                                                        DataBase.frameModifica.dispose();
+
+                                                        UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",
+                                                                this
+                                                        );
+                                                    }
 //
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
 //                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
@@ -168,37 +190,37 @@ public class ModificaPartecipante extends JFrame {
 
 
                                                 }else {
-                                                    creaDialogErrore("Inserisci un anno correttamente", mainFrame);
+                                                    creaDialogErrore("Inserisci un anno correttamente", localFrame);
                                                 }
                                             }else {
-                                                creaDialogErrore("Inserisci l'anno", mainFrame);
+                                                creaDialogErrore("Inserisci l'anno", localFrame);
                                             }
                                         }else {
-                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", mainFrame);
+                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", localFrame);
                                         }
                                     }else {
-                                        creaDialogErrore("Inserisci il mese", mainFrame);
+                                        creaDialogErrore("Inserisci il mese", localFrame);
                                     }
                                 } else {
-                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", mainFrame);
+                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", localFrame);
                                 }
                             } else {
-                                creaDialogErrore("Devi inserire il giorno", mainFrame);
+                                creaDialogErrore("Devi inserire il giorno", localFrame);
                             }
                         } else {
-                            creaDialogErrore("Inserisci solo LETTERE nel cognome", mainFrame);
+                            creaDialogErrore("Inserisci solo LETTERE nel cognome", localFrame);
                         }
                     } else {
-                        creaDialogErrore("Cognome non inserito", mainFrame);
+                        creaDialogErrore("Cognome non inserito", localFrame);
                     }
                 } else {
-                    creaDialogErrore("Inserisci solo LETTERE nel nome", mainFrame);
+                    creaDialogErrore("Inserisci solo LETTERE nel nome", localFrame);
                 }
             } else {
-                creaDialogErrore("Nome non inserito", mainFrame);
+                creaDialogErrore("Nome non inserito", localFrame);
             }
         } else {
-            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", mainFrame);
+            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", localFrame);
         }
 
     }
@@ -242,19 +264,18 @@ public class ModificaPartecipante extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
 
-
+        //riaggiorno il frame del database
+        DataBase.frameModifica = this;
 
     }
 
     private void addListener() {
-        btnModificaPartecipante.addActionListener(new ActionListener() {
+        btnSalvaModifiche.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                aggiungiPartecipante();
+                salvaModifiche();
             }
         });
-
-
     }
 
     private void settaTendina() {

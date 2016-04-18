@@ -21,11 +21,12 @@ import static javafx.scene.input.KeyCode.T;
  */
 public class DataBase  {
 
-
+    //finestraModifica
+    public static Frame frameModifica;
     public static final int altezzaModifica =400;
     public static final int larghezzaModifica = 300;
 
-
+    //ScegliDaModificare
     public static Frame frameScegliDaModificare;
     public static final int altezzaScegliModifica =400;
     public static final int larghezzaScegliModifica = 300;
@@ -262,5 +263,12 @@ public class DataBase  {
     public static Partecipante getPartecipanteAlCorso(int idCorso,int idPartecipante) {
         return corsi[idCorso].get(idPartecipante);
     }
+
+    public static void setPartecipanteAlCorso(int idCorso,int idPartecipante,Partecipante nuovoPartecipante) {
+        corsi[idCorso].set(idPartecipante,nuovoPartecipante);
+    }
+
+
+
 }
 

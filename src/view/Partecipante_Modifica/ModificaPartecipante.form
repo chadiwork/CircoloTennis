@@ -2,7 +2,7 @@
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.Partecipante_Modifica.ModificaPartecipante">
   <grid id="27dc6" binding="rootPanel" layout-manager="BorderLayout" hgap="5" vgap="5">
     <constraints>
-      <xy x="20" y="20" width="702" height="502"/>
+      <xy x="20" y="20" width="519" height="354"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -130,7 +130,7 @@
                   </hspacer>
                 </children>
               </grid>
-              <component id="96131" class="javax.swing.JButton" binding="btnModificaPartecipante">
+              <component id="96131" class="javax.swing.JButton" binding="btnSalvaModifiche">
                 <constraints>
                   <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="1" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
                     <preferred-size width="20" height="30"/>

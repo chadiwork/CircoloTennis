@@ -96,6 +96,7 @@ public class ScegliDaModificare extends JFrame {
     private void settaListener() {
 
         localFrame = this;
+        //TODO - forse causa errore
 
         btnModifica.addActionListener(new ActionListener() {
             //listener
@@ -104,11 +105,12 @@ public class ScegliDaModificare extends JFrame {
                 aggiornaPartecipanteSelezionato();
 
 
-                apriFinestraModifica();
-
                 //dispongo la finestra attuale
+                //l'ordine dei prossimi 2 è importante
                 DataBase.frameScegliDaModificare.dispose();
 
+
+                apriFinestraModifica();
             }
         });
         btnElimina.addActionListener(new ActionListener() {
@@ -186,7 +188,7 @@ public class ScegliDaModificare extends JFrame {
         System.out.println("--Indice selezionato: "+ idPartSelezionato);
         System.out.println(">Da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
         System.out.println(
-                        "Nato il: "
+                "Nato il: "
                         +selezionato.getDataDiNascita().getGiorno()
                         +"-"
                         +selezionato.getDataDiNascita().getMese()
