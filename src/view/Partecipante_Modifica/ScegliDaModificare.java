@@ -42,6 +42,8 @@ public class ScegliDaModificare extends JFrame {
 
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setContentPane(new ScegliDaModificare().rootPanel);
+
+        DataBase.frameScegliDaModificare = this;
     }
 
     private ScegliDaModificare() {
@@ -145,7 +147,7 @@ public class ScegliDaModificare extends JFrame {
 //
 //            }
 
-            localFrame.dispose();
+            DataBase.frameScegliDaModificare.dispose();
 
             System.out.println("Utente sceglie SI");
             DataBase.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);

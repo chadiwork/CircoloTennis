@@ -1,5 +1,6 @@
 package view.FinestraMain;
 
+import model.Data.DataBase;
 import view.FinestraIncasso.FinestraIncasso;
 import view.FinestraInfoCorso.FinestraInfoCorso;
 import view.Partecipante_Modifica.ScegliDaModificare;
@@ -30,6 +31,7 @@ public class FinestraMain extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
+
     }
 
     private FinestraMain() {

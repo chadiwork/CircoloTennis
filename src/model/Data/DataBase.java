@@ -9,6 +9,7 @@ import Librerie.Util.UtilityString;
 import Librerie.Random.RndAnagrafici;
 import org.jetbrains.annotations.NotNull;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,6 +35,10 @@ public class DataBase  {
 
     private static boolean isSetupFatto = false;
 
+    //frame finestra
+    public static Frame frameScegliDaModificare;
+
+
     public DataBase() {
         setupIniziale();
     }
@@ -43,7 +48,6 @@ public class DataBase  {
         creaMaestri();
         creaCorsi();
         //l'ordine è importantissimo qui, non cambiarlo
-
         System.out.println("Setup dati completato");
     }
 
@@ -122,7 +126,6 @@ public class DataBase  {
         return corsi[idCorso].size() == 0;
     }
 
-
     public static String getCognomeMaestroCorso(int idCorso) {
         controllaSetup();
         return corsi[idCorso].getMaestro().getCognome();
@@ -150,7 +153,6 @@ public class DataBase  {
 
         int totali=0;
 
-
         System.out.println("Size 0:"+corsi[0].size());
         System.out.println("Size 1:"+corsi[1].size());
         System.out.println("Size 2:"+corsi[2].size());
@@ -166,9 +168,6 @@ public class DataBase  {
                 for (int i = 0; i < getCorsi()[f].size(); i++) {
 
                     System.out.println("-Indice partecipante:"+i);
-
-
-
 
                     partecipanti[i]=(getCorsi()[f].get(i).getNome());
 
