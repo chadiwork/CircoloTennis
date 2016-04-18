@@ -153,7 +153,7 @@ public class D {
                 &&isCorsoVuoto(2);
     }
 
-    public static boolean isCorsoVuoto(int idCorso) {
+    private static boolean isCorsoVuoto(int idCorso) {
         controllaSetup();
         //controllo se un corso in particolare è vuoto
         return corsi[idCorso].size() == 0;
@@ -170,10 +170,6 @@ public class D {
 
     public static String[] getNomiCorsi() {
         return nomiCorsi;
-    }
-
-    public static Maestro[] getMaestri() {
-        return maestri;
     }
 
     public static void stampaDiagnostica() {
@@ -219,42 +215,15 @@ public class D {
 
     }
 
-    public static int getNumeroTotali() {
+    private static int getNumeroTotali() {
         return corsi[0].size()+
                 corsi[1].size()+
                 corsi[2].size();
     }
 
-    public static String[] estraiPartecipantiInseriti(int idCorso) {
-
-        controllaSetup();
-
-        int dim = corsi[idCorso].size();
-
-        String[] partecipanti = null;
-
-        if (dim > 0) {
-
-
-            partecipanti = new String[dim];
-
-            for (int i = 0; i < dim; i++) {
-
-                String nome = corsi[idCorso].get(i).getNome();
-                String cognome = corsi[idCorso].get(i).getCognome();
-
-                partecipanti[i] = nome + " " + cognome;
-
-            }
-
-        }
-
-        return partecipanti;
-    }
-
     public static LinkedList<String> getPartecipantiAlCorso(int idCorso) {
 
-        LinkedList<String> tmp=new LinkedList<String>();
+        LinkedList<String> tmp=new LinkedList<>();
 
         for (int i = 0; i < corsi[idCorso].size(); i++) {
             tmp.add(corsi[idCorso].get(i).getNome()+
@@ -330,7 +299,7 @@ public class D {
         }
     }
 
-    public static Frame getFinestra(int indice) {
+    private static Frame getFinestra(int indice) {
         inizializzaLaLista();
         return finestre.get(indice);
     }
