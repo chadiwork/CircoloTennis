@@ -101,51 +101,20 @@ public class ScegliDaModificare extends JFrame {
 
     private void settaListener() {
 
-//        localFrame = this;
-        //TODO - forse causa errore
+        btnModifica.addActionListener(evt ->{
+            aggiornaPartecipanteSelezionato();
 
-        btnModifica.addActionListener(new ActionListener() {
-            //listener
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aggiornaPartecipanteSelezionato();
-
-
-                //dispongo la finestra attuale
-                //l'ordine dei prossimi 2 è importante
-//                D.frameScegliDaModificare.dispose();
-
-                D.chiudiFinestra(D.getkScegli());
-
-                apriFinestraModifica();
-            }
+            //dispongo la finestra attuale
+            //l'ordine dei prossimi 2 è importante
+            D.chiudiFinestra(D.getkScegli());
+            apriFinestraModifica();
         });
-        btnElimina.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                eliminaPartecipante();
-            }
-        });
-        tendinaCorso.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                settaTendinaPartecipante();
-            }
-        });
+
+        btnElimina.addActionListener(evt -> eliminaPartecipante());
+
+        tendinaCorso.addActionListener(evt -> settaTendinaPartecipante());
 
     }
-
-//    private void aggiungiListenerChiusura() {
-//        D.getFinestra(D.getkScegli()).addWindowListener(new java.awt.event.WindowAdapter() {
-//            @Override
-//            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-//
-//                D.chiudiFinestra(D.getkScegli());
-//
-//            }
-//        });
-//    }
-
 
     private void eliminaPartecipante() {
 
@@ -159,21 +128,7 @@ public class ScegliDaModificare extends JFrame {
 
         if(dialogResult == 0) {
 
-//            for (int i=0;i<50;i++) {
-//
-//                String tmp = getFrames()[i].getClass().getCanonicalName();
-//
-//                if (tmp.equals(this.getClass().getCanonicalName())) {
-//                    System.out.println("Frame n:"+i);
-//                    getFrames()[i].dispose();
-//                    break;
-//                }
-//
-//            }
-
-
             //dispongo la finestra attuale
-//            D.frameScegliDaModificare.dispose();
             D.chiudiFinestra(D.getkScegli());
 
             System.out.println("Utente sceglie SI");
@@ -251,7 +206,7 @@ public class ScegliDaModificare extends JFrame {
     //TODO - crea listener onchiusura ripulisci i frame s db
 
 
-    public void setPosizioneCentro() {
+    private void setPosizioneCentro() {
         // valuta le dimensioni della finestra
         int larg;
         int alt;
