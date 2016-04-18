@@ -87,9 +87,9 @@ public class ScegliDaModificare extends JFrame {
         aggiornaCorsoSelezionato();
 
         //riempio la tendinaPartecipante
-        for (int i = 0; i < D.getPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
+        for (int i = 0; i < D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
             int n = i + 1;
-            tendinaPartecipante.addItem(n+"- "+D.getPartecipantiAlCorso(idCorsoSelezionato).get(i));
+            tendinaPartecipante.addItem(n+"- "+D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).get(i));
         }
 
         aggiornaPartecipanteSelezionato();

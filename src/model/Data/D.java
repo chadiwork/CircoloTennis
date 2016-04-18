@@ -217,20 +217,16 @@ public class D {
                 corsi[2].size();
     }
 
-    public static LinkedList<String> getPartecipantiAlCorso(int idCorso) {
+    public static LinkedList<String> getNominativiPartecipantiAlCorso(int idCorso) {
 
         LinkedList<String> tmp=new LinkedList<>();
 
-        for (int i = 0; i < corsi[idCorso].size(); i++) {
-            tmp.add(corsi[idCorso].get(i).getNome()+
-                    " "+
-                    corsi[idCorso].get(i).getCognome()
-
-            );
+        for (Partecipante p : corsi[idCorso]) {
+            tmp.add(p.getNome() +
+                    " " +
+                    p.getCognome());
         }
-
         return tmp;
-
     }
 
     public static ArrayList<String> getNomiCorsiConPartecipanti() {
