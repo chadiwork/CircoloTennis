@@ -22,22 +22,14 @@ public class ModificaPartecipante extends JFrame {
 
     private JPanel rootPanel;
     private JPanel pnlCenter;
-    private JPanel pnlForm;
-    private JPanel pnlNomeCliente;
-    private JPanel pnlGiorno;
     private JButton btnSalvaModifiche;
     private JComboBox<String> tendinaCorso;
-    private JPanel pnlCognomeCliente;
     private JTextField inputCognome;
-    private JPanel pnlDate;
-    private JPanel pnlMese;
     private JTextField inputMese;
-    private JPanel pnlAnno;
     private JTextField inputAnno;
     private JTextField inputNome;
     private JTextField inputGiorno;
     private JLabel lblUltimoInserito;
-    private JPanel pnlTendina;
     private JCheckBox checkCambia;
     private JPanel pnlCheck;
     private JPanel pnlTendinaNetta;
@@ -90,16 +82,19 @@ public class ModificaPartecipante extends JFrame {
 
     }
 
-
     private void salvaModifiche() {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
 
         //codice pressochè uguale ad aggiungi partecipante nella come controlli
 
-        if (tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) {
 
-            int codicePaz = tendinaCorso.getSelectedIndex();
+        boolean cambiaCorso = checkCambia.isSelected();
+
+        if ((tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere)| !cambiaCorso) {
+
+            //riprendo l'indice del corso selezionato
+            int idSelezionato = tendinaCorso.getSelectedIndex();
 
             if (!inputNome.getText().equals("")) {
                 if (inputNome.getText().matches(regexParole)) {
@@ -140,20 +135,6 @@ public class ModificaPartecipante extends JFrame {
                                                     //partecipante creato e pronto
                                                     String tmpAppenaAggiuntoA="";//setup iniziale
 
-                                                    //riprendo l'indice del corso selezionato
-                                                    int idSelezionato = tendinaCorso.getSelectedIndex();
-
-//                                                    //aggiungo partecipante al corso selezionato
-//                                                    switch (tendinaCorso.getSelectedIndex()) {
-//                                                        case 0:D.addPartecipante(0,toAdd);
-//                                                            break;
-//                                                        case 1:D.addPartecipante(1,toAdd);
-//                                                            break;
-//                                                        case 2:D.addPartecipante(2,toAdd);
-//                                                            break;
-//                                                    }
-
-
                                                     int dialogButton = JOptionPane.YES_NO_OPTION;
                                                     int dialogResult = JOptionPane.showConfirmDialog(this, "Stai per salvare: "
                                                                     + toAdd.getNome()+" "
@@ -164,7 +145,6 @@ public class ModificaPartecipante extends JFrame {
 
                                                         //creo diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
 
-                                                        boolean cambiaCorso = checkCambia.isSelected();
 
                                                         //controllo se sta mentendo, cioè se dice che non cambia corso
                                                         //ma in realtà lo cambia me ne accorgo e non sbaglio
@@ -272,18 +252,15 @@ public class ModificaPartecipante extends JFrame {
         this.setResizable(false);
     }
     private void addListener() {
-        btnSalvaModifiche.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                salvaModifiche();
-            }
-        });
-        checkCambia.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                listenerCheckBox();
-            }
-        });
+//        btnSalvaModifiche.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                salvaModifiche();
+//            }
+//        });
+        btnSalvaModifiche.addActionListener(evt -> salvaModifiche());
+
+        checkCambia.addActionListener(evt -> listenerCheckBox());
     }
 
     private void listenerCheckBox() {
