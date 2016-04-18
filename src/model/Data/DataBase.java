@@ -8,6 +8,7 @@ import model.Partecipante;
 import Librerie.Util.UtilityString;
 import Librerie.Random.RndAnagrafici;
 import org.jetbrains.annotations.NotNull;
+import view.FinestraMain.FinestraMain;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,13 +22,43 @@ import static javafx.scene.input.KeyCode.T;
  */
 public class DataBase  {
 
+    //costanti finestra
+    private static final int kFinestraMain=0;
+    private static final int kFinestraRegistra=1;
+    private static final int kFinestraScegliModifica=2;
+    private static final int kFinestraModifica=3;
+
+    public static int getkFinestraMain() {
+        return kFinestraMain;
+    }
+
+    public static int getkFinestraRegistra() {
+        return kFinestraRegistra;
+    }
+
+    public static int getkFinestraScegliModifica() {
+        return kFinestraScegliModifica;
+    }
+
+    public static int getkFinestraModifica() {
+        return kFinestraModifica;
+    }
+    //frame:
+    //0- main
+    //1- registra
+    //2- scegli modifica
+    //3- modifica
+    //4-
+
+    private static ArrayList<Frame>finestre;
+
     //finestraModifica
-    public static Frame frameModifica;
+    //    public static Frame frameModifica;
     public static final int altezzaModifica =400;
     public static final int larghezzaModifica = 300;
 
     //ScegliDaModificare
-    public static Frame frameScegliDaModificare;
+    //    public static Frame frameScegliDaModificare;
     public static final int altezzaScegliModifica =400;
     public static final int larghezzaScegliModifica = 300;
 
@@ -273,6 +304,43 @@ public class DataBase  {
     }
 
 
+    public static void chiudiFinestra(int indice) {
+        //frame:
+        //0- main
+        //1- registra
+        //2- scegli modifica
+        //3- modifica
+        //4-
+        finestre.get(indice).dispose();
+    }
 
+    public static void assegnaFinestra(int indice,Frame frame) {
+
+        //inizializza la lista
+        inizializzaLaLista();
+
+//        if (finestre.get(indice) == null) {
+        finestre.set(indice, frame);
+//        }else finestre.add(indice, frame);
+        //l'else in teoria non si applica mai
+        System.out.println("TEST DATABASE");
+    }
+
+    private static void inizializzaLaLista() {
+        if (finestre == null) {
+
+            finestre = new ArrayList<>();
+
+            for (int i=0;i<10;i++) {
+                finestre.add(null);
+            }
+        }
+    }
+
+    public static Frame getFinestra(int indice) {
+        inizializzaLaLista();
+        return finestre.get(indice);
+    }
 }
+
 

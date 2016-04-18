@@ -50,13 +50,17 @@ public class FinestraMain extends JFrame {
 
         modificaPartecipantiButton.addActionListener(e -> {
 
-            if (DataBase.isAllEmpty()) {
-                UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
-            } else {
-                ScegliDaModificare finestra=new ScegliDaModificare(
-                        "Modifica un partecipante", DataBase.altezzaScegliModifica, DataBase.larghezzaScegliModifica);
-                finestra.setVisible(true);
+            if (DataBase.getFinestra(DataBase.getkFinestraScegliModifica()) == null) {
+                if (DataBase.isAllEmpty()) {
+                    UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
+                } else {
+                    ScegliDaModificare finestra=new ScegliDaModificare(
+                            "Modifica un partecipante", DataBase.altezzaScegliModifica, DataBase.larghezzaScegliModifica);
+                    finestra.setVisible(true);
+                }
             }
+
+
 
         });
 

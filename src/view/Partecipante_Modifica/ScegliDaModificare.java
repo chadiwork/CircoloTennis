@@ -41,7 +41,8 @@ public class ScegliDaModificare extends JFrame {
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.setContentPane(new ScegliDaModificare().rootPanel);
 
-        DataBase.frameScegliDaModificare = this;
+        DataBase.assegnaFinestra(DataBase.getkFinestraScegliModifica(),this);
+        System.out.println("TEST SCEGLI");
     }
 
     private ScegliDaModificare() {
@@ -107,8 +108,9 @@ public class ScegliDaModificare extends JFrame {
 
                 //dispongo la finestra attuale
                 //l'ordine dei prossimi 2 è importante
-                DataBase.frameScegliDaModificare.dispose();
+//                DataBase.frameScegliDaModificare.dispose();
 
+                DataBase.chiudiFinestra(DataBase.getkFinestraScegliModifica());
 
                 apriFinestraModifica();
             }
@@ -155,7 +157,8 @@ public class ScegliDaModificare extends JFrame {
 
 
             //dispongo la finestra attuale
-            DataBase.frameScegliDaModificare.dispose();
+//            DataBase.frameScegliDaModificare.dispose();
+            DataBase.chiudiFinestra(DataBase.getkFinestraScegliModifica());
 
             System.out.println("Utente sceglie SI");
             DataBase.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);

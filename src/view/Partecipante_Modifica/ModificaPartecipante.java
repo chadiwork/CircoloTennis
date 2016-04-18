@@ -183,11 +183,15 @@ public class ModificaPartecipante extends JFrame {
                                                             DataBase.addPartecipante(tendinaCorso.getSelectedIndex(),toAdd);
                                                         }
 
-                                                        DataBase.frameModifica.dispose();
+//                                                        DataBase.frameModifica.dispose();
+
+                                                        //TODO - in work
+                                                        DataBase.chiudiFinestra(DataBase.getkFinestraModifica());
 
                                                         UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",this);
                                                     }
 //
+//                                                    //nome del corso al quale ho appena aggiunto il partecipante
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
 //                                                    tmpAppenaAggiuntoA = DataBase.getNomeCorso(idSelezionato);
 //
@@ -268,7 +272,10 @@ public class ModificaPartecipante extends JFrame {
         this.setResizable(false);
 
         //riaggiorno il frame del database
-        DataBase.frameModifica = this;
+
+
+//        DataBase.frameModifica = this;
+        DataBase.assegnaFinestra(DataBase.getkFinestraModifica(),this);
 
     }
     private void addListener() {
