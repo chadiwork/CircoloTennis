@@ -62,7 +62,7 @@ public class RndAnagrafici {
         controllaSetup();
 
         // Pick one at random
-        int randomIndex = RndNmbrInRange.random(1,nomi.size());
+        int randomIndex = RndNmbrInRange.random(1,nomi.size()-1);
         return nomi.get(randomIndex);
     }
 

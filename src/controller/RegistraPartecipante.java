@@ -19,9 +19,6 @@ public class RegistraPartecipante extends JFrame {
 
     private JPanel rootPanel;
     private JPanel pnlCenter;
-    private JPanel pnlForm;
-    private JPanel pnAnagrafici;
-    private JPanel pnlGiorno;
     private JButton btnInserisciPartecipante;
     private JComboBox<String> tendinaCorso;
     private JTextArea txtAreaInseriti;
@@ -34,10 +31,6 @@ public class RegistraPartecipante extends JFrame {
     private JButton btnAddCasuale;
     private JButton btnRiempi;
     private JButton btnCompletaInserimenti;
-    private JPanel pnlDate;
-    private JPanel pnlStoria;
-    private JPanel pnlMese;
-    private JPanel pnlAnno;
     private int indiceAncoraDaScegliere;
 
 
