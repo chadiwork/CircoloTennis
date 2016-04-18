@@ -264,8 +264,12 @@ public class DataBase  {
         return corsi[idCorso].get(idPartecipante);
     }
 
-    public static void setPartecipanteAlCorso(int idCorso,int idPartecipante,Partecipante nuovoPartecipante) {
-        corsi[idCorso].set(idPartecipante,nuovoPartecipante);
+    public static void setPartecipanteAlCorso(int idCorso,int idPosizione,Partecipante nuovoPartecipante) {
+        corsi[idCorso].set(idPosizione,nuovoPartecipante);
+    }
+
+    public static void rimuoviPartecipanteDaCorso(int idCorso,int idPosizione) {
+        corsi[idCorso].remove(idPosizione);
     }
 
 

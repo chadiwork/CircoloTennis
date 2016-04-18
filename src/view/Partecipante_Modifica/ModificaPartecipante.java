@@ -94,6 +94,8 @@ public class ModificaPartecipante extends JFrame {
         //if di controllo, vedo se l'utente immette info sensate e complete
         //eccezioni gestite
 
+        //codice pressochè uguale ad aggiungi partecipante nella come controlli
+
         if (tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) {
 
             int codicePaz = tendinaCorso.getSelectedIndex();
@@ -140,18 +142,15 @@ public class ModificaPartecipante extends JFrame {
                                                     //riprendo l'indice del corso selezionato
                                                     int idSelezionato = tendinaCorso.getSelectedIndex();
 
-                                                    //aggiungo partecipante al corso selezionato
-                                                    switch (tendinaCorso.getSelectedIndex()) {
-                                                        case 0:DataBase.addPartecipante(0,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(0);
-                                                            break;
-                                                        case 1:DataBase.addPartecipante(1,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(1);
-                                                            break;
-                                                        case 2:DataBase.addPartecipante(2,toAdd);
-//                                                            tmpAppenaAggiuntoA = DataBase.getNomeCorso(2);
-                                                            break;
-                                                    }
+//                                                    //aggiungo partecipante al corso selezionato
+//                                                    switch (tendinaCorso.getSelectedIndex()) {
+//                                                        case 0:DataBase.addPartecipante(0,toAdd);
+//                                                            break;
+//                                                        case 1:DataBase.addPartecipante(1,toAdd);
+//                                                            break;
+//                                                        case 2:DataBase.addPartecipante(2,toAdd);
+//                                                            break;
+//                                                    }
 
 
                                                     int dialogButton = JOptionPane.YES_NO_OPTION;
@@ -162,16 +161,31 @@ public class ModificaPartecipante extends JFrame {
 
                                                     if(dialogResult == 0) {
 
-                                                        //TODO - crea diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
+                                                        //creo diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
 
-                                                        //aggiorna l'oggetto, in posizione nuova
-                                                        DataBase.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
+                                                        boolean cambiaCorso = checkCambia.isSelected();
+
+                                                        //controllo se sta mentendo, cioè se dice che non cambia corso
+                                                        //ma in realtà lo cambia me ne accorgo e non sbaglio
+                                                        if (tendinaCorso.isEnabled() && (oldCorso == tendinaCorso.getSelectedIndex())) {
+                                                            cambiaCorso = false;
+                                                        }
+
+                                                        //effettivamente lavoro in base a ciò che so
+                                                        if (!cambiaCorso) {
+                                                            //aggiorna l'oggetto, in posizione nuova
+                                                            DataBase.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
+                                                        } else if (cambiaCorso) {
+                                                            //cancello vecchio partecipante
+                                                            DataBase.rimuoviPartecipanteDaCorso(oldCorso,oldPosizione);
+
+                                                            //aggiungo nuovo con dati presi
+                                                            DataBase.addPartecipante(tendinaCorso.getSelectedIndex(),toAdd);
+                                                        }
 
                                                         DataBase.frameModifica.dispose();
 
-                                                        UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",
-                                                                this
-                                                        );
+                                                        UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",this);
                                                     }
 //
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
