@@ -272,15 +272,14 @@ public class D {
 
         ArrayList<String> tmp = new ArrayList<>();
 
-//        String[] corsiConPartecipanti = null;
-
-        for (int f=0;f<3;f++) {
-
+        for(int f=0;f<getCorsi().length;f++) {
             if (!getCorsi()[f].isEmpty()) {
-
                 tmp.add(nomiCorsi[f]);
             }
         }
+
+
+
 
         return tmp;
     }
