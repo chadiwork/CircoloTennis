@@ -222,32 +222,14 @@ public class RegistraPartecipante extends JFrame {
     }
 
     private void addListener() {
-        btnInserisciPartecipante.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aggiungiPartecipante();
-            }
-        });
 
-        btnAddCasuale.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                riempiCampiInRandom();
-            }
-        });
+        btnInserisciPartecipante.addActionListener(evt -> aggiungiPartecipante());
 
-        btnCompletaInserimenti.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            D.chiudiFinestra(D.getkRegistra());
-            }
-        });
-        btnRiempi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                aggiungiNCasuali(20);
-            }
-        });
+        btnAddCasuale.addActionListener(evt -> riempiCampiInRandom());
+
+        btnCompletaInserimenti.addActionListener(evt->D.chiudiFinestra(D.getkRegistra()));
+
+        btnRiempi.addActionListener(evt -> aggiungiNCasuali(20));
     }
 
     private void aggiungiNCasuali(int numeroPartecipanti) {
