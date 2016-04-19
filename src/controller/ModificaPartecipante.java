@@ -170,9 +170,6 @@ private void salvaModifiche() {
 														D.addPartecipante(tendinaCorso.getSelectedIndex(), toAdd);
 													}
 
-//                                                        D.frameModifica.dispose();
-
-													//TODO - in work
 													D.chiudiFinestra(D.getkModifica());
 
 													UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente", this);

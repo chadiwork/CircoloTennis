@@ -203,7 +203,7 @@ private void aggiornaCorsoSelezionato() {
 }
 
 
-//TODO - crea listener onchiusura ripulisci i frame s db
+//TODO - crea listener onchiusura ripulisci i frame su db
 
 
 private void setPosizioneCentro() {

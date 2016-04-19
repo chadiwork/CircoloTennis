@@ -28,13 +28,15 @@ public static final int altezzaScegliMod = 250;
 //    private static final int kMain =0;
 private static final int kRegistra = 1;
 private static final int kScegli = 2;
+private static final int kModifica = 3;
+private static final int kInformazoni = 4;
+private static final int kIncasso = 5;
 //frame:
 //0- main
 //1- registra
 //2- scegli modifica
 //3- modifica
 //4-
-private static final int kModifica = 3;
 private static final double costoFacile = 50.35;
 private static final double costoMedio = 65.75;
 private static final double costoAvanzato = 90.99;
@@ -62,6 +64,14 @@ public static int getkScegli() {
 
 public static int getkModifica() {
 	return kModifica;
+}
+
+public static int getkIncasso() {
+	return kIncasso;
+}
+
+public static int getkInformazoni() {
+	return kInformazoni;
 }
 
 private static void setupIniziale() {

@@ -12,12 +12,10 @@ import java.awt.*;
  */
 public class FinestraMain extends JFrame {
 private JPanel rootPanel;
-private JPanel pnlCenter;
-private JPanel pnlSX; //cambiare nome
-private JButton visualizzaInformazioniDelCorsoButton;
+private JButton btnInfo;
 private JButton btnRegistra;
 private JButton btnScegliModifica;
-private JButton visualizzaIncassoButton;
+private JButton btnIncasso;
 
 
 private FinestraMain(String title, int larghezza, int altezza) {
@@ -42,54 +40,46 @@ public static void main(String[] args) throws Exception {
 	FinestraMain f = new FinestraMain("Circolo Tennis di Chadivlady", 450, 200);
 }
 
-public static void apriModifica() {
-
-}
-
 private void settaListenerTastiFinestre() {
-	btnRegistra.addActionListener(e -> {
-		apriFinestra(D.getkRegistra());
-	});
+	btnRegistra.addActionListener(e ->
+			apriFinestra(D.getkRegistra())
+	);
 
-	btnScegliModifica.addActionListener(e -> {
-		apriFinestra(D.getkScegli());
-	});
+	btnScegliModifica.addActionListener(e ->
+			apriFinestra(D.getkScegli())
+	);
 
-	visualizzaInformazioniDelCorsoButton.addActionListener(e -> {
-		FinestraInfoCorso finestra = new FinestraInfoCorso();
-		finestra.setVisible(true);
-	});
+	btnIncasso.addActionListener(e ->
+			apriFinestra(D.getkIncasso())
+	);
 
-	visualizzaIncassoButton.addActionListener(e -> {
-		FinestraIncasso finestra = new FinestraIncasso();
-		finestra.setVisible(true);
-	});
 }
 
 private void apriFinestra(int indice) {
 
-	int idFinRegistra = D.getkRegistra();
-	int idFinScegli = D.getkScegli();
+//	int idFinRegistra = D.getkRegistra();
+//	int idFinScegli = D.getkScegli();
 
 	//in base all'indice datomi dal listener faccio aprire ogni finestra solo una volta
-	if (indice == idFinRegistra) {
-		//if registra
+	if (indice == D.getkRegistra()) {
+		//test se è già aperta
 		if (!D.isFinestraAperta(indice)) {
 
-			D.assegnaFinestra(idFinRegistra,
+			D.assegnaFinestra(D.getkRegistra(),
 					new RegistraPartecipante("Registra Partecipante",
 							900,
 							400)
 			);
 		}
-	} else if (indice == idFinScegli) {
+	} else if (indice == D.getkScegli()) {
+		//test se è già aperta
 		if (!D.isFinestraAperta(indice)) {
 			if (D.isAllEmpty()) {
 				UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
 			} else {
 
 				D.assegnaFinestra(
-						idFinScegli,
+						D.getkScegli(),
 						new ScegliDaModificare(
 								"Modifica un partecipante",
 								D.larghezzaScegliMod,
@@ -97,6 +87,13 @@ private void apriFinestra(int indice) {
 				);
 			}
 		}
+	} else if (indice == D.getkIncasso()) {
+
+		//TODO: costruisci finestra incasso
+		//test se è già aperta
+//		if (!D.isFinestraAperta(indice)) {
+//			D.assegnaFinestra(D.getkIncasso(), new FinestraIncasso("Incasso totale",));
+//		}
 	}
 }
 
