@@ -14,211 +14,211 @@ import java.awt.*;
  */
 public class ScegliDaModificare extends JFrame {
 
-    private JPanel rootPanel;
-    private JButton btnModifica;
-    private JPanel pnlCenter;
-    private JPanel pnlModifica;
-    private JComboBox<String> tendinaCorso, tendinaPartecipante;
-    private JPanel pnlCorso;
-    private JPanel pnlPartecipante;
-    private JPanel pnlTende;
-    private JButton btnElimina;
-    //    private int numeroConversioni=0;
-    private JFrame localFrame;
+private JPanel rootPanel;
+private JButton btnModifica;
+private JPanel pnlCenter;
+private JPanel pnlModifica;
+private JComboBox<String> tendinaCorso, tendinaPartecipante;
+private JPanel pnlCorso;
+private JPanel pnlPartecipante;
+private JPanel pnlTende;
+private JButton btnElimina;
+//    private int numeroConversioni=0;
+private JFrame localFrame;
 
-    private int idCorsoSelezionato, idPartSelezionato;
-    private Partecipante selezionato = null;
+private int idCorsoSelezionato, idPartSelezionato;
+private Partecipante selezionato = null;
 
-    private String[] partecipanti, corsi;
+private String[] partecipanti, corsi;
 
-    public ScegliDaModificare(String title, int larghezza, int altezza) throws HeadlessException {
-        super(title);
-        this.setContentPane(new ScegliDaModificare().rootPanel);
-        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-        this.pack();
-        this.setSize(larghezza, altezza);
-        this.setVisible(true);
-        this.setPosizioneCentro();
+public ScegliDaModificare(String title, int larghezza, int altezza) throws HeadlessException {
+	super(title);
+	this.setContentPane(new ScegliDaModificare().rootPanel);
+	this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+	this.pack();
+	this.setSize(larghezza, altezza);
+	this.setVisible(true);
+	this.setPosizioneCentro();
 
 
 //        D.assegnaFinestra(D.getkScegli(),this);
-    }
+}
 
-    private ScegliDaModificare() {
+private ScegliDaModificare() {
 
-        if (D.isAllEmpty()) {
-            UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
-            System.exit(50000);
-        } else {
-            settaListener();
-            settaTendine();
-        }
+	if (D.isAllEmpty()) {
+		UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
+		System.exit(50000);
+	} else {
+		settaListener();
+		settaTendine();
+	}
 
 //        aggiungiListenerChiusura();
 
-    }
+}
 
-    private void settaTendine() {
+private void settaTendine() {
 
-        settaTendinaCorso();
-        //quella partecipante si aggiorna da sola, lascio comunque commentato per sicurezza
-        //settaTendinaPartecipante();
-
-
-        D.stampaDiagnostica();
-    }
-
-    private void settaTendinaCorso() {
-
-        System.out.println("Selezionato in creazione: " + tendinaCorso.getSelectedIndex());
-        tendinaCorso.removeAllItems();
-
-        for (int i = 0; i < D.getNomiCorsiConPartecipanti().size(); i++) {
-            tendinaCorso.addItem(D.getNomiCorsiConPartecipanti().get(i));
-        }
-    }
-
-    private void settaTendinaPartecipante() {
-        //reagisce al cambiamento di tendinaCorso
-
-        tendinaPartecipante.removeAllItems();
-        //così non metto doppioni
-
-        aggiornaCorsoSelezionato();
-
-        //riempio la tendinaPartecipante
-        for (int i = 0; i < D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
-            int n = i + 1;
-            tendinaPartecipante.addItem(n + "- " + D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).get(i));
-        }
-
-        aggiornaPartecipanteSelezionato();
-
-    }
+	settaTendinaCorso();
+	//quella partecipante si aggiorna da sola, lascio comunque commentato per sicurezza
+	//settaTendinaPartecipante();
 
 
-    private void settaListener() {
+	D.stampaDiagnostica();
+}
 
-        btnModifica.addActionListener(evt -> {
-            aggiornaPartecipanteSelezionato();
+private void settaTendinaCorso() {
 
-            //dispongo la finestra attuale
-            //l'ordine dei prossimi 2 è importante
-            D.chiudiFinestra(D.getkScegli());
-            apriFinestraModifica();
-        });
+	System.out.println("Selezionato in creazione: " + tendinaCorso.getSelectedIndex());
+	tendinaCorso.removeAllItems();
 
-        btnElimina.addActionListener(evt -> eliminaPartecipante());
+	for (int i = 0; i < D.getNomiCorsiConPartecipanti().size(); i++) {
+		tendinaCorso.addItem(D.getNomiCorsiConPartecipanti().get(i));
+	}
+}
 
-        tendinaCorso.addActionListener(evt -> settaTendinaPartecipante());
+private void settaTendinaPartecipante() {
+	//reagisce al cambiamento di tendinaCorso
 
-    }
+	tendinaPartecipante.removeAllItems();
+	//così non metto doppioni
 
-    private void eliminaPartecipante() {
+	aggiornaCorsoSelezionato();
 
-        aggiornaSelezionati();
+	//riempio la tendinaPartecipante
+	for (int i = 0; i < D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
+		int n = i + 1;
+		tendinaPartecipante.addItem(n + "- " + D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).get(i));
+	}
 
-        int dialogButton = JOptionPane.YES_NO_OPTION;
-        int dialogResult = JOptionPane.showConfirmDialog(this, "Vuoi davvero eliminare "
-                        + selezionato.getNome() + " "
-                        + selezionato.getCognome() + " ?"
-                , "Elimina partecipante", dialogButton);
+	aggiornaPartecipanteSelezionato();
 
-        if (dialogResult == 0) {
-
-            //dispongo la finestra attuale
-            D.chiudiFinestra(D.getkScegli());
-
-            System.out.println("Utente sceglie SI");
-            D.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
-
-            String toMsg = selezionato.getNomeCognome() + " rimosso/a correttamente";
-
-            UtilityMessages.creaDialogInfo(toMsg, this);
-
-            System.out.println("Funziona ancora e va avanti");
+}
 
 
-        } else {
-            System.out.println("Utente sceglie NO");
-        }
+private void settaListener() {
 
-    }
+	btnModifica.addActionListener(evt -> {
+		aggiornaPartecipanteSelezionato();
 
-    private void aggiornaSelezionati() {
-        aggiornaCorsoSelezionato();
-        aggiornaPartecipanteSelezionato();
-    }
+		//dispongo la finestra attuale
+		//l'ordine dei prossimi 2 è importante
+		D.chiudiFinestra(D.getkScegli());
+		apriFinestraModifica();
+	});
 
-    private void aggiornaPartecipanteSelezionato() {
-        idPartSelezionato = tendinaPartecipante.getSelectedIndex();
+	btnElimina.addActionListener(evt -> eliminaPartecipante());
 
-        selezionato = D.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
+	tendinaCorso.addActionListener(evt -> settaTendinaPartecipante());
 
+}
 
-        System.out.println("---Corso selezionato: " + idCorsoSelezionato);
-        System.out.println("--Indice selezionato: " + idPartSelezionato);
-        System.out.println(">Da editare:" + selezionato.getNome() + " " + selezionato.getCognome());
-        System.out.println(
-                "Nato il: "
-                        + selezionato.getDataDiNascita().getGiorno()
-                        + "-"
-                        + selezionato.getDataDiNascita().getMese()
-                        + "-"
-                        + selezionato.getDataDiNascita().getAnno()
-        );
+private void eliminaPartecipante() {
 
-    }
+	aggiornaSelezionati();
 
-    private void apriFinestraModifica() {
+	int dialogButton = JOptionPane.YES_NO_OPTION;
+	int dialogResult = JOptionPane.showConfirmDialog(this, "Vuoi davvero eliminare "
+					+ selezionato.getNome() + " "
+					+ selezionato.getCognome() + " ?"
+			, "Elimina partecipante", dialogButton);
 
-        aggiornaSelezionati();
+	if (dialogResult == 0) {
 
-        D.assegnaFinestra(D.getkModifica(),
-                new ModificaPartecipante(" Modifica: " +
-                        selezionato.getNome() + " " + selezionato.getCognome()
-                        , D.altezzaModifica, D.larghezzaModifica
-                        , selezionato
-                        , idCorsoSelezionato
-                        , idPartSelezionato)
-        );
-    }
+		//dispongo la finestra attuale
+		D.chiudiFinestra(D.getkScegli());
 
-    private void aggiornaCorsoSelezionato() {
-        String[] nomiCorsi = D.getNomiCorsi();
+		System.out.println("Utente sceglie SI");
+		D.getCorsi()[idCorsoSelezionato].remove(idPartSelezionato);
 
-        //switch paurosi
-        if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
-            //caso corso facile
-            idCorsoSelezionato = 0;
-        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
-            //caso corso medio
-            idCorsoSelezionato = 1;
-        } else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
-            //caso corso avanzato
-            idCorsoSelezionato = 2;
-        } else {
-            UtilityMessages.creaDialogErrore("Non ci sono corsi con partecipanti", new Frame("Fine del mondo"));
-        }
-    }
+		String toMsg = selezionato.getNomeCognome() + " rimosso/a correttamente";
+
+		UtilityMessages.creaDialogInfo(toMsg, this);
+
+		System.out.println("Funziona ancora e va avanti");
 
 
-    //TODO - crea listener onchiusura ripulisci i frame s db
+	} else {
+		System.out.println("Utente sceglie NO");
+	}
+
+}
+
+private void aggiornaSelezionati() {
+	aggiornaCorsoSelezionato();
+	aggiornaPartecipanteSelezionato();
+}
+
+private void aggiornaPartecipanteSelezionato() {
+	idPartSelezionato = tendinaPartecipante.getSelectedIndex();
+
+	selezionato = D.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
 
 
-    private void setPosizioneCentro() {
-        // valuta le dimensioni della finestra
-        int larg;
-        int alt;
-        alt = this.getHeight();
-        larg = this.getWidth();
-        // serve per la risoluzione dello schermo
-        final Toolkit kit = Toolkit.getDefaultToolkit();
-        final Dimension dimensione = kit.getScreenSize();
-        final int x = dimensione.width / 2 - larg / 2;
-        final int y = dimensione.height / 2 - alt / 2;
-        this.setLocation(x, y);
-    }
+	System.out.println("---Corso selezionato: " + idCorsoSelezionato);
+	System.out.println("--Indice selezionato: " + idPartSelezionato);
+	System.out.println(">Da editare:" + selezionato.getNome() + " " + selezionato.getCognome());
+	System.out.println(
+			"Nato il: "
+					+ selezionato.getDataDiNascita().getGiorno()
+					+ "-"
+					+ selezionato.getDataDiNascita().getMese()
+					+ "-"
+					+ selezionato.getDataDiNascita().getAnno()
+	);
+
+}
+
+private void apriFinestraModifica() {
+
+	aggiornaSelezionati();
+
+	D.assegnaFinestra(D.getkModifica(),
+			new ModificaPartecipante(" Modifica: " +
+					selezionato.getNome() + " " + selezionato.getCognome()
+					, D.altezzaModifica, D.larghezzaModifica
+					, selezionato
+					, idCorsoSelezionato
+					, idPartSelezionato)
+	);
+}
+
+private void aggiornaCorsoSelezionato() {
+	String[] nomiCorsi = D.getNomiCorsi();
+
+	//switch paurosi
+	if (tendinaCorso.getSelectedItem().equals(nomiCorsi[0])) {
+		//caso corso facile
+		idCorsoSelezionato = 0;
+	} else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[1])) {
+		//caso corso medio
+		idCorsoSelezionato = 1;
+	} else if (tendinaCorso.getSelectedItem().equals(nomiCorsi[2])) {
+		//caso corso avanzato
+		idCorsoSelezionato = 2;
+	} else {
+		UtilityMessages.creaDialogErrore("Non ci sono corsi con partecipanti", new Frame("Fine del mondo"));
+	}
+}
+
+
+//TODO - crea listener onchiusura ripulisci i frame s db
+
+
+private void setPosizioneCentro() {
+	// valuta le dimensioni della finestra
+	int larg;
+	int alt;
+	alt = this.getHeight();
+	larg = this.getWidth();
+	// serve per la risoluzione dello schermo
+	final Toolkit kit = Toolkit.getDefaultToolkit();
+	final Dimension dimensione = kit.getScreenSize();
+	final int x = dimensione.width / 2 - larg / 2;
+	final int y = dimensione.height / 2 - alt / 2;
+	this.setLocation(x, y);
+}
 
 
 }

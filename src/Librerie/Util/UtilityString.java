@@ -7,7 +7,7 @@ package Librerie.Util;
  */
 public class UtilityString {
 
-    public static String capFirst(String toCap) {
-        return toCap.substring(0, 1).toUpperCase() + toCap.substring(1);
-    }
+public static String capFirst(String toCap) {
+	return toCap.substring(0, 1).toUpperCase() + toCap.substring(1);
+}
 }

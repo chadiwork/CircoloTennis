@@ -10,13 +10,13 @@ import java.util.Random;
 
 public class RndNmbrInRange {
 
-    public static int random(int min, int max) {
+public static int random(int min, int max) {
 
-        if (min >= max) {
-            throw new IllegalArgumentException("Il massimo deve essere maggiore del minimo");
-        }
+	if (min >= max) {
+		throw new IllegalArgumentException("Il massimo deve essere maggiore del minimo");
+	}
 
-        Random r = new Random();
-        return r.nextInt((max - min) + 1) + min;
-    }
+	Random r = new Random();
+	return r.nextInt((max - min) + 1) + min;
+}
 }

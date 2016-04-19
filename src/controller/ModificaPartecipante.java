@@ -17,152 +17,166 @@ import static Librerie.Util.UtilityMessages.creaDialogErrore;
  */
 public class ModificaPartecipante extends JFrame {
 
-    private JPanel rootPanel;
-    private JPanel pnlCenter;
-    private JButton btnSalvaModifiche;
-    private JComboBox<String> tendinaCorso;
-    private JTextField inputCognome;
-    private JTextField inputMese;
-    private JTextField inputAnno;
-    private JTextField inputNome;
-    private JTextField inputGiorno;
-    private JCheckBox checkCambia;
-    private int indiceAncoraDaScegliere;
+private JPanel rootPanel;
+private JPanel pnlCenter;
+private JButton btnSalvaModifiche;
+private JComboBox<String> tendinaCorso;
+private JTextField inputCognome;
+private JTextField inputMese;
+private JTextField inputAnno;
+private JTextField inputNome;
+private JTextField inputGiorno;
+private JCheckBox checkCambia;
+private int indiceAncoraDaScegliere;
 
-    private int oldCorso, oldPosizione;
-    private Partecipante oldPartecipante;
+private int oldCorso, oldPosizione;
+private Partecipante oldPartecipante;
 
 
-    private void onFirstOpening() {
-        settaTendina();
+private ModificaPartecipante(Partecipante partecipante, int idCorso, int idPosizione) {
+	//costruttore in cui aggiungere tutte le modifiche alla UI
+	//tieni private
 
-        assegnaDaModificare();
-
-        tendinaCorso.setSelectedIndex(3);
-
-        //setto condizioni iniziali della tendina disabilitata
-
-        tendinaCorso.setEnabled(false);
-
-    }
-
-    private void assegnaDaModificare() {
-
-        System.out.println(oldPartecipante.getNome());
-        inputNome.setText(oldPartecipante.getNome());
-        inputCognome.setText(oldPartecipante.getCognome());
-        inputGiorno.setText(oldPartecipante.getDataDiNascita().getGiorno());
-        inputMese.setText(oldPartecipante.getDataDiNascita().getMese());
-        inputAnno.setText(oldPartecipante.getDataDiNascita().getAnno());
-
-        tendinaCorso.setSelectedIndex(oldCorso);
-    }
-
-    private ModificaPartecipante(Partecipante partecipante, int idCorso, int idPosizione) {
-        //costruttore in cui aggiungere tutte le modifiche alla UI
-        //tieni private
-
-        //mi passo i valori
-        this.oldPartecipante = partecipante;
+	//mi passo i valori
+	this.oldPartecipante = partecipante;
 
 //        System.out.println(oldPartecipante);
-        this.oldCorso = idCorso;
-        this.oldPosizione = idPosizione;
+	this.oldCorso = idCorso;
+	this.oldPosizione = idPosizione;
 
-        addListener();
-        onFirstOpening();
+	addListener();
+	onFirstOpening();
 
-    }
+}
 
-    private void salvaModifiche() {
-        //if di controllo, vedo se l'utente immette info sensate e complete
-        //eccezioni gestite
+public ModificaPartecipante(String title, int larghezza, int altezza,
+                            Partecipante partecipante, int idCorso, int idPosizione) {
+	super(title);
 
-        //codice pressochè uguale ad aggiungi partecipante nella come controlli
+	//setup iniziale finestra
+	this.setContentPane(new ModificaPartecipante(partecipante, idCorso, idPosizione).rootPanel);
+	this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+	this.pack();
+	this.setSize(larghezza, altezza);
+	this.setLocationRelativeTo(null);
+	this.setVisible(true);
+	this.setResizable(false);
+}
+
+private void onFirstOpening() {
+	settaTendina();
+
+	assegnaDaModificare();
+
+	tendinaCorso.setSelectedIndex(3);
+
+	//setto condizioni iniziali della tendina disabilitata
+
+	tendinaCorso.setEnabled(false);
+
+}
+
+private void assegnaDaModificare() {
+
+	System.out.println(oldPartecipante.getNome());
+	inputNome.setText(oldPartecipante.getNome());
+	inputCognome.setText(oldPartecipante.getCognome());
+	inputGiorno.setText(oldPartecipante.getDataDiNascita().getGiorno());
+	inputMese.setText(oldPartecipante.getDataDiNascita().getMese());
+	inputAnno.setText(oldPartecipante.getDataDiNascita().getAnno());
+
+	tendinaCorso.setSelectedIndex(oldCorso);
+}
+
+private void salvaModifiche() {
+	//if di controllo, vedo se l'utente immette info sensate e complete
+	//eccezioni gestite
+
+	//codice pressochè uguale ad aggiungi partecipante nella come controlli
 
 
-        boolean cambiaCorso = checkCambia.isSelected();
+	boolean cambiaCorso = checkCambia.isSelected();
 
-        if ((tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) | !cambiaCorso) {
+	if ((tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) | !cambiaCorso) {
 
-            //riprendo l'indice del corso selezionato
-            int idSelezionato = tendinaCorso.getSelectedIndex();
+		//riprendo l'indice del corso selezionato
+		int idSelezionato = tendinaCorso.getSelectedIndex();
 
-            if (!inputNome.getText().equals("")) {
-                if (inputNome.getText().matches(regexParole)) {
+		if (!inputNome.getText().equals("")) {
+			if (inputNome.getText().matches(regexParole)) {
 
-                    String nome = inputNome.getText();
+				String nome = inputNome.getText();
 
-                    if (!inputCognome.getText().equals("")) {
-                        if (inputCognome.getText().matches(regexParole)) {
+				if (!inputCognome.getText().equals("")) {
+					if (inputCognome.getText().matches(regexParole)) {
 
-                            String cognome = inputCognome.getText();
+						String cognome = inputCognome.getText();
 
-                            if (!inputGiorno.getText().equals("")) {
-                                if (inputGiorno.getText().matches(regexNumeri)
-                                        && (Integer.parseInt(inputGiorno.getText()) <= 31)
-                                        && (Integer.parseInt(inputGiorno.getText()) >= 1)) {
+						if (!inputGiorno.getText().equals("")) {
+							if (inputGiorno.getText().matches(regexNumeri)
+									&& (Integer.parseInt(inputGiorno.getText()) <= 31)
+									&& (Integer.parseInt(inputGiorno.getText()) >= 1)) {
 
-                                    String giorno = inputGiorno.getText();
+								String giorno = inputGiorno.getText();
 
-                                    if (!inputMese.getText().equals("")) {
-                                        if (inputMese.getText().matches(regexNumeri)
-                                                && (Integer.parseInt(inputMese.getText()) <= 12)
-                                                && (Integer.parseInt(inputMese.getText()) >= 1)) {
+								if (!inputMese.getText().equals("")) {
+									if (inputMese.getText().matches(regexNumeri)
+											&& (Integer.parseInt(inputMese.getText()) <= 12)
+											&& (Integer.parseInt(inputMese.getText()) >= 1)) {
 
-                                            String mese = inputMese.getText();
+										String mese = inputMese.getText();
 
-                                            if (!inputAnno.getText().equals("")) {
-                                                if (inputAnno.getText().matches(regexNumeri)
+										if (!inputAnno.getText().equals("")) {
+											if (inputAnno.getText().matches(regexNumeri)
 //                                                        &&Integer.parseInt(inputMese.getText())<=2016
 //                                                        &&Integer.parseInt(inputMese.getText())>=1900
-                                                        ) {
+													) {
 
-                                                    String anno = inputAnno.getText();
+												String anno = inputAnno.getText();
 
-                                                    //ora ho tutti i dati raccolti
+												//ora ho tutti i dati raccolti
 
-                                                    Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
+												Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
 
-                                                    //partecipante creato e pronto
-                                                    String tmpAppenaAggiuntoA = "";//setup iniziale
+												//partecipante creato e pronto
+												String tmpAppenaAggiuntoA = "";//setup iniziale
 
-                                                    int dialogButton = JOptionPane.YES_NO_OPTION;
-                                                    int dialogResult = JOptionPane.showConfirmDialog(this, "Stai per salvare: "
-                                                                    + toAdd.getNome() + " "
-                                                                    + toAdd.getCognome() + " | Confermi?"
-                                                            , "Aggiorna dati partecipante", dialogButton);
+												int dialogButton = JOptionPane.YES_NO_OPTION;
+												int dialogResult = JOptionPane.showConfirmDialog(this, "Stai per salvare: "
+																+ toAdd.getNome() + " "
+																+ toAdd.getCognome() + " | Confermi?"
+														, "Aggiorna dati partecipante", dialogButton);
 
-                                                    if (dialogResult == 0) {
+												if (dialogResult == 0) {
 
-                                                        //creo diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
+													//creo diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
 
 
-                                                        //controllo se sta mentendo, cioè se dice che non cambia corso
-                                                        //ma in realtà lo cambia me ne accorgo e non sbaglio
-                                                        if (tendinaCorso.isEnabled() && (oldCorso == tendinaCorso.getSelectedIndex())) {
-                                                            cambiaCorso = false;
-                                                        }
+													//controllo se sta mentendo, cioè se dice che non cambia corso
+													//ma in realtà lo cambia me ne accorgo e non sbaglio
+													if (tendinaCorso.isEnabled() && (oldCorso == tendinaCorso.getSelectedIndex())) {
+														cambiaCorso = false;
+													}
 
-                                                        //effettivamente lavoro in base a ciò che so
-                                                        if (!cambiaCorso) {
-                                                            //aggiorna l'oggetto, in posizione nuova
-                                                            D.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
-                                                        } else if (cambiaCorso) {
-                                                            //cancello vecchio partecipante
-                                                            D.rimuoviPartecipanteDaCorso(oldCorso, oldPosizione);
+													//effettivamente lavoro in base a ciò che so
+													if (!cambiaCorso) {
+														//aggiorna l'oggetto, in posizione nuova
+														D.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
+													} else if (cambiaCorso) {
+														//cancello vecchio partecipante
+														D.rimuoviPartecipanteDaCorso(oldCorso, oldPosizione);
 
-                                                            //aggiungo nuovo con dati presi
-                                                            D.addPartecipante(tendinaCorso.getSelectedIndex(), toAdd);
-                                                        }
+														//aggiungo nuovo con dati presi
+														D.addPartecipante(tendinaCorso.getSelectedIndex(), toAdd);
+													}
 
 //                                                        D.frameModifica.dispose();
 
-                                                        //TODO - in work
-                                                        D.chiudiFinestra(D.getkModifica());
+													//TODO - in work
+													D.chiudiFinestra(D.getkModifica());
 
-                                                        UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente", this);
-                                                    }
+													UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente", this);
+												}
 //
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
@@ -185,110 +199,96 @@ public class ModificaPartecipante extends JFrame {
 //                                                    );
 
 
-                                                } else {
-                                                    creaDialogErrore("Inserisci un anno correttamente", this);
-                                                }
-                                            } else {
-                                                creaDialogErrore("Inserisci l'anno", this);
-                                            }
-                                        } else {
-                                            creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", this);
-                                        }
-                                    } else {
-                                        creaDialogErrore("Inserisci il mese", this);
-                                    }
-                                } else {
-                                    creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", this);
-                                }
-                            } else {
-                                creaDialogErrore("Devi inserire il giorno", this);
-                            }
-                        } else {
-                            creaDialogErrore("Inserisci solo LETTERE nel cognome", this);
-                        }
-                    } else {
-                        creaDialogErrore("Cognome non inserito", this);
-                    }
-                } else {
-                    creaDialogErrore("Inserisci solo LETTERE nel nome", this);
-                }
-            } else {
-                creaDialogErrore("Nome non inserito", this);
-            }
-        } else {
-            creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", this);
-        }
-    }
+											} else {
+												creaDialogErrore("Inserisci un anno correttamente", this);
+											}
+										} else {
+											creaDialogErrore("Inserisci l'anno", this);
+										}
+									} else {
+										creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", this);
+									}
+								} else {
+									creaDialogErrore("Inserisci il mese", this);
+								}
+							} else {
+								creaDialogErrore("Inserisci un numero tra 1 e 31 nel campo giorno", this);
+							}
+						} else {
+							creaDialogErrore("Devi inserire il giorno", this);
+						}
+					} else {
+						creaDialogErrore("Inserisci solo LETTERE nel cognome", this);
+					}
+				} else {
+					creaDialogErrore("Cognome non inserito", this);
+				}
+			} else {
+				creaDialogErrore("Inserisci solo LETTERE nel nome", this);
+			}
+		} else {
+			creaDialogErrore("Nome non inserito", this);
+		}
+	} else {
+		creaDialogErrore("Non hai selezionato il corso a cui aggiungere il partecipante ", this);
+	}
+}
 
-    private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
-        Data dataNascita = new Data(giorno, mese, anno);
-        return new Partecipante(nome, cognome, dataNascita);
-    }
+private Partecipante costruisciPartecipante(String nome, String cognome, String giorno, String mese, String anno) {
+	Data dataNascita = new Data(giorno, mese, anno);
+	return new Partecipante(nome, cognome, dataNascita);
+}
 
-    private void svuotaJText(JTextField daSvuotare) {
-        daSvuotare.setText("");
-    }
+private void svuotaJText(JTextField daSvuotare) {
+	daSvuotare.setText("");
+}
 
-    public ModificaPartecipante(String title, int larghezza, int altezza,
-                                Partecipante partecipante, int idCorso, int idPosizione) {
-        super(title);
-
-        //setup iniziale finestra
-        this.setContentPane(new ModificaPartecipante(partecipante, idCorso, idPosizione).rootPanel);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        this.pack();
-        this.setSize(larghezza, altezza);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        this.setResizable(false);
-    }
-
-    private void addListener() {
+private void addListener() {
 //        btnSalvaModifiche.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {
 //                salvaModifiche();
 //            }
 //        });
-        btnSalvaModifiche.addActionListener(evt -> salvaModifiche());
+	btnSalvaModifiche.addActionListener(evt -> salvaModifiche());
 
-        checkCambia.addActionListener(evt -> listenerCheckBox());
-    }
+	checkCambia.addActionListener(evt -> listenerCheckBox());
+}
 
-    private void listenerCheckBox() {
-        //flip flop
-        if (checkCambia.isSelected()) tendinaCorso.setEnabled(true);
-        else if (!checkCambia.isSelected()) tendinaCorso.setEnabled(false);
-    }
+private void listenerCheckBox() {
+	//flip flop
+	if (checkCambia.isSelected()) tendinaCorso.setEnabled(true);
+	else if (!checkCambia.isSelected()) tendinaCorso.setEnabled(false);
+}
 
-    private void settaTendina() {
-        String[] tabellaCodici = new String[4];
+private void settaTendina() {
+	String[] tabellaCodici = new String[4];
 
-        tabellaCodici[0] = D.getNomeCorso(0);
-        tabellaCodici[1] = D.getNomeCorso(1);
-        tabellaCodici[2] = D.getNomeCorso(2);
-        tabellaCodici[3] = "Scegliere...";
+	tabellaCodici[0] = D.getNomeCorso(0);
+	tabellaCodici[1] = D.getNomeCorso(1);
+	tabellaCodici[2] = D.getNomeCorso(2);
+	tabellaCodici[3] = "Scegliere...";
 
 
-        //non separare questi 2 blocchi in 2 metodi separati...
-        for (int i = 0; i <= 3; i++) {
-            tendinaCorso.addItem(tabellaCodici[i]);
-            indiceAncoraDaScegliere = i;
-        }
+	//non separare questi 2 blocchi in 2 metodi separati...
+	for (int i = 0; i <= 3; i++) {
+		tendinaCorso.addItem(tabellaCodici[i]);
+		indiceAncoraDaScegliere = i;
+	}
 
-        tendinaCorso.setSelectedIndex(indiceAncoraDaScegliere);
-    }
+	tendinaCorso.setSelectedIndex(indiceAncoraDaScegliere);
+}
 
-    private void svuotaCampi() {
-        //svuoto robe
-        svuotaJText(inputAnno);
-        svuotaJText(inputGiorno);
-        svuotaJText(inputMese);
-        svuotaJText(inputCognome);
-        svuotaJText(inputNome);
+private void svuotaCampi() {
+	//svuoto robe
+	svuotaJText(inputAnno);
+	svuotaJText(inputGiorno);
+	svuotaJText(inputMese);
+	svuotaJText(inputCognome);
+	svuotaJText(inputNome);
 
-        //rimetto tendina da impostare
-        tendinaCorso.setSelectedIndex(3);
-    }
+	//rimetto tendina da impostare
+	tendinaCorso.setSelectedIndex(3);
+}
 
 }

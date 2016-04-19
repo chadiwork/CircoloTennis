@@ -12,21 +12,21 @@ import java.util.LinkedList;
  */
 public class UtilityFile {
 
-    public static LinkedList<String> readLinesFromFile(File file) throws Exception {
-        if (!file.exists()) {
-            return new LinkedList<String>();
-        }
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        LinkedList<String> results = new LinkedList<String>();
-        String line = reader.readLine();
-        while (line != null) {
+public static LinkedList<String> readLinesFromFile(File file) throws Exception {
+	if (!file.exists()) {
+		return new LinkedList<>();
+	}
+	BufferedReader reader = new BufferedReader(new FileReader(file));
+	LinkedList<String> results = new LinkedList<>();
+	String line = reader.readLine();
+	while (line != null) {
 
-            //scommentare la riga seguente per stampare riga per riga le stringhe in lettura
-            //System.out.println(line);
+		//scommentare la riga seguente per stampare riga per riga le stringhe in lettura
+		//System.out.println(line);
 
-            results.add(line);
-            line = reader.readLine();
-        }
-        return results;
-    }
+		results.add(line);
+		line = reader.readLine();
+	}
+	return results;
+}
 }
