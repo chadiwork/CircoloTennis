@@ -1,6 +1,7 @@
 package controller;
 
 import Librerie.Random.RndAnagrafici;
+import Librerie.Random.RndDate;
 import model.Data.D;
 import model.Modelli.Data;
 import model.Partecipante;
@@ -225,9 +226,12 @@ private void riempiCampiInRandom() {
 	inputNome.setText(capFirst(RndAnagrafici.getRndNome()));
 	inputCognome.setText(capFirst(RndAnagrafici.getRndCognome()));
 	tendinaCorso.setSelectedIndex(random(1, 3) - 1);
-	inputGiorno.setText("" + random(1, 31));
-	inputMese.setText("" + random(1, 12));
-	inputAnno.setText("" + random(1920, 2016));
+
+
+	String mese = RndDate.rndMonth();
+	inputMese.setText("" + mese);
+	inputGiorno.setText("" + RndDate.rndDay(mese));
+	inputAnno.setText("" + RndDate.rndYear());
 }
 
 private void settaTendina() {

@@ -14,7 +14,7 @@ public static String getStandard(char separator) {
 	return d + separator + m + separator + y;
 }
 
-private static String rndDay(String month) {
+public static String rndDay(String month) {
 	//tiene conto di febbraio
 	if (month.equals("2")) {
 		Integer a = RndNmbrInRange.random(1, 28);
@@ -25,13 +25,13 @@ private static String rndDay(String month) {
 	}
 }
 
-private static String rndMonth() {
+public static String rndMonth() {
 	Integer a = RndNmbrInRange.random(1, 12);
 	return a.toString();
 }
 
-private static String rndYear() {
-	Integer a = RndNmbrInRange.random(1940, 2010);
+public static String rndYear() {
+	Integer a = RndNmbrInRange.random(1940, 2000);
 	return a.toString();
 }
 }

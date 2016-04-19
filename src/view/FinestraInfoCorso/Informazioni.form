@@ -111,7 +111,7 @@
                 <properties/>
                 <border type="none" title="Statistiche" title-justification="2"/>
                 <children>
-                  <component id="21ebf" class="javax.swing.JLabel" binding="lblAvanzato">
+                  <component id="21ebf" class="javax.swing.JLabel" binding="lblNumeroAvanzato">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -186,7 +186,7 @@
                 <properties/>
                 <border type="none" title="Statistiche" title-justification="2"/>
                 <children>
-                  <component id="e7a1" class="javax.swing.JLabel" binding="lblMedio">
+                  <component id="e7a1" class="javax.swing.JLabel" binding="lblNumeroMedio">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>
@@ -261,7 +261,7 @@
                 <properties/>
                 <border type="none" title="Statistiche" title-justification="2"/>
                 <children>
-                  <component id="1bba6" class="javax.swing.JLabel" binding="lblFacile">
+                  <component id="1bba6" class="javax.swing.JLabel" binding="lblNumeroFacile">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
                     </constraints>

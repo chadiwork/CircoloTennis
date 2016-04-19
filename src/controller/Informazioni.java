@@ -13,11 +13,11 @@ public class Informazioni extends JFrame {
 JPanel rootPanel;
 private JLabel lblTotale;
 private JLabel lblMaestroMedio;
-private JLabel lblFacile;
+private JLabel lblNumeroFacile;
 private JLabel lblMaestroFacile;
-private JLabel lblMedio;
+private JLabel lblNumeroMedio;
 private JLabel lblMaestroAvanzato;
-private JLabel lblAvanzato;
+private JLabel lblNumeroAvanzato;
 private JProgressBar progressBase;
 private JProgressBar progressMedio;
 private JProgressBar progressAvanzato;
@@ -35,7 +35,20 @@ private Informazioni() {
 	riempiArea(1);
 	riempiArea(2);
 
+	settaLabelNumeroPartecipanti();
 
+
+
+}
+
+private void settaLabelNumeroPartecipanti() {
+
+
+	String desc = "Partecipanti: ";
+
+	lblNumeroFacile.setText(desc+String.valueOf(D.getPartecipantiAlCorso(0).size()));
+	lblNumeroMedio.setText(desc+String.valueOf(D.getPartecipantiAlCorso(1).size()));
+	lblNumeroAvanzato.setText(desc+String.valueOf(D.getPartecipantiAlCorso(2).size()));
 
 }
 
@@ -62,18 +75,22 @@ private void riempiArea(int idArea) {
 }
 
 private void settaLabelMaestri() {
-	lblMaestroFacile.setText("Maestro: "+
+
+	String m = "Maestro: ";
+	String a = " anni";
+
+	lblMaestroFacile.setText(m+
 			D.getMestroCorso(0).getNomeCognome()+
-			", "+D.getMestroCorso(0).getEtà()+" anni"
+			", "+D.getMestroCorso(0).getEtà()+a
 	);
-	lblMaestroMedio.setText("Maestro: "+
+	lblMaestroMedio.setText(m+
 			D.getMestroCorso(1).getNomeCognome()+
-			", "+D.getMestroCorso(1).getEtà()+" anni"
+			", "+D.getMestroCorso(1).getEtà()+a
 	);
 
-	lblMaestroAvanzato.setText("Maestro: "+
+	lblMaestroAvanzato.setText(m+
 			D.getMestroCorso(2).getNomeCognome()+
-			", "+D.getMestroCorso(2).getEtà()+" anni"
+			", "+D.getMestroCorso(2).getEtà()+a
 	);
 }
 
