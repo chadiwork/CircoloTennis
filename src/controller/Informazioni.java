@@ -1,6 +1,7 @@
 package controller;
 
 import model.Data.D;
+import model.Partecipante;
 
 import javax.swing.*;
 
@@ -28,14 +29,52 @@ private Informazioni() {
 	//costruttore in cui aggiungere tutte le modifiche alla UI
 	//tieni private
 
+	settaLabelMaestri();
+
+	riempiArea(0);
+	riempiArea(1);
+	riempiArea(2);
+
+
+
+}
+
+private void riempiArea(int idArea) {
+
+	int indiceIterazione=1;
+
+	for (Partecipante p : D.getPartecipantiAlCorso(idArea)) {
+
+		String toAppend = indiceIterazione+"- "+p.getNomeCognome() + ", " + p.getEtà() + " anni" + "\n";
+
+		switch (idArea) {
+			case 0:areaBase.append(toAppend);
+				break;
+			case 1:areaMedi.append(toAppend);
+				break;
+			case 2:areaAvanzati.append(toAppend);
+		}
+
+		indiceIterazione++;
+
+	}
+
+}
+
+private void settaLabelMaestri() {
 	lblMaestroFacile.setText("Maestro: "+
 			D.getMestroCorso(0).getNomeCognome()+
-			" , "+D.getMestroCorso(0).getEtà()+" anni"
-
+			", "+D.getMestroCorso(0).getEtà()+" anni"
+	);
+	lblMaestroMedio.setText("Maestro: "+
+			D.getMestroCorso(1).getNomeCognome()+
+			", "+D.getMestroCorso(1).getEtà()+" anni"
 	);
 
-
-
+	lblMaestroAvanzato.setText("Maestro: "+
+			D.getMestroCorso(2).getNomeCognome()+
+			", "+D.getMestroCorso(2).getEtà()+" anni"
+	);
 }
 
 

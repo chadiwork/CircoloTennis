@@ -347,6 +347,11 @@ public static int finestreAperte() {
 	return n;
 }
 
+public static LinkedList<Partecipante> getPartecipantiAlCorso(int index) {
+
+	return corsi[index];
+}
+
 }
 
 

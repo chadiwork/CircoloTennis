@@ -8,8 +8,6 @@ package model.Modelli;
 public class Persona {
 private String nome, cognome;
 private Data dataDiNascita;
-//private Data dataDiNascita;
-
 
 public Persona(String nome, String cognome, Data dataDiNascita) {
 	this.nome = nome;
