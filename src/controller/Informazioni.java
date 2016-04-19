@@ -1,5 +1,7 @@
 package controller;
 
+import model.Data.D;
+
 import javax.swing.*;
 
 /**
@@ -25,6 +27,15 @@ private JTextArea areaBase;
 private Informazioni() {
 	//costruttore in cui aggiungere tutte le modifiche alla UI
 	//tieni private
+
+	lblMaestroFacile.setText("Maestro: "+
+			D.getMestroCorso(0).getNomeCognome()+
+			" , "+D.getMestroCorso(0).getEtà()+" anni"
+
+	);
+
+
+
 }
 
 
@@ -37,6 +48,6 @@ Informazioni(String title, int larghezza, int altezza) {
 	this.setSize(larghezza, altezza);
 	this.setLocationRelativeTo(null);
 	this.setVisible(true);
-	this.setResizable(false);
+	this.setResizable(true);
 }
 }

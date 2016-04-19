@@ -56,7 +56,7 @@ private void settaListenerTastiFinestre() {
 			apriFinestra(D.getkIncasso())
 	);
 	btnInfo.addActionListener(e ->
-			apriFinestra(D.getkInformazoni())
+			apriFinestra(D.getkInformazioni())
 	);
 
 }
@@ -100,9 +100,9 @@ private void apriFinestra(int indice) {
 			D.assegnaFinestra(D.getkIncasso(), new Incasso("Incasso totale",400,250));
 //			finestreAperte++;
 		}
-	} else if (indice == D.getkInformazoni()) {
+	} else if (indice == D.getkInformazioni()) {
 		if (!D.isFinestraAperta(indice)) {
-			D.assegnaFinestra(D.getkInformazoni(), new Informazioni("Informazioni sul circolo", 400, 250));
+			D.assegnaFinestra(D.getkInformazioni(), new Informazioni("Informazioni sul circolo", 400, 250));
 
 		}
 

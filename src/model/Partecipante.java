@@ -9,23 +9,11 @@ import model.Modelli.Persona;
  */
 public class Partecipante extends Persona {
 
-private Data dataDiNascita;
+//private Data dataDiNascita;
 
 public Partecipante(String nome, String cognome, Data dataDiNascita) {
-	super(nome, cognome);
-	this.dataDiNascita = dataDiNascita;
+	super(nome, cognome,dataDiNascita);
 }
-
-//creati getter e setter per modificare o prendere dati del tipo @Indirizzo e @Data
-
-public Data getDataDiNascita() {
-	return dataDiNascita;
-}
-
-public void setDataDiNascita(Data dataDiNascita) {
-	this.dataDiNascita = dataDiNascita;
-}
-
 
 }
 

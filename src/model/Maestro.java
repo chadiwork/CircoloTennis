@@ -11,16 +11,11 @@ import model.Modelli.Persona;
 public class Maestro extends Persona {
 
 private String numTel;
-private Data dataDiNascita;
+//private Data dataDiNascita;
 
 public Maestro(String nome, String cognome, String numTel, Data data) {
-	super(nome, cognome);
+	super(nome, cognome, data);
 	this.numTel = numTel;
-	this.dataDiNascita = data;
-}
-
-public Data getDataDiNascita() {
-	return dataDiNascita;
 }
 
 public String getNumTel() {

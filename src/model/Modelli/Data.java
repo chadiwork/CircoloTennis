@@ -21,7 +21,7 @@ public Data() {
 	//con costruttore vuoto aggiungo dati casuali
 	this.mese = rndMonth();
 	this.giorno = rndDay();
-	this.rndYear();
+	this.anno= rndYear();
 }
 
 public String getGiorno() {

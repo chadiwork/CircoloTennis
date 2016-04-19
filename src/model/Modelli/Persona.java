@@ -7,10 +7,14 @@ package model.Modelli;
  */
 public class Persona {
 private String nome, cognome;
+private Data dataDiNascita;
+//private Data dataDiNascita;
 
-public Persona(String nome, String cognome) {
+
+public Persona(String nome, String cognome, Data dataDiNascita) {
 	this.nome = nome;
 	this.cognome = cognome;
+	this.dataDiNascita = dataDiNascita;
 }
 
 public String getNome() {
@@ -29,7 +33,19 @@ public void setCognome(String cognome) {
 	this.cognome = cognome;
 }
 
+public Data getDataDiNascita() {
+	return dataDiNascita;
+}
+
+public void setDataDiNascita(Data dataDiNascita) {
+	this.dataDiNascita = dataDiNascita;
+}
+
 public String getNomeCognome() {
-	return nome + " " + cognome;
+	return this.getNome() + " " + this.getCognome();
+}
+
+public int getEtà() {
+	return 2016 - Integer.parseInt(this.dataDiNascita.getAnno());
 }
 }

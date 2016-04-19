@@ -68,7 +68,7 @@ public static int getkIncasso() {
 	return kIncasso;
 }
 
-public static int getkInformazoni() {
+public static int getkInformazioni() {
 	return kInformazoni;
 }
 
