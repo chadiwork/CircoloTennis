@@ -269,7 +269,7 @@ public static void chiudiFinestra(int indice) {
 public static void assegnaFinestra(int indice, Frame frame) {
 
 	//inizializza la lista
-	inizializzaLaLista();
+	inizializzaFinestre();
 
 //        if (finestre.get(indice) == null) {
 	finestre.set(indice, frame);
@@ -277,7 +277,7 @@ public static void assegnaFinestra(int indice, Frame frame) {
 	//l'else in teoria non si applica mai
 }
 
-private static void inizializzaLaLista() {
+private static void inizializzaFinestre() {
 	if (finestre == null) {
 
 		finestre = new ArrayList<>();
@@ -289,12 +289,12 @@ private static void inizializzaLaLista() {
 }
 
 private static Frame getFinestra(int indice) {
-	inizializzaLaLista();
+	inizializzaFinestre();
 	return finestre.get(indice);
 }
 
 public static boolean isFinestraAperta(int indice) {
-	inizializzaLaLista();
+	inizializzaFinestre();
 //        return finestre.get(indice);
 	return getFinestra(indice) != null;
 }
@@ -318,6 +318,40 @@ private static void setupArrayCosti() {
 
 public static String getValuta() {
 	return valuta;
+}
+
+public static void svuotaFinestre() {
+//	for (Frame fInProc : finestre) {
+//
+//		if (fInProc != null) {
+//			fInProc.dispose();
+//		}
+//		fInProc = null;
+//	}
+
+	for (int i=0; i<finestre.size();i++) {
+		Frame tmp = finestre.get(i);
+		if (tmp != null) {
+			tmp.dispose();
+		}
+		finestre.set(i, null);
+	}
+
+}
+
+public static int finestreAperte() {
+
+	D.inizializzaFinestre();
+
+	int n=0;
+	for (Frame f : finestre) {
+		if (f != null) {
+			System.out.println("Finestra viva: " +f.getTitle());
+			n++;
+		}
+	}
+
+	return n;
 }
 
 }

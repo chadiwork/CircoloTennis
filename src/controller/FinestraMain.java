@@ -17,6 +17,8 @@ private JButton btnRegistra;
 private JButton btnScegliModifica;
 private JButton btnIncasso;
 
+//private static int finestreAperte;
+
 private FinestraMain(String title, int larghezza, int altezza) {
 	//setup iniziale finestra
 	super(title);
@@ -36,7 +38,9 @@ private FinestraMain() {
 
 public static void main(String[] args) throws Exception {
 	//main
-	FinestraMain f = new FinestraMain("Circolo Tennis di Chadivlady", 450, 200);
+//	D.assegnaFinestra(0,new FinestraMain("Circolo Tennis di Chadivlady", 450, 200));
+
+	FinestraMain f0 = new FinestraMain("Circolo Tennis di Chadivlady", 450, 200);
 }
 
 private void settaListenerTastiFinestre() {
@@ -56,6 +60,15 @@ private void settaListenerTastiFinestre() {
 
 private void apriFinestra(int indice) {
 
+
+	System.out.println("Finestre aperte prima: "+D.finestreAperte());
+
+	if (D.finestreAperte() > 0) {
+		D.svuotaFinestre();
+//		finestreAperte = 0;
+	}
+
+
 //	int idFinRegistra = D.getkRegistra();
 //	int idFinScegli = D.getkScegli();
 
@@ -69,6 +82,7 @@ private void apriFinestra(int indice) {
 							900,
 							400)
 			);
+//			finestreAperte++;
 		}
 	} else if (indice == D.getkScegli()) {
 		//test se è già aperta
@@ -84,6 +98,7 @@ private void apriFinestra(int indice) {
 								D.larghezzaScegliMod,
 								D.altezzaScegliMod)
 				);
+//				finestreAperte++;
 			}
 		}
 	} else if (indice == D.getkIncasso()) {
@@ -92,8 +107,10 @@ private void apriFinestra(int indice) {
 //		test se è già aperta
 		if (!D.isFinestraAperta(indice)) {
 			D.assegnaFinestra(D.getkIncasso(), new VisualizzaIncasso("Incasso totale",400,250));
+//			finestreAperte++;
 		}
 	}
+	System.out.println("Finestre aperte dopo: "+D.finestreAperte());
 }
 
 }

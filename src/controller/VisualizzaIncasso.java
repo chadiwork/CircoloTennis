@@ -24,6 +24,8 @@ private VisualizzaIncasso() {
 	//costruttore in cui aggiungere tutte le modifiche alla UI
 	//tieni private
 
+	settaListenerDispose();
+
 	settaValoriGuadagni();
 
 	lblInfoFacile.setText("Su "+String.valueOf(D.getNumeroPartecipantiCorso(0))+" partecipanti");
@@ -37,6 +39,11 @@ private VisualizzaIncasso() {
 							D.getNumeroPartecipantiCorso(1)+
 							D.getNumeroPartecipantiCorso(2))
 			+" partecipanti");
+
+}
+
+private void settaListenerDispose() {
+
 
 }
 
