@@ -210,7 +210,7 @@ private void addListener() {
 
 	btnCompletaInserimenti.addActionListener(evt -> D.chiudiFinestra(D.getkRegistra()));
 
-	btnRiempi.addActionListener(evt -> aggiungiNCasuali(20));
+	btnRiempi.addActionListener(evt -> aggiungiNCasuali(50));
 }
 
 private void aggiungiNCasuali(int numeroPartecipanti) {

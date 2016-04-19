@@ -184,7 +184,7 @@ public static void stampaDiagnostica() {
 
 	for (int f = 0; f < 3; f++) {
 
-		System.out.println("--Indice corso:" + f);
+		System.out.println("--Corso:" + f);
 
 		if (!getCorsi()[f].isEmpty()) {
 
@@ -192,7 +192,7 @@ public static void stampaDiagnostica() {
 
 			for (int i = 0; i < getCorsi()[f].size(); i++) {
 
-				System.out.println("-Indice partecipante:" + i);
+				System.out.println("-Indice:" + i);
 
 				partecipanti[i] = (getCorsi()[f].get(i).getNome());
 
@@ -321,13 +321,6 @@ public static String getValuta() {
 }
 
 public static void svuotaFinestre() {
-//	for (Frame fInProc : finestre) {
-//
-//		if (fInProc != null) {
-//			fInProc.dispose();
-//		}
-//		fInProc = null;
-//	}
 
 	for (int i=0; i<finestre.size();i++) {
 		Frame tmp = finestre.get(i);

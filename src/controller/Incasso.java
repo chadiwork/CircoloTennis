@@ -7,7 +7,7 @@ import javax.swing.*;
 /**
  * Created by Chado on 01/04/2016.
  */
-public class VisualizzaIncasso extends JFrame {
+public class Incasso extends JFrame {
 
 private JPanel rootPanel;
 private JLabel lblFacile;
@@ -18,9 +18,10 @@ private JLabel lblInfoFacile;
 private JLabel lblInfoMedio;
 private JLabel lblInfoAvanzato;
 private JLabel lblInfoTotale;
+private JButton myButton1;
 
 
-private VisualizzaIncasso() {
+private Incasso() {
 	//costruttore in cui aggiungere tutte le modifiche alla UI
 	//tieni private
 
@@ -39,11 +40,9 @@ private VisualizzaIncasso() {
 							D.getNumeroPartecipantiCorso(1)+
 							D.getNumeroPartecipantiCorso(2))
 			+" partecipanti");
-
 }
 
 private void settaListenerDispose() {
-
 
 }
 
@@ -55,10 +54,10 @@ private void settaValoriGuadagni() {
 	lblTotale.setText(String.valueOf(D.getGuadagniTotali())+D.getValuta());
 }
 
-VisualizzaIncasso(String title, int larghezza, int altezza) {
+Incasso(String title, int larghezza, int altezza) {
 	//setup iniziale finestra
 	super(title);
-	this.setContentPane(new VisualizzaIncasso().rootPanel);
+	this.setContentPane(new Incasso().rootPanel);
 	this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 	this.pack();
 	this.setSize(larghezza, altezza);

@@ -55,6 +55,9 @@ private void settaListenerTastiFinestre() {
 	btnIncasso.addActionListener(e ->
 			apriFinestra(D.getkIncasso())
 	);
+	btnInfo.addActionListener(e ->
+			apriFinestra(D.getkInformazoni())
+	);
 
 }
 
@@ -65,12 +68,7 @@ private void apriFinestra(int indice) {
 
 	if (D.finestreAperte() > 0) {
 		D.svuotaFinestre();
-//		finestreAperte = 0;
 	}
-
-
-//	int idFinRegistra = D.getkRegistra();
-//	int idFinScegli = D.getkScegli();
 
 	//in base all'indice datomi dal listener faccio aprire ogni finestra solo una volta
 	if (indice == D.getkRegistra()) {
@@ -82,7 +80,6 @@ private void apriFinestra(int indice) {
 							900,
 							400)
 			);
-//			finestreAperte++;
 		}
 	} else if (indice == D.getkScegli()) {
 		//test se è già aperta
@@ -91,24 +88,24 @@ private void apriFinestra(int indice) {
 				UtilityMessages.creaDialogErrore("I corsi sono tutti vuoti! ", new Frame("Errore"));
 			} else {
 
-				D.assegnaFinestra(
-						D.getkScegli(),
-						new ScegliDaModificare(
-								"Modifica un partecipante",
-								D.larghezzaScegliMod,
-								D.altezzaScegliMod)
+				D.assegnaFinestra(D.getkScegli(),new ScegliDaModificare("Modifica un partecipante",
+						D.larghezzaScegliMod,
+						D.altezzaScegliMod)
 				);
-//				finestreAperte++;
 			}
 		}
 	} else if (indice == D.getkIncasso()) {
-
-//		TODO: costruisci finestra incasso
 //		test se è già aperta
 		if (!D.isFinestraAperta(indice)) {
-			D.assegnaFinestra(D.getkIncasso(), new VisualizzaIncasso("Incasso totale",400,250));
+			D.assegnaFinestra(D.getkIncasso(), new Incasso("Incasso totale",400,250));
 //			finestreAperte++;
 		}
+	} else if (indice == D.getkInformazoni()) {
+		if (!D.isFinestraAperta(indice)) {
+			D.assegnaFinestra(D.getkInformazoni(), new Informazioni("Informazioni sul circolo", 400, 250));
+
+		}
+
 	}
 	System.out.println("Finestre aperte dopo: "+D.finestreAperte());
 }
