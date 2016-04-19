@@ -1,14 +1,11 @@
 package model;
 
-import model.Maestro;
-import model.Partecipante;
-
 import java.util.LinkedList;
 
 /**
  * Created by Chado on 17/03/2016.
  */
-public class Corso extends LinkedList<Partecipante>{
+public class Corso extends LinkedList<Partecipante> {
 
     private Maestro maestro;
     private String nome;
@@ -18,7 +15,6 @@ public class Corso extends LinkedList<Partecipante>{
     //0 = facile
     //1 = intermedio
     //2 = avanzato
-
 
 
     //classe pronta

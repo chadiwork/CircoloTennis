@@ -8,17 +8,17 @@ package Librerie.Random;
 public class RndTelNumber {
 
     public static String conPrefisso() {
-        return ""+prefissoItalia() + numero();
+        return "" + prefissoItalia() + numero();
     }
 
     public static String prefissoItalia() {
-        return "0"+
+        return "0" +
                 RndNmbrInRange.random(1, 9) +
-                RndNmbrInRange.random(0, 9)+"-";
+                RndNmbrInRange.random(0, 9) + "-";
     }
 
     public static String numero() {
-        return ""+
+        return "" +
                 RndNmbrInRange.random(0, 9) +
                 RndNmbrInRange.random(0, 9) +
                 RndNmbrInRange.random(0, 9) +

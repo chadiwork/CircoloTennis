@@ -1,12 +1,12 @@
 package model.Data;
 
+import Librerie.Random.RndAnagrafici;
 import Librerie.Random.RndTelNumber;
+import Librerie.Util.UtilityString;
 import model.Corso;
 import model.Maestro;
 import model.Modelli.Data;
 import model.Partecipante;
-import Librerie.Util.UtilityString;
-import Librerie.Random.RndAnagrafici;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -16,11 +16,39 @@ import java.util.LinkedList;
 
 public class D {
 
+    //finestraModifica
+    //    public static Frame frameModifica;
+    public static final int altezzaModifica = 400;
+    public static final int larghezzaModifica = 300;
+    //ScegliDaModificare
+    //    public static Frame frameScegliDaModificare;
+    public static final int larghezzaScegliMod = 400;
+    public static final int altezzaScegliMod = 250;
     //costanti finestra
 //    private static final int kMain =0;
-    private static final int kRegistra =1;
-    private static final int kScegli =2;
-    private static final int kModifica =3;
+    private static final int kRegistra = 1;
+    private static final int kScegli = 2;
+    //frame:
+    //0- main
+    //1- registra
+    //2- scegli modifica
+    //3- modifica
+    //4-
+    private static final int kModifica = 3;
+    private static final double costoFacile = 50.35;
+    private static final double costoMedio = 65.75;
+    private static final double costoAvanzato = 90.99;
+    private static ArrayList<Frame> finestre;
+
+    //utilizzata al posto di circolo
+    private static String[] nomiCorsi = new String[3];
+    private static Maestro[] maestri = new Maestro[3];
+    private static Corso[] corsi = new Corso[3];
+    private static boolean isSetupFatto = false;
+
+    public D() {
+        setupIniziale();
+    }
 
     public static int getkRegistra() {
         return kRegistra;
@@ -30,46 +58,10 @@ public class D {
         return kScegli;
     }
 
-    public static int getkModifica() {
-        return kModifica;
-    }
-    //frame:
-    //0- main
-    //1- registra
-    //2- scegli modifica
-    //3- modifica
-    //4-
-
-    private static ArrayList<Frame>finestre;
-
-    //finestraModifica
-    //    public static Frame frameModifica;
-    public static final int altezzaModifica =400;
-    public static final int larghezzaModifica = 300;
-
-    //ScegliDaModificare
-    //    public static Frame frameScegliDaModificare;
-    public static final int larghezzaScegliMod =400;
-    public static final int altezzaScegliMod = 250;
-
-    //utilizzata al posto di circolo
-
-    private static final double costoFacile = 50.35;
-    private static final double costoMedio = 65.75;
-    private static final double costoAvanzato = 90.99;
-
-    private static String[] nomiCorsi = new String[3];
-
-    private static Maestro[] maestri = new Maestro[3];
-
-    private static Corso[] corsi = new Corso[3];
-
-    private static boolean isSetupFatto = false;
-
     //frame finestra
 
-    public D() {
-        setupIniziale();
+    public static int getkModifica() {
+        return kModifica;
     }
 
     private static void setupIniziale() {
@@ -109,7 +101,7 @@ public class D {
         controllaSetup();
         corsi[idCorso].add(personaDaAggiungere);
 
-        System.out.println("Aggiunto: "+personaDaAggiungere.getNome());
+        System.out.println("Aggiunto: " + personaDaAggiungere.getNome());
     }
 
     private static void controllaSetup() {
@@ -145,8 +137,8 @@ public class D {
         controllaSetup();
         //controllo se sono tutti vuoti
         return isCorsoVuoto(0)
-                &&isCorsoVuoto(1)
-                &&isCorsoVuoto(2);
+                && isCorsoVuoto(1)
+                && isCorsoVuoto(2);
     }
 
     private static boolean isCorsoVuoto(int idCorso) {
@@ -176,27 +168,27 @@ public class D {
 
         System.out.println(">>>>Diagnostica:");
 
-        int totali=0;
+        int totali = 0;
 
-        System.out.println("Size 0:"+corsi[0].size());
-        System.out.println("Size 1:"+corsi[1].size());
-        System.out.println("Size 2:"+corsi[2].size());
+        System.out.println("Size 0:" + corsi[0].size());
+        System.out.println("Size 1:" + corsi[1].size());
+        System.out.println("Size 2:" + corsi[2].size());
 
-        for (int f=0;f<3;f++) {
+        for (int f = 0; f < 3; f++) {
 
-            System.out.println("--Indice corso:"+f);
+            System.out.println("--Indice corso:" + f);
 
             if (!getCorsi()[f].isEmpty()) {
 
-                partecipanti = new String[getCorsi()[f].size()+1];
+                partecipanti = new String[getCorsi()[f].size() + 1];
 
                 for (int i = 0; i < getCorsi()[f].size(); i++) {
 
-                    System.out.println("-Indice partecipante:"+i);
+                    System.out.println("-Indice partecipante:" + i);
 
-                    partecipanti[i]=(getCorsi()[f].get(i).getNome());
+                    partecipanti[i] = (getCorsi()[f].get(i).getNome());
 
-                    System.out.println("Partecipante: "+partecipanti[i]);
+                    System.out.println("Partecipante: " + partecipanti[i]);
 
                     totali++;
 
@@ -204,22 +196,22 @@ public class D {
                 }
             }
             System.out.println("---");
-            System.out.println("Totali contati per ora:"+totali);
-            System.out.println("Totali size:"+getNumeroTotali());
+            System.out.println("Totali contati per ora:" + totali);
+            System.out.println("Totali size:" + getNumeroTotali());
             System.out.println("---");
         }
 
     }
 
     private static int getNumeroTotali() {
-        return corsi[0].size()+
-                corsi[1].size()+
+        return corsi[0].size() +
+                corsi[1].size() +
                 corsi[2].size();
     }
 
     public static LinkedList<String> getNominativiPartecipantiAlCorso(int idCorso) {
 
-        LinkedList<String> tmp=new LinkedList<>();
+        LinkedList<String> tmp = new LinkedList<>();
 
         for (Partecipante p : corsi[idCorso]) {
             tmp.add(p.getNome() +
@@ -233,7 +225,7 @@ public class D {
 
         ArrayList<String> tmp = new ArrayList<>();
 
-        for(int f=0;f<getCorsi().length;f++) {
+        for (int f = 0; f < getCorsi().length; f++) {
             if (!getCorsi()[f].isEmpty()) {
                 tmp.add(nomiCorsi[f]);
             }
@@ -242,15 +234,15 @@ public class D {
         return tmp;
     }
 
-    public static Partecipante getPartecipanteAlCorso(int idCorso,int idPartecipante) {
+    public static Partecipante getPartecipanteAlCorso(int idCorso, int idPartecipante) {
         return corsi[idCorso].get(idPartecipante);
     }
 
-    public static void setPartecipanteAlCorso(int idCorso,int idPosizione,Partecipante nuovoPartecipante) {
-        corsi[idCorso].set(idPosizione,nuovoPartecipante);
+    public static void setPartecipanteAlCorso(int idCorso, int idPosizione, Partecipante nuovoPartecipante) {
+        corsi[idCorso].set(idPosizione, nuovoPartecipante);
     }
 
-    public static void rimuoviPartecipanteDaCorso(int idCorso,int idPosizione) {
+    public static void rimuoviPartecipanteDaCorso(int idCorso, int idPosizione) {
         corsi[idCorso].remove(idPosizione);
     }
 
@@ -263,10 +255,10 @@ public class D {
         //3- modifica
         //4-
         finestre.get(indice).dispose();
-        finestre.set(indice,null) ;
+        finestre.set(indice, null);
     }
 
-    public static void assegnaFinestra(int indice,Frame frame) {
+    public static void assegnaFinestra(int indice, Frame frame) {
 
         //inizializza la lista
         inizializzaLaLista();
@@ -282,7 +274,7 @@ public class D {
 
             finestre = new ArrayList<>();
 
-            for (int i=0;i<10;i++) {
+            for (int i = 0; i < 10; i++) {
                 finestre.add(null);
             }
         }

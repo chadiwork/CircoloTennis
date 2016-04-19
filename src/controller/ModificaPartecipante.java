@@ -6,9 +6,6 @@ import model.Modelli.Data;
 import model.Partecipante;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import static Librerie.Util.UtilityConstants.regexNumeri;
 import static Librerie.Util.UtilityConstants.regexParole;
@@ -29,12 +26,7 @@ public class ModificaPartecipante extends JFrame {
     private JTextField inputAnno;
     private JTextField inputNome;
     private JTextField inputGiorno;
-    private JLabel lblUltimoInserito;
     private JCheckBox checkCambia;
-    private JPanel pnlCheck;
-    private JPanel pnlTendinaNetta;
-    private JButton btnAddCasuale;
-    private String[] tabellaCodici;
     private int indiceAncoraDaScegliere;
 
     private int oldCorso, oldPosizione;
@@ -66,7 +58,7 @@ public class ModificaPartecipante extends JFrame {
         tendinaCorso.setSelectedIndex(oldCorso);
     }
 
-    private ModificaPartecipante(Partecipante partecipante  ,int idCorso,int idPosizione) {
+    private ModificaPartecipante(Partecipante partecipante, int idCorso, int idPosizione) {
         //costruttore in cui aggiungere tutte le modifiche alla UI
         //tieni private
 
@@ -91,7 +83,7 @@ public class ModificaPartecipante extends JFrame {
 
         boolean cambiaCorso = checkCambia.isSelected();
 
-        if ((tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere)| !cambiaCorso) {
+        if ((tendinaCorso.getSelectedIndex() != indiceAncoraDaScegliere) | !cambiaCorso) {
 
             //riprendo l'indice del corso selezionato
             int idSelezionato = tendinaCorso.getSelectedIndex();
@@ -111,14 +103,14 @@ public class ModificaPartecipante extends JFrame {
                                         && (Integer.parseInt(inputGiorno.getText()) <= 31)
                                         && (Integer.parseInt(inputGiorno.getText()) >= 1)) {
 
-                                    String giorno =inputGiorno.getText();
+                                    String giorno = inputGiorno.getText();
 
                                     if (!inputMese.getText().equals("")) {
                                         if (inputMese.getText().matches(regexNumeri)
                                                 && (Integer.parseInt(inputMese.getText()) <= 12)
                                                 && (Integer.parseInt(inputMese.getText()) >= 1)) {
 
-                                            String mese =inputMese.getText();
+                                            String mese = inputMese.getText();
 
                                             if (!inputAnno.getText().equals("")) {
                                                 if (inputAnno.getText().matches(regexNumeri)
@@ -126,22 +118,22 @@ public class ModificaPartecipante extends JFrame {
 //                                                        &&Integer.parseInt(inputMese.getText())>=1900
                                                         ) {
 
-                                                    String anno =inputAnno.getText();
+                                                    String anno = inputAnno.getText();
 
                                                     //ora ho tutti i dati raccolti
 
                                                     Partecipante toAdd = costruisciPartecipante(nome, cognome, giorno, mese, anno);
 
                                                     //partecipante creato e pronto
-                                                    String tmpAppenaAggiuntoA="";//setup iniziale
+                                                    String tmpAppenaAggiuntoA = "";//setup iniziale
 
                                                     int dialogButton = JOptionPane.YES_NO_OPTION;
                                                     int dialogResult = JOptionPane.showConfirmDialog(this, "Stai per salvare: "
-                                                                    + toAdd.getNome()+" "
-                                                                    + toAdd.getCognome()+" | Confermi?"
+                                                                    + toAdd.getNome() + " "
+                                                                    + toAdd.getCognome() + " | Confermi?"
                                                             , "Aggiorna dati partecipante", dialogButton);
 
-                                                    if(dialogResult == 0) {
+                                                    if (dialogResult == 0) {
 
                                                         //creo diramificazione - se il corso è lo stesso modifica se è diverso cancella e aggiungi
 
@@ -158,10 +150,10 @@ public class ModificaPartecipante extends JFrame {
                                                             D.setPartecipanteAlCorso(oldCorso, oldPosizione, toAdd);
                                                         } else if (cambiaCorso) {
                                                             //cancello vecchio partecipante
-                                                            D.rimuoviPartecipanteDaCorso(oldCorso,oldPosizione);
+                                                            D.rimuoviPartecipanteDaCorso(oldCorso, oldPosizione);
 
                                                             //aggiungo nuovo con dati presi
-                                                            D.addPartecipante(tendinaCorso.getSelectedIndex(),toAdd);
+                                                            D.addPartecipante(tendinaCorso.getSelectedIndex(), toAdd);
                                                         }
 
 //                                                        D.frameModifica.dispose();
@@ -169,7 +161,7 @@ public class ModificaPartecipante extends JFrame {
                                                         //TODO - in work
                                                         D.chiudiFinestra(D.getkModifica());
 
-                                                        UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente",this);
+                                                        UtilityMessages.creaDialogInfo("Dati partecipante aggiornati correttamente", this);
                                                     }
 //
 //                                                    //nome del corso al quale ho appena aggiunto il partecipante
@@ -193,17 +185,16 @@ public class ModificaPartecipante extends JFrame {
 //                                                    );
 
 
-
-                                                }else {
+                                                } else {
                                                     creaDialogErrore("Inserisci un anno correttamente", this);
                                                 }
-                                            }else {
+                                            } else {
                                                 creaDialogErrore("Inserisci l'anno", this);
                                             }
-                                        }else {
+                                        } else {
                                             creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", this);
                                         }
-                                    }else {
+                                    } else {
                                         creaDialogErrore("Inserisci il mese", this);
                                     }
                                 } else {
@@ -239,11 +230,11 @@ public class ModificaPartecipante extends JFrame {
     }
 
     public ModificaPartecipante(String title, int larghezza, int altezza,
-                                Partecipante partecipante,int idCorso,int idPosizione) {
+                                Partecipante partecipante, int idCorso, int idPosizione) {
         super(title);
 
         //setup iniziale finestra
-        this.setContentPane(new ModificaPartecipante(partecipante,idCorso,idPosizione).rootPanel);
+        this.setContentPane(new ModificaPartecipante(partecipante, idCorso, idPosizione).rootPanel);
         this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.pack();
         this.setSize(larghezza, altezza);
@@ -251,6 +242,7 @@ public class ModificaPartecipante extends JFrame {
         this.setVisible(true);
         this.setResizable(false);
     }
+
     private void addListener() {
 //        btnSalvaModifiche.addActionListener(new ActionListener() {
 //            @Override
@@ -270,16 +262,16 @@ public class ModificaPartecipante extends JFrame {
     }
 
     private void settaTendina() {
-        String[] tabellaCodici =new String[4];
+        String[] tabellaCodici = new String[4];
 
-        tabellaCodici[0]= D.getNomeCorso(0);
-        tabellaCodici[1]= D.getNomeCorso(1);
-        tabellaCodici[2]= D.getNomeCorso(2);
-        tabellaCodici[3]="Scegliere...";
+        tabellaCodici[0] = D.getNomeCorso(0);
+        tabellaCodici[1] = D.getNomeCorso(1);
+        tabellaCodici[2] = D.getNomeCorso(2);
+        tabellaCodici[3] = "Scegliere...";
 
 
         //non separare questi 2 blocchi in 2 metodi separati...
-        for (int i =0;i<=3;i++){
+        for (int i = 0; i <= 3; i++) {
             tendinaCorso.addItem(tabellaCodici[i]);
             indiceAncoraDaScegliere = i;
         }

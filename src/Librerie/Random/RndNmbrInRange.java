@@ -5,7 +5,7 @@ package Librerie.Random;
  * in origine parte del progetto:
  * CircoloTennis
  */
-import java.lang.*;
+
 import java.util.Random;
 
 public class RndNmbrInRange {

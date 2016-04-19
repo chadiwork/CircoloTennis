@@ -9,6 +9,8 @@ import java.util.Random;
  */
 public class RndString {
     private static final char[] symbols;
+    private static final Random random = new Random();
+    private static char[] buf;
 
     static {
         StringBuilder tmp = new StringBuilder();
@@ -18,10 +20,6 @@ public class RndString {
             tmp.append(ch);
         symbols = tmp.toString().toCharArray();
     }
-
-    private static final Random random = new Random();
-
-    private static char[] buf;
 
     public RndString(int length) {
         if (length < 1)

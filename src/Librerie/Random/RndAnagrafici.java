@@ -2,7 +2,8 @@ package Librerie.Random;
 
 import Librerie.Util.UtilityFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
 /**
@@ -24,7 +25,7 @@ public class RndAnagrafici {
     private static void setupListNomi() throws FileNotFoundException {
 
         try {
-            nomi= UtilityFile.readLinesFromFile(new File(fileNomi));
+            nomi = UtilityFile.readLinesFromFile(new File(fileNomi));
             System.out.println("Setup list nomi effettuato correttamente");
 
         } catch (Exception e) {
@@ -36,7 +37,7 @@ public class RndAnagrafici {
     private static void setupListCognomi() throws FileNotFoundException {
 
         try {
-            cognomi= UtilityFile.readLinesFromFile(new File(fileCognomi));
+            cognomi = UtilityFile.readLinesFromFile(new File(fileCognomi));
             System.out.println("Setup list cognomi effettuato correttamente");
 
 
@@ -58,19 +59,19 @@ public class RndAnagrafici {
 
     }
 
-    public static String getRndNome()  {
+    public static String getRndNome() {
         controllaSetup();
 
         // Pick one at random
-        int randomIndex = RndNmbrInRange.random(1,nomi.size()-1);
+        int randomIndex = RndNmbrInRange.random(1, nomi.size() - 1);
         return nomi.get(randomIndex);
     }
 
-    public static String getRndCognome()  {
+    public static String getRndCognome() {
         controllaSetup();
 
         // Pick one at random
-        int randomIndex = RndNmbrInRange.random(1,cognomi.size()-1);
+        int randomIndex = RndNmbrInRange.random(1, cognomi.size() - 1);
         return cognomi.get(randomIndex);
     }
 
@@ -82,8 +83,6 @@ public class RndAnagrafici {
             setupCompleto();
         }
     }
-
-
 
 
 }

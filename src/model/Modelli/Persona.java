@@ -4,7 +4,7 @@ package model.Modelli;
  * Created by Chado on 17/03/2016.
  */
 public class Persona {
-    private String nome,cognome;
+    private String nome, cognome;
 
     public Persona(String nome, String cognome) {
         this.nome = nome;

@@ -18,7 +18,7 @@ public class ScegliDaModificare extends JFrame {
     private JButton btnModifica;
     private JPanel pnlCenter;
     private JPanel pnlModifica;
-    private JComboBox<String> tendinaCorso,tendinaPartecipante;
+    private JComboBox<String> tendinaCorso, tendinaPartecipante;
     private JPanel pnlCorso;
     private JPanel pnlPartecipante;
     private JPanel pnlTende;
@@ -27,9 +27,9 @@ public class ScegliDaModificare extends JFrame {
     private JFrame localFrame;
 
     private int idCorsoSelezionato, idPartSelezionato;
-    private Partecipante selezionato=null;
+    private Partecipante selezionato = null;
 
-    private String[] partecipanti,corsi;
+    private String[] partecipanti, corsi;
 
     public ScegliDaModificare(String title, int larghezza, int altezza) throws HeadlessException {
         super(title);
@@ -70,7 +70,7 @@ public class ScegliDaModificare extends JFrame {
 
     private void settaTendinaCorso() {
 
-        System.out.println("Selezionato in creazione: "+tendinaCorso.getSelectedIndex());
+        System.out.println("Selezionato in creazione: " + tendinaCorso.getSelectedIndex());
         tendinaCorso.removeAllItems();
 
         for (int i = 0; i < D.getNomiCorsiConPartecipanti().size(); i++) {
@@ -89,7 +89,7 @@ public class ScegliDaModificare extends JFrame {
         //riempio la tendinaPartecipante
         for (int i = 0; i < D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).size(); i++) {
             int n = i + 1;
-            tendinaPartecipante.addItem(n+"- "+D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).get(i));
+            tendinaPartecipante.addItem(n + "- " + D.getNominativiPartecipantiAlCorso(idCorsoSelezionato).get(i));
         }
 
         aggiornaPartecipanteSelezionato();
@@ -99,7 +99,7 @@ public class ScegliDaModificare extends JFrame {
 
     private void settaListener() {
 
-        btnModifica.addActionListener(evt ->{
+        btnModifica.addActionListener(evt -> {
             aggiornaPartecipanteSelezionato();
 
             //dispongo la finestra attuale
@@ -120,11 +120,11 @@ public class ScegliDaModificare extends JFrame {
 
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "Vuoi davvero eliminare "
-                        + selezionato.getNome()+" "
-                        + selezionato.getCognome()+" ?"
+                        + selezionato.getNome() + " "
+                        + selezionato.getCognome() + " ?"
                 , "Elimina partecipante", dialogButton);
 
-        if(dialogResult == 0) {
+        if (dialogResult == 0) {
 
             //dispongo la finestra attuale
             D.chiudiFinestra(D.getkScegli());
@@ -134,7 +134,7 @@ public class ScegliDaModificare extends JFrame {
 
             String toMsg = selezionato.getNomeCognome() + " rimosso/a correttamente";
 
-            UtilityMessages.creaDialogInfo(toMsg,this);
+            UtilityMessages.creaDialogInfo(toMsg, this);
 
             System.out.println("Funziona ancora e va avanti");
 
@@ -156,16 +156,16 @@ public class ScegliDaModificare extends JFrame {
         selezionato = D.getPartecipanteAlCorso(idCorsoSelezionato, idPartSelezionato);
 
 
-        System.out.println("---Corso selezionato: "+ idCorsoSelezionato);
-        System.out.println("--Indice selezionato: "+ idPartSelezionato);
-        System.out.println(">Da editare:" +selezionato.getNome()+" "+selezionato.getCognome());
+        System.out.println("---Corso selezionato: " + idCorsoSelezionato);
+        System.out.println("--Indice selezionato: " + idPartSelezionato);
+        System.out.println(">Da editare:" + selezionato.getNome() + " " + selezionato.getCognome());
         System.out.println(
                 "Nato il: "
-                        +selezionato.getDataDiNascita().getGiorno()
-                        +"-"
-                        +selezionato.getDataDiNascita().getMese()
-                        +"-"
-                        +selezionato.getDataDiNascita().getAnno()
+                        + selezionato.getDataDiNascita().getGiorno()
+                        + "-"
+                        + selezionato.getDataDiNascita().getMese()
+                        + "-"
+                        + selezionato.getDataDiNascita().getAnno()
         );
 
     }
@@ -176,11 +176,11 @@ public class ScegliDaModificare extends JFrame {
 
         D.assegnaFinestra(D.getkModifica(),
                 new ModificaPartecipante(" Modifica: " +
-                selezionato.getNome() + " " + selezionato.getCognome()
-                , D.altezzaModifica, D.larghezzaModifica
-                , selezionato
-                , idCorsoSelezionato
-                , idPartSelezionato)
+                        selezionato.getNome() + " " + selezionato.getCognome()
+                        , D.altezzaModifica, D.larghezzaModifica
+                        , selezionato
+                        , idCorsoSelezionato
+                        , idPartSelezionato)
         );
     }
 
@@ -198,7 +198,7 @@ public class ScegliDaModificare extends JFrame {
             //caso corso avanzato
             idCorsoSelezionato = 2;
         } else {
-            UtilityMessages.creaDialogErrore("Non ci sono corsi con partecipanti",new Frame("Fine del mondo"));
+            UtilityMessages.creaDialogErrore("Non ci sono corsi con partecipanti", new Frame("Fine del mondo"));
         }
     }
 

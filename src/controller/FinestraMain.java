@@ -47,12 +47,12 @@ public class FinestraMain extends JFrame {
         });
 
         visualizzaInformazioniDelCorsoButton.addActionListener(e -> {
-            FinestraInfoCorso finestra=new FinestraInfoCorso();
+            FinestraInfoCorso finestra = new FinestraInfoCorso();
             finestra.setVisible(true);
         });
 
         visualizzaIncassoButton.addActionListener(e -> {
-            FinestraIncasso finestra=new FinestraIncasso();
+            FinestraIncasso finestra = new FinestraIncasso();
             finestra.setVisible(true);
         });
     }
@@ -66,7 +66,7 @@ public class FinestraMain extends JFrame {
 
 //        if(finestraAperta())
 
-        int uno,due,tre,quattro;
+        int uno, due, tre, quattro;
         uno = D.getkRegistra();
         due = D.getkScegli();
 
@@ -104,18 +104,12 @@ public class FinestraMain extends JFrame {
         }
 
 
-
-
-
     }
 
 
-    public static void apriModifica () {
+    public static void apriModifica() {
 
     }
-
-
-
 
 
 }

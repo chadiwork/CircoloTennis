@@ -1,15 +1,24 @@
 package controller;
 
+import Librerie.Random.RndAnagrafici;
 import model.Data.D;
 import model.Modelli.Data;
 import model.Partecipante;
-import Librerie.Random.RndAnagrafici;
 
-import javax.swing.*;
-import static Librerie.Random.RndNmbrInRange.*;
-import static Librerie.Util.UtilityConstants.*;
-import static Librerie.Util.UtilityMessages.*;
-import static Librerie.Util.UtilityString.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+
+import static Librerie.Random.RndNmbrInRange.random;
+import static Librerie.Util.UtilityConstants.regexNumeri;
+import static Librerie.Util.UtilityConstants.regexParole;
+import static Librerie.Util.UtilityMessages.creaDialogErrore;
+import static Librerie.Util.UtilityString.capFirst;
 
 /**
  * Created by Chado on 01/04/2016.
@@ -72,14 +81,14 @@ public class RegistraPartecipante extends JFrame {
                                         && (Integer.parseInt(inputGiorno.getText()) <= 31)
                                         && (Integer.parseInt(inputGiorno.getText()) >= 1)) {
 
-                                    String giorno =inputGiorno.getText();
+                                    String giorno = inputGiorno.getText();
 
                                     if (!inputMese.getText().equals("")) {
                                         if (inputMese.getText().matches(regexNumeri)
                                                 && (Integer.parseInt(inputMese.getText()) <= 12)
                                                 && (Integer.parseInt(inputMese.getText()) >= 1)) {
 
-                                            String mese =inputMese.getText();
+                                            String mese = inputMese.getText();
 
                                             if (!inputAnno.getText().equals("")) {
                                                 if (inputAnno.getText().matches(regexNumeri)
@@ -87,7 +96,7 @@ public class RegistraPartecipante extends JFrame {
 //                                                        &&Integer.parseInt(inputMese.getText())>=1900
                                                         ) {
 
-                                                    String anno =inputAnno.getText();
+                                                    String anno = inputAnno.getText();
 
                                                     //ora ho tutti i dati raccolti
 
@@ -100,15 +109,15 @@ public class RegistraPartecipante extends JFrame {
                                                     //aggiungo partecipante al corso selezionato
                                                     switch (idSelezionato) {
                                                         case 0:
-                                                            D.addPartecipante(0,toAdd);
+                                                            D.addPartecipante(0, toAdd);
 //                                                            tmpAppenaAggiuntoA = D.getNomeCorso(0);
                                                             break;
                                                         case 1:
-                                                            D.addPartecipante(1,toAdd);
+                                                            D.addPartecipante(1, toAdd);
 //                                                            tmpAppenaAggiuntoA = D.getNomeCorso(1);
                                                             break;
                                                         case 2:
-                                                            D.addPartecipante(2,toAdd);
+                                                            D.addPartecipante(2, toAdd);
 //                                                            tmpAppenaAggiuntoA = D.getNomeCorso(2);
                                                             break;
                                                     }
@@ -122,26 +131,26 @@ public class RegistraPartecipante extends JFrame {
                                                     int compagniCorso = D.getNumeroPartecipantiCorso(idSelezionato) - 1;
 
                                                     //stampo l'inserimento effettuato
-                                                    txtAreaInseriti.append(toAdd.getNome() +" aggiunto a corso "+tmpAppenaAggiuntoA+ "\n");
-                                                    txtAreaInseriti.append("Compagni: "+compagniCorso + "\n");
+                                                    txtAreaInseriti.append(toAdd.getNome() + " aggiunto a corso " + tmpAppenaAggiuntoA + "\n");
+                                                    txtAreaInseriti.append("Compagni: " + compagniCorso + "\n");
 
                                                     //aggiorno label
                                                     lblUltimoInserito.setText(
                                                             "Maestro: " + D.getNomeMaestroCorso(idSelezionato)
-                                                                    + " " + D.getCognomeMaestroCorso(idSelezionato) +" | "+
+                                                                    + " " + D.getCognomeMaestroCorso(idSelezionato) + " | " +
                                                                     "Tel: " + D.getMestroCorso(idSelezionato).getNumTel()
                                                     );
 
-                                                }else {
+                                                } else {
                                                     creaDialogErrore("Inserisci un anno correttamente", this);
                                                 }
-                                            }else {
+                                            } else {
                                                 creaDialogErrore("Inserisci l'anno", this);
                                             }
-                                        }else {
+                                        } else {
                                             creaDialogErrore("Inserisci solo numeri interi nel mese,senza lo zero", this);
                                         }
-                                    }else {
+                                    } else {
                                         creaDialogErrore("Inserisci il mese", this);
                                     }
                                 } else {
@@ -206,7 +215,7 @@ public class RegistraPartecipante extends JFrame {
 
         btnAddCasuale.addActionListener(evt -> riempiCampiInRandom());
 
-        btnCompletaInserimenti.addActionListener(evt->D.chiudiFinestra(D.getkRegistra()));
+        btnCompletaInserimenti.addActionListener(evt -> D.chiudiFinestra(D.getkRegistra()));
 
         btnRiempi.addActionListener(evt -> aggiungiNCasuali(20));
     }
@@ -222,22 +231,22 @@ public class RegistraPartecipante extends JFrame {
         //riempio i campi con valori casuali
         inputNome.setText(capFirst(RndAnagrafici.getRndNome()));
         inputCognome.setText(capFirst(RndAnagrafici.getRndCognome()));
-        tendinaCorso.setSelectedIndex(random(1,3)-1);
-        inputGiorno.setText(""+ random(1, 31));
-        inputMese.setText(""+ random(1, 12));
-        inputAnno.setText(""+ random(1920, 2016));
+        tendinaCorso.setSelectedIndex(random(1, 3) - 1);
+        inputGiorno.setText("" + random(1, 31));
+        inputMese.setText("" + random(1, 12));
+        inputAnno.setText("" + random(1920, 2016));
     }
 
     private void settaTendina() {
-        String[] tabellaCodici =new String[4];
+        String[] tabellaCodici = new String[4];
 
-        tabellaCodici[0]="Facile";
-        tabellaCodici[1]="Medio";
-        tabellaCodici[2]="Avanzato";
-        tabellaCodici[3]="Scegliere...";
+        tabellaCodici[0] = "Facile";
+        tabellaCodici[1] = "Medio";
+        tabellaCodici[2] = "Avanzato";
+        tabellaCodici[3] = "Scegliere...";
 
         //non separare questi 2 blocchi in 2 metodi separati...
-        for (int i =0;i<=3;i++){
+        for (int i = 0; i <= 3; i++) {
             tendinaCorso.addItem(tabellaCodici[i]);
             indiceAncoraDaScegliere = i;
         }

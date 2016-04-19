@@ -9,7 +9,7 @@ import java.util.Objects;
  * and some magic by Vlady
  */
 public class Data {
-    private String giorno,mese,anno;
+    private String giorno, mese, anno;
 
     public Data(String giorno, String mese, String anno) {
         this.giorno = giorno;
@@ -24,28 +24,28 @@ public class Data {
         this.rndYear();
     }
 
-    public void setMese(String mese) {
-        this.mese = mese;
-    }
-
-    public void setAnno(String anno) {
-        this.anno = anno;
+    public String getGiorno() {
+        return giorno;
     }
 
     public void setGiorno(String giorno) {
         this.giorno = giorno;
     }
 
-    public String getGiorno() {
-        return giorno;
-    }
-
     public String getMese() {
         return mese;
     }
 
+    public void setMese(String mese) {
+        this.mese = mese;
+    }
+
     public String getAnno() {
         return anno;
+    }
+
+    public void setAnno(String anno) {
+        this.anno = anno;
     }
 
     private String rndDay() {
@@ -53,18 +53,19 @@ public class Data {
         if (Objects.equals(this.mese, "2")) {
             Integer a = RndNmbrInRange.random(1, 28);
             return a.toString();
-        }
-        else{
+        } else {
             Integer a = RndNmbrInRange.random(1, 30);
             return a.toString();
         }
 
     }
+
     private String rndMonth() {
         Integer a = RndNmbrInRange.random(1, 12);
         return a.toString();
     }
-    private  String rndYear() {
+
+    private String rndYear() {
         Integer a = RndNmbrInRange.random(1940, 2010);
         return a.toString();
     }
