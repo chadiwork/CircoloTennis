@@ -17,38 +17,36 @@ import java.util.LinkedList;
 public class D {
 
 //finestraModifica
-//    public static Frame frameModifica;
 public static final int altezzaModifica = 400;
 public static final int larghezzaModifica = 300;
 //ScegliDaModificare
-//    public static Frame frameScegliDaModificare;
 public static final int larghezzaScegliMod = 400;
 public static final int altezzaScegliMod = 250;
 //costanti finestra
-//    private static final int kMain =0;
 private static final int kRegistra = 1;
 private static final int kScegli = 2;
 private static final int kModifica = 3;
 private static final int kInformazoni = 4;
 private static final int kIncasso = 5;
-//frame:
-//0- main
-//1- registra
-//2- scegli modifica
-//3- modifica
-//4-
+
+private static final long[] costi=new long[3];
+
 private static final double costoFacile = 50.35;
 private static final double costoMedio = 65.75;
 private static final double costoAvanzato = 90.99;
+
+private static final String valuta="€";
+
 private static ArrayList<Frame> finestre;
 
 //utilizzata al posto di circolo
 private static String[] nomiCorsi = new String[3];
+
 private static Maestro[] maestri = new Maestro[3];
 private static Corso[] corsi = new Corso[3];
 private static boolean isSetupFatto = false;
-
 public D() {
+	System.out.println("SETUP ESEGUITO DAL COSTRUTTORE DI D");
 	setupIniziale();
 }
 
@@ -256,7 +254,6 @@ public static void rimuoviPartecipanteDaCorso(int idCorso, int idPosizione) {
 	corsi[idCorso].remove(idPosizione);
 }
 
-
 public static void chiudiFinestra(int indice) {
 	//frame:
 	//0- main
@@ -267,6 +264,7 @@ public static void chiudiFinestra(int indice) {
 	finestre.get(indice).dispose();
 	finestre.set(indice, null);
 }
+
 
 public static void assegnaFinestra(int indice, Frame frame) {
 
@@ -300,6 +298,28 @@ public static boolean isFinestraAperta(int indice) {
 //        return finestre.get(indice);
 	return getFinestra(indice) != null;
 }
+
+public static long getGuadagno(int idCorso) {
+
+	setupArrayCosti();
+
+	return corsi[idCorso].size() * costi[idCorso];
+}
+
+public static long getGuadagniTotali() {
+	return getGuadagno(0) + getGuadagno(1) + getGuadagno(2);
+}
+
+private static void setupArrayCosti() {
+	costi[0]= (long) costoFacile;
+	costi[1]= (long) costoMedio;
+	costi[2]= (long) costoAvanzato;
+}
+
+public static String getValuta() {
+	return valuta;
+}
+
 }
 
 

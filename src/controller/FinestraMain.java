@@ -17,7 +17,6 @@ private JButton btnRegistra;
 private JButton btnScegliModifica;
 private JButton btnIncasso;
 
-
 private FinestraMain(String title, int larghezza, int altezza) {
 	//setup iniziale finestra
 	super(title);
@@ -89,11 +88,11 @@ private void apriFinestra(int indice) {
 		}
 	} else if (indice == D.getkIncasso()) {
 
-		//TODO: costruisci finestra incasso
-		//test se è già aperta
-//		if (!D.isFinestraAperta(indice)) {
-//			D.assegnaFinestra(D.getkIncasso(), new FinestraIncasso("Incasso totale",));
-//		}
+//		TODO: costruisci finestra incasso
+//		test se è già aperta
+		if (!D.isFinestraAperta(indice)) {
+			D.assegnaFinestra(D.getkIncasso(), new VisualizzaIncasso("Incasso totale",400,250));
+		}
 	}
 }
 
